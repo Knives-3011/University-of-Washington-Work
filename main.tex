@@ -1,0 +1,239 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}			% A library of many standard math expressions
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 134 Homework \#3}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+
+
+
+\begin{document} %The writing for your homework should all come after this. 
+
+
+%Enumerate starts a list of problems so you can put each homework problem after each item. 
+\begin{enumerate}[start=1,label={\bfseries. },leftmargin=1in] %You can change "Problem" to be whatevber label you like. 
+    \item [\textbf{57.}]
+
+    First, we find the slope of the tangent line:
+    \[
+    f'(3) = \lim_{h \to 0} \frac{(3 + h)^2 - 9}{h} = \lim_{h \to 0} \frac{6h + h^2}{h} = 6
+    \]
+    The equation of the tangent line is:
+    \[
+    y - 9 = 6(x - 3) \quad \Rightarrow \quad y = 6x - 9
+    \]
+    To find the x-intercept of the tangent line, set \( y = 0 \):
+    \[
+    0 = 6x - 9 \quad \Rightarrow \quad x = 1.5
+    \]
+    Thus, tangent intersects x axis at \( (1.5, 0) \).
+
+    Next, the slope of the normal line is the negative reciprocal of the tangent line's slope, so it is \( -\frac{1}{6} \). Thus:
+    \[
+    y - 9 = -\frac{1}{6}(x - 3) \quad \Rightarrow \quad 6y-54 = 3-x
+    \]
+    To find the x-intercept of the normal line, set \( y = 0 \):
+    \[
+    0 = \frac{57-x}{6} \quad \Rightarrow \quad x = 57
+    \]
+    Thus, the normal line intersects the x-axis at \( (57, 0) \).
+
+    Finally, the distance \( s \) between the x-intercepts is:
+    \[
+    s = 57 - 1.5 = 55.5
+    \]
+    Therefore, \( s = {55.5} \).
+
+    \item [\textbf{59.}]
+    
+    \begin{enumerate}
+        \item 
+        To show that \( f(x) \) is continuous at \( x = 0 \), we check if:
+        \[
+        \lim_{x \to 0} f(x) = f(0).
+        \]
+        
+        To calculate the limit, we use the squeeze theorem:
+        \[
+        -|x| < x\cdot sin\left(\frac{1}{x}\right) < |x|
+        \]
+        Since:
+        \[
+        \lim_{x\to0} -|x| = 0 \quad and \quad \lim_{x\to0}|x| = 0
+        \]
+        We obtain:
+        \[
+        \lim_{x\to0}x\cdot sin\left(\frac{1}{x}\right) = 0
+        \]
+        And since:
+        \[
+        f(0) = 0
+        \]
+        We conclude that $f(x)$ is continuous at 0
+        \bigbreak
+        To show $g(x)$ is continuous at 0,
+        \[
+        \lim_{x \to 0} g(x) = g(0).
+        \]
+        
+        Using the squeeze theorem again:
+        \[
+         -x^2\leq x^2 \sin\left(\frac{1}{x}\right) \leq x^2,
+        \]
+        Since:
+        \[
+        \lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0 \quad and \quad \lim_{x \to 0} -x^2 \sin\left(\frac{1}{x}\right) = 0
+        \]
+        We obtain:
+        \[
+        \lim_{x\to0}g(x) = 0
+        \]
+        And since:
+        \[
+        g(0) = 0 \quad (\text{Since $g(0) = 0*f(0)$})
+        \]
+        We conclude that $g(x)$ is continuous at 0
+        \bigbreak
+    
+    \item 
+    
+    To check the differentiability of \( f(x) \) at \( x = 0 \), we compute the derivative:
+    \[
+    f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \frac{x \sin\left(\frac{1}{x}\right)}{x}.
+    \]
+    This simplifies to:
+    \[
+    f'(0) = \lim_{x \to 0} \sin\left(\frac{1}{x}\right),
+    \]
+    which does not exist due to the oscillatory behavior of \( \sin\left(\frac{1}{x}\right) \). Thus, \( f(x) \) is not differentiable at 0.
+    \bigbreak
+    \item
+    
+    The derivative of \( g(x) \) at \( x = 0 \) is:
+    \[
+    g'(0) = \lim_{x \to 0} \frac{g(x) - g(0)}{x} = \lim_{x \to 0} \frac{x^2 \sin\left(\frac{1}{x}\right)}{x} = \lim_{x \to 0} x \sin\left(\frac{1}{x}\right).
+    \]
+    
+   Since this is a prior result, we can say that $g'(0) = 0$ and $g(x)$ is differentiable at 0.
+    
+\end{enumerate}
+\newpage
+    \item [\textbf{50.}]
+    To find A and B, we must obtain 2 equations about A and B such that we can solve them simultaneously and obtain a result.
+
+    $f(x)$ = \begin{cases}
+Ax^2 + B, &  x < -1\\
+Bx^5 + Ax + 4, & x \geq -1
+\end{cases}
+
+We can equate the two parts of the piece-wise function for $x=-1$ since the function is everywhere continuous. We know this as in class it was shown that the everywhere continuity of the derivative implies that the original function is everywhere continuous.
+\[
+Ax^2 + B = Bx^5 + Ax + 4
+\]
+\[
+Bx^5 - Ax^2 + Ax - B + 4 = 0
+\]
+Substituting in $x = -1$
+\[
+-B - A - A - B + 4 = 0
+\]
+\[
+-2B - 2A + 4 = 0
+\]
+We will use the above result later:
+
+Now differentiating $f(x)$
+
+$f'(x)$ = \begin{cases}
+    2Ax, & x<-1 \\
+    5Bx^4 + A, & x\geq -1
+\end{cases}
+
+\[
+2Ax = 5Bx^4 + A
+\]
+Substituting in $x=-1$
+\[
+-2A = 5B + A
+\]
+\[
+A = \frac{-5B}{3}
+\]
+Substituting in the value of A in the original result
+
+\[
+-2B - 2\left(\frac{-5B}{3}\right) + 4 = 0
+\]
+
+\[
+-2B + \frac{10B}{3} + 4 = 0
+\]
+\[
+\frac{4B}{3} = -4
+\]
+\[
+B = -3
+\]
+
+Since $A = \frac{-5B}{3}$, we find $A = 5$.
+\boxed{A = 5, B = -3}
+
+\item [\textbf{62.}]
+
+    The derivative of \( f(x) = x^3 \) is:
+    \[
+    f'(x) = 3x^2
+    \]
+    At \( x = c \), the slope of the tangent line is:
+    \[
+    f'(c) = 3c^2
+    \]
+    The equation of the tangent line at \( x = c \) is given by the point-slope form:
+    \[
+    y - f(c) = f'(c)(x - c)
+    \]
+    Substituting \( f(c) = c^3 \) and \( f'(c) = 3c^2 \), we get:
+    \[
+    y - c^3 = 3c^2(x - c)
+    \]
+    Expanding this equation:
+    \[
+    y = 3c^2(x - c) + c^3 = 3c^2x - 3c^3 + c^3 = 3c^2x - 2c^3
+    \]
+    So the equation of the tangent line is:
+    \[
+    y = 3c^2x - 2c^3
+    \]
+
+    To find other solutions(should they exist), we will equate the tanget line to the function.
+
+    \[
+    x^3 = 3c^2x-2c^3
+    \]
+    \[
+    x^3 -3c^2x + 2c^3 = 0
+    \]
+    Computing the roots for the equation, we obtain the following expansion:
+    \[
+    (x-c)(x^2+cx-2c^2)=0
+    \]
+    \[
+    (x-c)(x-c)(x+2c) = 0
+    \]
+    Therefore, the tangent line intersects the function at $x=-2c$
+    
+
+\end{enumerate}
+\end{document}
