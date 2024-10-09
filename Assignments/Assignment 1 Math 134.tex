@@ -1,0 +1,583 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[left=3.5cm, right=3.5cm, top=4cm, bottom=4cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\doctitle}{Assignment 1}
+\newcommand{\name}{Aditya Gupta}
+\newcommand{\studentno}{2434754}
+\newcommand{\todaydate}{Fall 2024}
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{graphicx}
+\titleformat*{\subsection}{\large}
+\graphicspath{ {./Images/} }
+
+\pagestyle{fancy}
+\lhead{\textbf{\doctitle}}
+\chead{\name}
+\rhead{\todaydate}
+
+\begin{document}
+
+\begin{flushright}
+\name \\
+\studentno \\
+\todaydate
+\end{flushright}
+
+\begin{center}
+\Large
+\bfseries
+\doctitle
+\end{center}
+
+% suppress the fancy header on the first page only
+\thispagestyle{plain}
+
+\noindent
+
+\section*{Section 1.2}
+
+\subsection*{70.}\bigbreak
+\textbf{Proposition:} The sum of two rational numbers is also a rational number
+\bigbreak
+\noindent\textbf{Proof:} Let two rational numbers be $\frac{m}{n}$ and $\frac{p}{q}$ wherein $\{m,n,p,q \in \mathbb{Z} | n,q \neq 0\}$.
+Let
+\begin{align}
+g&= \frac{m}{n} + \frac{p}{q}\\
+&= \frac{mq + pn}{nq}
+\end{align}
+
+According to the closure property of integers(the integer set is closed under multiplication), the product of two integers results in an integer. Thus, $\{ mq,pn,nq \in \mathbb{Z} \}$. Applying the closure property to addition, we show that $\{ mq + pn \in \mathbb{Z}$\}. Therefore, we can say that $g$ is a fraction with integers values in the numerator and denominator, which is the definition of a rational number. 
+\qed
+
+ \subsection*{71.}\bigbreak
+ \textbf{Proposition:} The sum of a rational and irrational number is an irrational number \bigbreak
+ \noindent\textbf{Proof by Contradiction:} We assume that the sum of a rational and irrational number is a rational number. Let $\frac{m}{n}$ and $\frac{p}{q}$ be rational numbers and $\alpha$ to be an irrational number.
+\smallbreak
+ \noindent Thus one may say that,
+\[
+\frac{m}{n} + \alpha = \frac{p}{q}
+\]
+\begin{align}
+\alpha &= \frac{p}{q} - \frac{m}{n}\\
+&= \frac{pn - mq}{qn}
+\end{align}
+
+According to the aforementioned closure property of integers, the subtraction of two integers $pn$ and $mq$ also results in an integer. This results in $\alpha$ being expressed in the form of a fraction with integer values in the numerator and denominator, which is the standard form of a rational number. However, this contradicts our prior assertion that the sum of a rational and irrational number results in a rational number. Thus by contradiction, we have proved that the sum of a rational and irrational number results in an irrational number.
+\qed
+
+\subsection*{74.}\bigbreak
+\textbf{Proposition:}  Show by example that the sum of two irrational numbers can be both rational and irrational. Also show that this applies to the product of irrationals.
+\bigbreak
+\noindent\textbf{Proof by Example:} \\
+\bigbreak
+\textbf{Case 1: Sum of irrational numbers leads to an irrational number}
+
+Let our two irrational numbers be $\pi$ and $\phi$.
+\[
+\pi + \phi = 4.759626...
+\]
+
+This results in another irrational number
+\bigbreak
+\bigbreak
+\textbf{Case 2: Sum of irrational numbers leads to a rational number}
+
+Let our two irrational numbers be $\sqrt{2}$ and $-\sqrt{2}$
+\[
+\sqrt{2} + (- \sqrt{2}) = 0
+\]
+
+This results in 0, which is a rational number
+\bigbreak
+\bigbreak
+
+\textbf{Case 3: Product of irrational leads to a rational number}
+
+Let our two irrational numbers be $\sqrt{2}$ and $\sqrt{8}$
+\[
+\sqrt{2} \times \sqrt{8} = \sqrt{16}
+\]
+\[
+\sqrt{16} = 4
+\]
+
+This results in 4, which is a rational number
+\bigbreak
+\bigbreak
+
+\textbf{Case 4: Product of irrationals leads to an irrational number}
+
+Let our two irrational numbers be $\sqrt{2}$ and $\sqrt{4}$
+
+\[
+\sqrt{2} \times \sqrt{4} = \sqrt{8}
+\]
+
+This results in $\sqrt{8}$ which is irrational \qed
+\newpage
+\thispagestyle{fancy}
+
+\section*{Section 1.3}
+
+\subsection*{53.}\bigbreak
+\textbf{Proposition: }\[ \bigl\lvert\lvert x\rvert -\lvert y\rvert \bigr\rvert \leq \lvert x - y\rvert : x,y \in \mathbb{R}\]
+\bigbreak
+\noindent\textbf{Proof: }
+
+Because $|x| \geq x$ and $|y| \geq y$,
+\[
+|x||y| \geq xy
+\]
+
+Multiplying by -2 on both sides
+\[
+-2|x||y| \leq -2xy
+\]
+
+Adding $x^2 + y^2$ on both sides,
+\[
+x^2 + y^2 - 2|x||y| \leq x^2 + y^2 - 2xy
+\]
+
+Adding a modulus sign to x and y on LHS since $|x|^2 = x^2: x\in \mathbb{R}$
+\[
+|x|^2 + |y|^2 - 2|x||y| \leq x^2 + y^2 - 2xy
+\]
+
+Using identity $(a-b)^2$,
+\[
+\bigl\lvert\lvert x\rvert -\lvert y\rvert \bigr\rvert^2 \leq \lvert x - y\rvert^2
+\]
+\[
+    (\lvert x\rvert -\lvert y\rvert \bigr)^2 \leq ( x - y)^2
+\]
+
+Taking a square root on both sides
+\[ \bigl\lvert\lvert x\rvert -\lvert y\rvert \bigr\rvert \leq \lvert x - y\rvert : x,y \in \mathbb{R}\]
+Thus, the proposition is proven true.
+\qed
+\bigbreak
+\bigbreak
+\subsection*{58.}
+\bigbreak
+\textbf{Proposition: } Given $0\leq a \leq b$, prove that $a \leq \sqrt{ab} \leq \frac{a+b}{2} \leq b$
+\bigbreak
+\noindent\textbf{Proof:}
+\bigbreak
+\textbf{Step 1 Proof:} $a \leq \sqrt{ab}$
+\bigbreak
+
+Given:
+\[
+a\leq b
+\]
+
+Multiplying by $a$ on both sides
+\[
+a^2 \leq ab
+\]
+
+Taking the root on both sides
+\[
+a \leq \sqrt{ab}
+\]
+
+Thus, step 1 of the proof is completed
+\bigbreak
+\textbf{Step 2 Proof:} $\sqrt{ab} \leq \frac{a+b}{2}$
+\bigbreak
+
+Because $a,b \in \mathbb{Z}$ and that the square of an integer is always greater than 
+
+or equal to 0
+\[
+(a-b)^2 \geq 0 
+\]
+\[
+a^2 + b^2 - 2ab \geq 0
+\]
+
+Adding $4ab$ to each side
+\[
+a^2 + b^2 + 2ab \geq 4ab
+\]
+\[
+(a+b)^2 \geq 4ab
+\]
+
+Taking the square root on both sides
+\[
+a+b \geq 2\sqrt{ab}
+\]
+\[
+\frac{a+b}{2} \geq \sqrt{ab}
+\]
+
+
+Thus, step 2 of the proof is completed
+\bigbreak
+\textbf{Step 3 Proof:} $\frac{a+b}{2} \leq b$
+\bigbreak
+
+Given:
+\[
+a \leq b
+\]
+
+Adding b to each side
+\[
+a+b \leq 2b
+\]
+\[
+\frac{a+b}{2} \leq b
+\]
+
+Thus, the third and last step of the proof is 
+
+Thus proven, $a \leq \sqrt{ab} \leq \frac{a+b}{2} \leq b$ \qed
+\newpage
+
+\section*{Section 1.4}
+\subsection*{52.}\bigbreak
+
+Let $\alpha$ be the slope of line PQ
+\begin{align}
+    \alpha &= \frac{y_2 - y_1}{x_2-x_1}\\
+    &= \frac{-4-3}{3+1}\\
+    &= \frac{-7}{4}
+\end{align}
+
+\noindent Let MN be the perpendicular bisector of PQ with N as the midpoint. Let $\beta$ be the slope of MN. Therefore:
+
+\[
+\alpha \times \beta = -1
+\]
+\[
+\beta = \frac{4}{7}
+\]
+
+\noindent Because N is the midpoint of PQ,
+\begin{align}
+    N &= \left(\frac{x_1 + x_2}{2}, \frac{y_1+y_2}{2}\right)\\
+    &= \left(\frac{-1+3}{2}, \frac{3-4}{2}\right)\\
+    &= \left(1,-0.5\right)
+\end{align}
+
+\noindent Thus, the equation of line is expressed in the following form:
+
+\[
+(y-y_1) = \beta(x-x_1)
+\]
+\[
+7(y+0.5) = 4(x-1)
+\]
+\[
+7y + 3.5 = 4x-4
+\]
+
+\noindent Thus, our final equation of the perpendicular bisector is:
+\[
+y = \frac{4x-7.5}{7}
+\]\bigbreak
+
+
+\subsection*{62.}\bigbreak
+
+\textbf{Question:} Show that the medians of a triangle intersect in a single point (called the centroid of the triangle).
+
+A method to prove this statement may be to find the intersection of all medians and show they only intersect at a single point called the centroid. The first step would be to find the equation of all medians. We will start by defining the vertexes and midpoints of all lines.
+\[
+A = (0,0)
+\]
+\[
+B = (a,b)
+\]
+\[
+C = (c,0)
+\]
+
+\noindent \textbf{Step 1: Finding the Midpoints} \newline
+We find the midpoints of each side of the triangle:
+
+\begin{itemize}
+    \item The midpoint of side \( BC \) is:
+    \[
+    M_{BC} = \left( \frac{a + c}{2}, \frac{b}{2} \right)
+    \]
+    \item The midpoint of side \( AC \) is:
+    \[
+    M_{AC} = \left( \frac{c}{2}, 0 \right)
+    \]
+    \item The midpoint of side \( AB \) is:
+    \[
+    M_{AB} = \left( \frac{a}{2}, \frac{b}{2} \right)
+    \]
+\end{itemize}
+
+\noindent \textbf{Step 2: Finding the Equations of the Medians} \newline
+We now determine the equations of the medians using the vertex points and their opposite side midpoints.
+
+\begin{itemize}
+    \item \textbf{Median from} \( A(0,0) \textbf{ to } M_{BC} \left( \frac{a+c}{2}, \frac{b}{2} \right) \): \newline
+    To find the equation of the median, we first compute the slope:
+    \[
+    m_1 = \frac{\frac{b}{2} - 0}{\frac{a+c}{2} - 0} = \frac{b}{a+c}
+    \]
+    Now, using the point \( A(0,0) \) and the slope \( m_1 \), the equation of the median is:
+    \[
+    y - 0 = \frac{b}{a+c}(x - 0)
+    \]
+    Simplifying, we get:
+    \[
+    y = \frac{b}{a+c}x
+    \]
+    
+    \item Median from \( B(a, b) \text{ to }  M_{AC} \left( \frac{c}{2}, 0 \right) \): \newline
+    The slope of this median is:
+    \[
+    m_2 = \frac{-b}{\frac{c}{2} - a}
+    \]
+    Using point-slope form, the equation of the second median is:
+    \[
+    y - b = \frac{-b}{\frac{c}{2} - a}(x - a)
+    \]
+    
+    \item \text{Median from} \( C(c, 0) \text{ to } M_{AB} \left( \frac{a}{2}, \frac{b}{2} \right) \): \newline
+    The slope of this median is:
+    \[
+    m_3 = \frac{b}{a - 2c}
+    \]
+    The equation of the third median is:
+    \[
+    y = \frac{b}{a - 2c}(x - c)
+    \]
+\end{itemize}
+
+\noindent \textbf{Step 3: Solving for the Intersection of the Medians} \newline
+We now solve for the intersection of the first two medians.
+
+\begin{itemize}
+    \item The equation of the first median is:
+    \[
+    y = \frac{b}{a+c}x
+    \]
+    
+    \item The equation of the second median is:
+    \[
+    y - b = \frac{-b}{\frac{c}{2} - a}(x - a)
+    \]
+    Simplifying the second equation:
+    \[
+    y = \frac{-b}{\frac{c}{2} - a}(x - a) + b
+    \]
+    Now, set the equations equal to each other:
+    \[
+    \frac{b}{a+c} \times x = \frac{-b}{\frac{c}{2} - a}(x - a) + b
+    \]
+    Multiply out and solve for \( x \):
+    \[
+    \frac{b}{a+c} \times x = \frac{-b(x - a)}{\frac{c}{2} - a} + b
+    \]
+    Expand and simplify:
+    \[
+    \frac{b}{a+c}x = \frac{-bx + ab}{\frac{c}{2} - a} + b
+    \]
+    Combine like terms and solve for \( x \):
+    \[
+    x = \frac{a+c}{3}
+    \]
+\end{itemize}
+
+Substitute \( x = \frac{a+c}{3} \) into the first median equation to find \( y \):
+\[
+y = \frac{b}{a+c} \times \frac{a+c}{3} = \frac{b}{3}
+\]
+
+Thus, the intersection point of the medians is:
+\[
+\left( \frac{a+c}{3}, \frac{b}{3} \right)
+\]
+This is the centroid of the triangle. Since the third median also passes through this point, the medians of the triangle intersect at a single point, confirming that all medians meet at the centroid.
+
+\bigbreak
+\newpage
+\section*{Section 1.6}
+\bigbreak
+\subsection*{80.}
+\bigbreak
+Prove that
+f(x) = \begin{cases}
+1, & \text{if } \text{x is rational}\\
+0,  & \text{if } \text{x is irrational}\\
+\end{cases} is periodic but has no period.
+\bigbreak
+\noindent\textbf{Proof of Periodicity:}\\
+Given $a,p \in \mathbb{Q}$. f(a), f(a+p) and f(a+2p) will always have a value of 1. Similarly, if $a,p \in \mathbb{P}$, f(a), f(a+p), f(a+2p) will always have a value of 0.Thus showing us that f(x) is periodic for both rational and irrational numbers.\\
+
+\noindent\textbf{Proof by contradiction of the lack of existence of period:}\\
+We start of by assuming existence of a period. Drawing on the previous proof of periodicity, we may show that for a value of p, we may obtain periodic intervals. However, we may do the same with a value of 0.5p, 0.25p, 0.125p and so on till we reach infinitesimally small numbers. Regardless of how small a period we obtain, there will always be a smaller period which displays periodic intervals. Thus, we may say our assumption is wrong as no period can be defined.
+\newpage
+\section*{Section 1.7}\bigbreak
+\subsection*{59.}
+\textbf{Proposition:}  Show that every function defined for all real numbers can be written as the sum of an even function and an odd function.
+\bigbreak
+\noindent\textbf{Proof:}
+This proof will be approached by proving two lemmas which will help us solve the above proposition.
+\bigbreak
+\noindent \textbf{Lemma 1:} Given that f(x) is defined for all real numbers, the function $g(x) = f(x) + f(-x)$ is an even function
+\bigbreak
+By definition, if $g(x)$ was an even function,
+\[
+g(x) = g(-x)
+\]
+\begin{align}
+    g(-x) &= f(-x) + f(x)\\
+    &= f(x) + f(-x)\\
+    &= g(x)
+\end{align}
+
+Thus, g(x) is an even function
+\bigbreak
+\noindent \textbf{Lemma 2:} Given that f(x) is defined for all real numbers, the function $h(x) = f(x) - f(-x)$ is an odd function.
+\bigbreak
+By definition, if $h(x)$ was an odd function,
+\[
+h(x) = -h(-x)
+\]
+\begin{align}
+    -h(-x) &= -f(-x) + f(x)\\
+    &= f(x) - f(-x)\\
+    &= h(x)
+\end{align}
+
+Thus, $h(x)$ is an odd function
+\bigbreak
+Now that both lemmas are proven, we will use them to prove the main proposition. Adding both $g(x)$ and $h(x)$:
+
+\[
+g(x) + h(x) = f(x) + f(-x) + f(x) - f(-x)
+\]
+\[
+g(x) + h(x) = 2f(x)
+\]
+\[
+f(x) = \frac{g(x)}{2} + \frac{h(x)}{2}
+\]
+
+Thus, we have shown that $f(x)$, which is a function defined for all real numbers, can be expressed as a sum of $g(x)$ and $h(x)$, which are even and odd functions respectively.
+\newpage
+\section*{Section 1.8}\bigbreak
+\subsection*{6.}\bigbreak
+\textbf{Proposition:} $1^3 + 2^3 + ... + n^3 = (1+2+...+n)^2$\bigbreak
+\noindent\textbf{Proof by Induction:}\bigbreak
+
+\noindent Base Step:
+\bigbreak
+For n = 1
+
+\[
+1^3 = (1)^2
+\]
+\[
+1 = 1
+\]
+
+Thus, we prove n holds for a value of 1
+\bigbreak
+\noindent Step 2:
+\bigbreak
+We assume that proposition holds for n = k for $k \in \mathbb{N}$
+
+\[
+1^3 + 2^3 + ... + k^3 = (1+2+...+k)^2
+\]
+\bigbreak
+\noindent Step 3:
+\bigbreak
+For n = k+1
+
+\[
+1^3 + 2^3 + ... + k^3 + (k+1)^3 = (1+2+...+k +(k+1))^2
+\]
+
+By the prior assumption,
+
+\[
+    (1+2+...+k)^2 + (k+1)^3
+\]
+
+Using the formula for the sum of an arithmetic progression,
+
+\[
+\left(\frac{k(k+1)}{2}\right)^2 + (k+1)^3
+\]
+\[
+\frac{k^2(k+1)^2 + 4(k+1)^3}{4} 
+\]
+\[
+\frac{(k+1)^2(k^2 + 4(k+1))}{4}
+\]
+\[
+\frac{(k+1)^2(k^2 + 4k + 4)}{4}
+\]
+\[
+\frac{(k+1)^2(k+2)^2}{4}
+\]
+\[
+\left( \frac{(k+1)(k+2)}{2}\right)^2
+\]
+Using the reverse of the arithmetic summation formula, we obtain the result.
+\[
+(1+2+...+k+(k+1))^2
+\]
+Thus, the proposition holds for $1, k, k+1$. Thus by the induction hypothesis, we have proved the proposition.
+\bigbreak
+
+\subsection*{18.}
+
+\textbf{Question:} Show that, given a unit length, for each positive integer n, a line segment of length $\sqrt{n}$ can be constructed by straight edge and compass.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.4]{Images/Screenshot 2024-09-30 at 4.07.24 PM.png}
+\end{figure}
+
+\noindent In the above diagram, FE $\perp$ AB, AE = n and BE is 1 unit long. Length AE can be drawn using a compass, using BE as a reference. $\angle BFA_1 = 90\degree$ according to the inscribed triangle in a semi-circle theorem
+\bigbreak
+\noindent\textbf{Proposition: } $\alpha = \sqrt{n}$
+\bigbreak
+\noindent\textbf{Proof:} 
+
+Using the Pythagorean theorem,
+\[
+\alpha^2 + 1^2 = \gamma^2
+\]
+\[
+\alpha^2 + n^2 = \delta^2
+\]
+\[
+\delta^2 + \gamma^2 = (n+1)^2
+\]
+
+Replacing in the values of $\delta$ and $\gamma$ into the equation,
+\[
+n^2 + 2\alpha^2 + 1 = n^2 + 2n + 1
+\]
+
+Cancelling out terms,
+\[
+\alpha^2 = n
+\]
+\[
+\alpha = \sqrt{n}
+\]
+
+
+
+
+
+\end{document}
