@@ -217,7 +217,7 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
     y = 3c^2x - 2c^3
     \]
 
-    To find other solutions(should they exist), we will equate the tanget line to the function.
+    To find other solutions(should they exist), we will equate the tangent line to the function.
 
     \[
     x^3 = 3c^2x-2c^3
@@ -233,7 +233,225 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
     (x-c)(x-c)(x+2c) = 0
     \]
     Therefore, the tangent line intersects the function at $x=-2c$
-    
 
+    \item [\textbf{54.}]
+    \begin{enumerate}
+        \item 
+        
+        \[
+        g'(x) = \begin{cases}
+            3x^2, & x\geq 0\\
+            0, & x<0
+        \end{cases}
+        \]
+        \[
+        g'(0) = 0
+        \]
+
+        \[
+        g''(x) = \begin{cases}
+            6x, & x\geq 0\\
+            0, & x<0
+        \end{cases}
+        \]
+
+        \[
+        g''(0) = 0
+        \]
+
+        \item 
+
+        \[
+        g'(x) = \begin{cases}
+            3x^2, & x\geq 0\\
+            0, & x<0
+        \end{cases}
+        \]
+        \[
+        g''(x) = \begin{cases}
+            6x, & x\geq 0\\
+            0, & x<0
+        \end{cases}
+        \]
+
+        \item
+        Differentiating $g''(x)$, we obtain
+        \[
+        g'''(x) = \begin{cases}
+            6, & x\geq0\\
+            0, & x<0
+        \end{cases}
+        \]
+        Since $g'''(x) = 6$ for $x\geq0$ and $0$ for $x<0$, there is a jump discontinuity at $x=0$. Thus, if $g'''(x)$ is discontinuous at $x=0$, it is not differentiable at that point. 
+    \end{enumerate}
+
+    \item [\textbf{61. }]To prove: If \( y = x^{-1} \), then the \( n \)-th derivative of \( y \) is \( \frac{d^ny}{dx^n} = (-1)^n \cdot n! \cdot x^{-n-1} \).
+    \begin{enumerate}
+
+    \item Base Case ( \( n = 0 \) ): For \( n = 0 \), the \( 0 \)-th derivative is simply \( y(x) \), so
+    \[
+    y = x^{-1}
+    \]
+    which matches the formula for \( n = 0 \):
+    \[
+    (-1)^0 \cdot 0! \cdot x^{-0-1} = 1 \cdot 1 \cdot x^{-1} = x^{-1}
+    \]
+    Thus, the base case holds.
+
+    \item Inductive Hypothesis: Assume that for some \( n = k \), the formula holds,
+    \[
+    \frac{d^ky}{dx^k} = (-1)^k \cdot k! \cdot x^{-k-1}
+    \]
+
+    \item Inductive Step: Differentiate \( \frac{d^ky}{dx^k} = (-1)^k \cdot k! \cdot x^{-k-1} \) using the power rule:
+    \[
+    \frac{d^{k+1}y}{dx^{k+1}} = \frac{d}{dx}\left(\frac{d^{k}y}{dx^{k}}\right)
+    \]
+    \[
+    \frac{d^{k+1}y}{dx^{k+1}}= \frac{d}{dx} \left( (-1)^k \cdot k! \cdot x^{-k-1} \right) = (-1)^k \cdot k! \cdot (-k-1) \cdot x^{-k-2}
+    \]
+    Simplifying:
+    \[
+    \frac{d^{k+1}y}{dx^{k+1}}= (-1)^k \cdot k! \cdot -1\cdot(k+1) \cdot x^{-k-2} = (-1)^{k+1} \cdot (k+1)! \cdot x^{-k-2}
+    \]
+    The result obtained by differentiating the $k^{th}$ derivative of $y$ results in the $k+1^{th}$ derivative of $y$ according to the proposed formula. Thus, we can say the formula holds true for all $n\in \mathbb{N}$.
+    \end{enumerate}
+
+    \item [\textbf{62. }]
+    \begin{enumerate}
+    \item If \( f(x) \) is even, then \( f'(x) \) is odd.
+
+    A function \( f(x) \) is even if \( f(-x) = f(x) \) for all \( x \).
+
+    We are given that \( f(x) \) is even, so \( f(-x) = f(x) \). Differentiating both sides:
+    \[
+    \frac{d}{dx} f(-x) = \frac{d}{dx} f(x)
+    \]
+    By the chain rule, the derivative of \( f(-x) \) is:
+    \[
+    \frac{d}{dx} f(-x) = f'(-x) \cdot \frac{d}{dx}(-x) = f'(-x) \cdot (-1) = -f'(-x)
+    \]
+    The derivative of \( f(x) \) on the right-hand side is just \( f'(x) \), so:
+    \[
+    -f'(-x) = f'(x)
+    \]
+    Rearranging the equation gives:
+    \[
+    f'(-x) = -f'(x)
+    \]
+    The above is the definition of an odd function. Thus if $f(x)$ is even, then $f'(x)$ is odd
+    \bigbreak
+
+    \item If \( f(x) \) is odd, then \( f'(x) \) is even.
+
+    A function \( f(x) \) is odd if \( f(-x) = -f(x) \) for all \( x \).
+
+    We are given that \( f(x) \) is odd, so \( f(-x) = -f(x) \). Differentiating both sides:
+    \[
+    \frac{d}{dx} f(-x) = \frac{d}{dx} [-f(x)]
+    \]
+    Applying the chain rule to the left-hand side gives:
+    \[
+    \frac{d}{dx} f(-x) = f'(-x) \cdot \frac{d}{dx}(-x) = -f'(-x)
+    \]
+    The derivative of \( -f(x) \) on the right-hand side is:
+    \[
+    \frac{d}{dx} [-f(x)] = -f'(x)
+    \]
+    Equating both sides gives:
+    \[
+    -f'(-x) = -f'(x)
+    \]
+    Simplifying, we get:
+    \[
+    f'(-x) = f'(x)
+    \]
+    The above is the definition of an even function. Thus if $f(x)$ is odd, then $f'(x)$ is even
+    \end{enumerate}
+\newpage
+    \item [\textbf{67.}] 
+    \begin{enumerate}
+        \item For $x\neq 0$
+        \[
+        f(x) = x \sin\left(\frac{1}{x}\right) 
+        \]
+        Thus, by using product rule and chain rule we obtain the following:
+        \[
+        f'(x) = 1\left(\sin\left(\frac{1}{x}\right)\right) + x\left(\cos\left(\frac{1}{x}\right) \times \frac{-1}{x^2}\right)
+        \]
+        This simplifies to:
+        \[
+        f'(x) =\sin\left(\frac{1}{x}\right) -\frac{\cos\left(\frac{1}{x}\right)}{x}
+        \]
+
+        \[
+        g(x) = x^2\sin\left(\frac{1}{x}\right)
+        \]
+        Using product rule and chain rule:
+        \[
+        g'(x) = 2x\sin\left(\frac{1}{x}\right) + x^2\left(\cos\left(\frac{1}{x}\right) \times \frac{-1}{x^2}\right)
+        \]
+        Simplifying
+        \[
+        g'(x) = 2x\sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)
+        \]
+        \item 
+        If $g'(x)$ was continuous at 0:
+        \[
+        \lim_{x\to0} g'(x) = g(0)
+        \]
+
+        \[
+        \lim_{x \to 0}2x\sin\left(\frac{1}{x}\right)- \cos\left(\frac{1}{x}\right)
+        \]
+        Using the limit theorem, 
+        \[
+        \lim_{x\to0}2x\sin\left(\frac{1}{x}\right) - \lim_{x\to0}\cos\left(\frac{1}{x}\right)
+        \]
+        The following limit computes to 0 as $2x$ approaches 0
+        \[
+        \lim_{x\to0}2x\sin\left(\frac{1}{x}\right) = 0
+        \]
+        However, the following limit exhibits oscillating behaviour, thus the limit does not exist at 0. Thus, $g'(x)$ is not continuous at 0.
+        
+    \end{enumerate}
+
+    \item [\textbf{72.}]
+    \begin{enumerate}
+        \item 
+        \[
+        \theta(t) = A \sin(\omega t+ \phi)
+        \]
+        Applying chain rule
+        \[
+        \theta'(t) = A \cos(\omega t + \phi) \times \omega = A\omega\cos(\omega t + \phi)
+        \]
+        \[
+        \theta''(t) = -A\omega\sin(\omega t + \phi) \times \omega = -A\omega^2\sin(\omega t + \phi)
+        \]
+        Separating the $\omega^2$ term,
+        \[
+        \theta''(t) = -\omega^2 \times A \sin(\omega t+ \phi)
+        \]
+        Replacing the original function in:
+        \[
+        \theta''(t) = -\omega^2 \theta(t)
+        \]
+        Thus, we can say that $\theta(t)$ satisfies the equation
+        \bigbreak
+        \item 
+        \[
+        \theta(t) = A\sin(\omega t+\phi)
+        \]
+        Using the formula: $\sin(a+b) = \sin(a)\cos(b) + \cos(a)\sin(b)$
+        \[
+        \theta(t) = A\sin(\omega t)\cos(\phi) + A\sin(\phi)\cos(\omega t)
+        \]
+        Let $A' = A\cos(\phi)$ and $B = A\sin(\phi)$
+        \[
+        \theta(t) = A'\sin(\omega t) + B\cos(\omega t)
+        \]
+        Thus, $\theta(t)$ can be expressed in the above form.
+    \end{enumerate}
 \end{enumerate}
 \end{document}
