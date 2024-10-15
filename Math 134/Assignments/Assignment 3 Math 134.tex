@@ -1,7 +1,9 @@
 \documentclass[12pt]{article}
 
 \usepackage{graphicx}			% Use this package to include images
-\usepackage{amsmath}			% A library of many standard math expressions
+\usepackage{amsmath}		
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
 \usepackage[margin=1in]{geometry}% Sets 1in margins. 
 \usepackage{fancyhdr}			% Creates headers and footers
 \usepackage{enumerate}          %These two package give custom labels to a list
@@ -236,8 +238,34 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
 
     \item [\textbf{54.}]
     \begin{enumerate}
+        \item The function \( g(x) \) is defined as \( g(x) = \begin{cases} x^3 & \text{for } x \geq 0 \\ 0 & \text{for } x < 0 \end{cases} \). To find \( g'(0) \), we use the limit definition of the derivative: 
+\[
+g'(0) = \lim_{h \to 0} \frac{g(h) - g(0)}{h} = \lim_{h \to 0} \frac{g(h)}{h}
+\]
+For \( h > 0 \), \( g(h) = h^3 \), so:
+\[
+g'(0) = \lim_{h \to 0^+} \frac{h^3}{h} = \lim_{h \to 0^+} h^2 = 0
+\]
+For \( h < 0 \), \( g(h) = 0 \), so:
+\[
+g'(0) = \lim_{h \to 0^-} \frac{0}{h} = 0
+\]
+Thus, \( g'(0) = 0 \). For the second derivative \( g''(0) \), we apply:
+\[
+g''(0) = \lim_{h \to 0} \frac{g'(h) - g'(0)}{h} = \lim_{h \to 0} \frac{g'(h)}{h}
+\]
+For \( h > 0 \), \( g'(h) = 3h^2 \), so:
+\[
+g''(0) = \lim_{h \to 0^+} \frac{3h^2}{h} = \lim_{h \to 0^+} 3h = 0
+\]
+For \( h < 0 \), \( g'(h) = 0 \), so:
+\[
+g''(0) = \lim_{h \to 0^-} \frac{0}{h} = 0
+\]
+Thus, \( g''(0) = 0 \).
+
         \item 
-        
+
         \[
         g'(x) = \begin{cases}
             3x^2, & x\geq 0\\
@@ -245,50 +273,42 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
         \end{cases}
         \]
         \[
-        g'(0) = 0
-        \]
-
-        \[
         g''(x) = \begin{cases}
             6x, & x\geq 0\\
             0, & x<0
         \end{cases}
         \]
 
-        \[
-        g''(0) = 0
-        \]
+        \item To show that \( g'''(0) \) does not exist, we use the definition of the derivative:
+\[
+g'''(0) = \lim_{h \to 0} \frac{g''(h) - g''(0)}{h}
+\]
+Since \( g''(0) = 0 \), this simplifies to:
+\[
+g'''(0) = \lim_{h \to 0} \frac{g''(h)}{h}
+\]
+For \( h > 0 \), \( g(x) = x^3 \), so \( g'(x) = 3x^2 \) and \( g''(x) = 6x \), meaning \( g''(h) = 6h \) for \( h > 0 \). 
 
-        \item 
+For \( h < 0 \), \( g(x) = 0 \), so \( g''(h) = 0 \). Now, evaluate the limit from both sides:
+\[
+g'''(0) = \lim_{h \to 0^+} \frac{6h}{h} = \lim_{h \to 0^+} 6 = 6
+\]
+\[
+g'''(0) = \lim_{h \to 0^-} \frac{0}{h} = 0
+\]
+Since the left-hand and right-hand limits are not equal, \( g'''(0) \) does not exist due to a jump discontinuity.
 
-        \[
-        g'(x) = \begin{cases}
-            3x^2, & x\geq 0\\
-            0, & x<0
-        \end{cases}
-        \]
-        \[
-        g''(x) = \begin{cases}
-            6x, & x\geq 0\\
-            0, & x<0
-        \end{cases}
-        \]
-
-        \item
-        Differentiating $g''(x)$, we obtain
-        \[
-        g'''(x) = \begin{cases}
-            6, & x\geq0\\
-            0, & x<0
-        \end{cases}
-        \]
-        Since $g'''(x) = 6$ for $x\geq0$ and $0$ for $x<0$, there is a jump discontinuity at $x=0$. Thus, if $g'''(x)$ is discontinuous at $x=0$, it is not differentiable at that point. 
+\item 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Math 134/Images/ggraph.png}
+\end{figure}
     \end{enumerate}
 
     \item [\textbf{61. }]To prove: If \( y = x^{-1} \), then the \( n \)-th derivative of \( y \) is \( \frac{d^ny}{dx^n} = (-1)^n \cdot n! \cdot x^{-n-1} \).
     \begin{enumerate}
 
-    \item Base Case ( \( n = 0 \) ): For \( n = 0 \), the \( 0 \)-th derivative is simply \( y(x) \), so
+    For \( n = 0 \), the \( 0 \)-th derivative is simply \( y(x) \), so
     \[
     y = x^{-1}
     \]
@@ -298,12 +318,12 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
     \]
     Thus, the base case holds.
 
-    \item Inductive Hypothesis: Assume that for some \( n = k \), the formula holds,
+    Assume that for some \( n = k \), the formula holds,
     \[
     \frac{d^ky}{dx^k} = (-1)^k \cdot k! \cdot x^{-k-1}
     \]
 
-    \item Inductive Step: Differentiate \( \frac{d^ky}{dx^k} = (-1)^k \cdot k! \cdot x^{-k-1} \) using the power rule:
+ Inductive Step: Differentiate \( \frac{d^ky}{dx^k} = (-1)^k \cdot k! \cdot x^{-k-1} \) using the power rule:
     \[
     \frac{d^{k+1}y}{dx^{k+1}} = \frac{d}{dx}\left(\frac{d^{k}y}{dx^{k}}\right)
     \]
@@ -447,11 +467,306 @@ Since $A = \frac{-5B}{3}$, we find $A = 5$.
         \[
         \theta(t) = A\sin(\omega t)\cos(\phi) + A\sin(\phi)\cos(\omega t)
         \]
-        Let $A' = A\cos(\phi)$ and $B = A\sin(\phi)$
+        Let $C = A\cos(\phi)$ and $B = A\sin(\phi)$
         \[
-        \theta(t) = A'\sin(\omega t) + B\cos(\omega t)
+        \theta(t) = C\sin(\omega t) + B\cos(\omega t)
         \]
         Thus, $\theta(t)$ can be expressed in the above form.
     \end{enumerate}
+\bigbreak
+    \item [\textbf{52.}]
+
+    We begin with the equation of the parabola:
+    \[
+    x = a y^2.
+    \]
+    Dividing both sides by \( y^2 \) gives:
+    \[
+    \frac{x}{y^2} = a.
+    \]
+
+    Now, we differentiate both sides of the equation implicitly with respect to \( x \).
+    \[
+    \frac{d}{dx} \left( \frac{x}{y^2} \right) = \frac{d}{dx} (a).
+    \]
+    The derivative of the constant \( a \) on the right-hand side is zero, so:
+    \[
+    \frac{d}{dx} \left( \frac{x}{y^2} \right) = 0.
+    \]
+
+    Using the quotient rule for differentiation on \( \frac{x}{y^2} \), we have:
+    \[
+    \frac{d}{dx} \left( \frac{x}{y^2} \right) = \frac{y^2 \cdot \frac{dx}{dx} - x \cdot \frac{d}{dx} (y^2)}{(y^2)^2}.
+    \]
+
+    Since \( \frac{dx}{dx} = 1 \) and \( \frac{d}{dx}(y^2) = 2y \frac{dy}{dx} \), this becomes:
+    \[
+    \frac{y^2 - x \cdot 2y \frac{dy}{dx}}{y^4} = 0.
+    \]
+
+    \[
+    y^2 - 2xy \frac{dy}{dx} = 0.
+    \]
+    Solving for \( \frac{dy}{dx} \) gives:
+    \[
+    2xy \frac{dy}{dx} = y^2,
+    \]
+    \[
+    \frac{dy}{dx} = \frac{y^2}{2xy} = \frac{y}{2x}.
+    \]
+
+    Thus, the slope of the tangent to the parabola is:
+    \[
+    m_{\text{parabola}} = \frac{y}{2x}.
+    \]
+
+
+
+    Next, for the ellipse equation \( x^2 + \frac{y^2}{2} = b \), we differentiate both sides implicitly with respect to \( x \):
+    \[
+    2x + y \frac{dy}{dx} = 0.
+    \]
+    Solving for \( \frac{dy}{dx} \) gives:
+    \[
+    \frac{dy}{dx} = -\frac{2x}{y}.
+    \]
+
+    For the curves to be orthogonal at their points of intersection, the product of their slopes must equal \(-1\):
+    
+    \[
+    -1 = -1.
+    \]
+    \[
+    -\frac{y}{2x} \cdot \frac{2x}{y} = -1,
+    \]
+    \[
+    m_{\text{parabola}} \cdot m_{\text{ellipse}} = -1.
+    \]
+
+    Thus, they are orthogonal\\
+    \includegraphics[width=0.5\linewidth]{Math 134/Images/ellpise.png}
+    
+
+    \item [\textbf{55.}]
+
+    We start with the equation of the lemniscate:
+    \[
+    (x^2 + y^2)^2 = x^2 - y^2.
+    \]
+
+    We will differentiate both sides with respect to \( x \).
+
+    Using the chain rule and implicit differentiation:
+    \[
+    \frac{d}{dx}[(x^2 + y^2)^2] = \frac{d}{dx}[x^2 - y^2].
+    \]
+
+    Using the chain rule on the left side:
+    \[
+    2(x^2 + y^2)(2x + 2y \frac{dy}{dx}) = 2x - 2y \frac{dy}{dx}.
+    \]
+
+    Simplifying:
+    \[
+    2(x^2 + y^2)(x + y \frac{dy}{dx}) = x - y \frac{dy}{dx}.
+    \]
+
+    Rearranging gives:
+    \[
+    2(x^2 + y^2)x + 2(x^2 + y^2)y \frac{dy}{dx} = x - 2(x^2 + y^2)x.
+    \]
+
+    Combine the terms involving \(\frac{dy}{dx}\):
+    \[
+    2(x^2 + y^2)y \frac{dy}{dx} + y \frac{dy}{dx} = x - 2(x^2 + y^2)x.
+    \]
+
+    Factoring out \(\frac{dy}{dx}\):
+    \[
+    \left(2(x^2 + y^2)y + y\right) \frac{dy}{dx} = x - 2(x^2 + y^2)x.
+    \]
+
+    Thus, we have:
+    \[
+    \frac{dy}{dx} = \frac{x - 2(x^2 + y^2)x}{2(x^2 + y^2)y + y}.
+    \]
+
+    Setting the numerator equal to zero gives the condition for horizontal tangents:
+    \[
+    x - 2(x^2 + y^2)x = 0.
+    \]
+    This simplifies to:
+    \[
+    x(1 - 2(x^2 + y^2)) = 0.
+    \]
+
+    This yields two cases:
+    
+    1. \(x = 0\)\\
+    2. \(1 - 2(x^2 + y^2) = 0\) or \(x^2 + y^2 = \frac{1}{2}\)
+
+    Case 1: \(x = 0\)
+
+    Substituting \(x = 0\) into the original equation:
+    \[
+    (0^2 + y^2)^2 = 0^2 - y^2 \implies y^4 = -y^2.
+    \]
+    This gives:
+    \[
+    y^4 + y^2 = 0 \implies y^2(y^2 + 1) = 0.
+    \]
+    Thus, \(y^2 = 0\) or \(y^2 = -1\), which gives \(y = 0\).
+
+    Thus, we have one point:
+    \[
+    (0, 0).
+    \]
+
+    Case 2: \(x^2 + y^2 = \frac{1}{2}\)
+
+    Substituting this back into the lemniscate equation:
+    \[
+    \left(\frac{1}{2}\right)^2 = x^2 - y^2 \implies \frac{1}{4} = x^2 - y^2.
+    \]
+    Now, substituting \(y^2 = \frac{1}{2} - x^2\):
+    \[
+    \frac{1}{4} = x^2 - \left(\frac{1}{2} - x^2\right).
+    \]
+    This simplifies to:
+    \[
+    \frac{1}{4} = x^2 - \frac{1}{2} + x^2,
+    \]
+    \[
+    \frac{1}{4} = 2x^2 - \frac{1}{2}.
+    \]
+    Multiplying through by 4 gives:
+    \[
+    1 = 8x^2 - 2 \implies 8x^2 = 3 \implies x^2 = \frac{3}{8} \implies x = \pm\sqrt{\frac{3}{8}}.
+    \]
+
+    Now substituting \(x^2 = \frac{3}{8}\) back to find \(y^2\):
+    \[
+    y^2 = \frac{1}{2} - \frac{3}{8} = \frac{4}{8} - \frac{3}{8} = \frac{1}{8} \implies y = \pm \sqrt{\frac{1}{8}}.
+    \]
+
+    This gives us four points:
+    
+    1. \(\left(\sqrt{\frac{3}{8}}, \sqrt{\frac{1}{8}}\right)\)\\
+    2. \(\left(\sqrt{\frac{3}{8}}, -\sqrt{\frac{1}{8}}\right)\)\\
+    3. \(\left(-\sqrt{\frac{3}{8}}, \sqrt{\frac{1}{8}}\right)\)\\
+    4. \(\left(-\sqrt{\frac{3}{8}}, -\sqrt{\frac{1}{8}}\right)\)\\
+
+    Thus, the four points of the curve at which the tangent line is horizontal are:
+    1. \(\left(\sqrt{\frac{3}{8}}, \sqrt{\frac{1}{8}}\right)\)\\
+    2. \(\left(\sqrt{\frac{3}{8}}, -\sqrt{\frac{1}{8}}\right)\)\\
+    3. \(\left(-\sqrt{\frac{3}{8}}, \sqrt{\frac{1}{8}}\right)\)\\
+    4. \(\left(-\sqrt{\frac{3}{8}}, -\sqrt{\frac{1}{8}}\right)\)\\
+
+\item [\textbf{58.}] 
+    The equation of the circle with center \( (0, a) \) and radius \( 1 \) is given by:
+    \[
+    (x - 0)^2 + (y - a)^2 = 1.
+    \]
+    Simplifying this gives:
+    \[
+    x^2 + (y - a)^2 = 1.
+    \]
+    The parabola is given by \( y = 2x^2 \).
+
+    We substitute the parabola equation into the circle's equation:
+    \[
+    x^2 + (2x^2 - a)^2 = 1.
+    \]
+
+    So, the equation becomes:
+    \[
+    x^2 + 4x^4 - 4ax^2 + a^2 = 1.
+    \]
+    Rearranging gives:
+    \[
+    4x^4 + (1 - 4a)x^2 + (a^2 - 1) = 0.
+    \]
+
+    This is a quadratic equation in \( x^2 \). For the circle to be inscribed, this equation must have a double root. Therefore, the discriminant must be zero.
+
+    The discriminant \( D \) of the quadratic \( Ax^2 + Bx + C = 0 \) is given by \( D = B^2 - 4AC \). Here:
+    \[
+    A = 4, \quad B = 1 - 4a, \quad C = a^2 - 1.
+    \]
+    Thus, the discriminant becomes:
+    \[
+    D = (1 - 4a)^2 - 4(4)(a^2 - 1) = 0.
+    \]
+
+    Setting the discriminant equal to zero:
+    \[
+    (1 - 4a)^2 - 16(a^2 - 1) = 0.
+    \]
+
+    Expanding this gives:
+    \[
+    1 - 8a + 16a^2 - 16a^2 + 16 = 0.
+    \]
+    Simplifying, we have:
+    \[
+    -8a + 17 = 0.
+    \]
+    Solving for \( a \):
+    \[
+    8a = 17 \quad \Rightarrow \quad a = \frac{17}{8}.
+    \]
+
+    Now we substitute \( a \) back into the quadratic equation to find \( x^2 \):
+    \[
+    4x^4 + (1 - 4 \cdot \frac{17}{8})x^2 + \left(\left(\frac{17}{8}\right)^2 - 1\right) = 0.
+    \]
+
+    So the equation becomes:
+    \[
+    4x^4 - \frac{15}{2}x^2 + \left(\frac{289}{64} - 1\right) = 0.
+    \]
+
+    Now our equation simplifies to:
+    \[
+    4x^4 - \frac{15}{2}x^2 + \frac{225}{64} = 0.
+    \]
+    Multiplying through by \( 64 \) to eliminate fractions:
+    \[
+    256x^4 - 480x^2 + 225 = 0.
+    \]
+
+ 
+    Using the quadratic formula:
+    \[
+    x = \frac{-(-480) \pm \sqrt{(-480)^2 - 4 \cdot 256 \cdot 225}}{2 \cdot 256}.
+    \]
+    Calculating the discriminant:
+    \[
+    (-480)^2 = 230400,
+    \]
+    \[
+    4 \cdot 256 \cdot 225 = 230400.
+    \]
+    Thus, the discriminant is:
+    \[
+    D = 230400 - 230400 = 0.
+    \]
+    Since the discriminant is zero, there is one double root:
+    \[
+    x^2 = \frac{480}{2 \cdot 256} = \frac{480}{512} = \frac{15}{16}.
+    \]
+    \[
+    x = \pm \frac{\sqrt{15}}{4}.
+    \]
+
+    Using \( y = 2x^2 \):
+    \[
+    y = 2 \cdot \frac{15}{16} = \frac{30}{16} = \frac{15}{8}.
+    \]
+
+    The points of contact are:
+    \[
+    \left(\frac{\sqrt{15}}{4}, \frac{15}{8}\right) \quad \text{and} \quad \left(-\frac{\sqrt{15}}{4}, \frac{15}{8}\right).
+    \]
 \end{enumerate}
 \end{document}
