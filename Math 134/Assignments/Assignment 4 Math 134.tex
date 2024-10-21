@@ -1,0 +1,478 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}		
+\usepackage{polynom}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 134 Homework \#4}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+
+
+
+\begin{document} 
+\begin{enumerate}[start=1,label={\bfseries. },leftmargin=1in]
+
+\item [29.]  We are given that \( f \) is differentiable on an interval \( I \) and that \( f'(x) < 1 \) for all \( x \in I \). To show that \( f \) has at most one fixed point in \( I \), we define the function
+
+\[
+g(x) = f(x) - x.
+\]
+
+A fixed point \( c \) is where \( f(c) = c \), which is equivalent to
+
+\[
+g(c) = 0.
+\]
+
+Since \( f \) is differentiable, \( g(x) \) is also differentiable, and its derivative is
+
+\[
+g'(x) = f'(x) - 1.
+\]
+
+Given that \( f'(x) < 1 \) for all \( x \in I \), it follows that
+
+\[
+g'(x) = f'(x) - 1 < 0,
+\]
+
+which means that \( g(x) \) is strictly decreasing on \( I \).
+
+Now, assume for contradiction that \( f \) has two distinct fixed points, \( c_1 \) and \( c_2 \), where \( c_1 \neq c_2 \). This implies
+
+\[
+g(c_1) = g(c_2) = 0.
+\]
+
+By Rolle's Theorem, since \( g(x) \) is continuous and differentiable, there must be some point \( c_3 \in (c_1, c_2) \) such that
+
+\[
+g'(c_3) = 0.
+\]
+
+However, since \( g'(x) < 0 \) for all \( x \in I \), this contradicts Rolle's Theorem, implying that two distinct fixed points cannot exist. Thus, \( f \) can have at most one fixed point.
+
+For zero fixed points, if \( g(a) > 0 \) and \( g(b) > 0 \) (or \( g(a) < 0 \) and \( g(b) < 0 \)), then \( g(x) \) does not cross the \( x \)-axis, meaning \( f(x) = x \) has no solution. Hence, there are no fixed points in \( I \).
+
+For one fixed point, if \( g(a) \) and \( g(b) \) have different signs, the intermediate value theorem guarantees that there is some \( c \in (a, b) \) such that
+
+\[
+g(c) = 0,
+\]
+
+which means there is exactly one fixed point in \( I \).
+
+\item [34. ]To show that the equation 
+    \[
+    x^n + ax + b = 0,
+    \]
+    where \( n \) is an odd positive integer, has at most three distinct real roots, we proceed as follows: 
+
+    Let 
+    \[
+    f(x) = x^n + ax + b.
+    \]
+
+    The derivative of \( f(x) \) is given by:
+    \[
+    f'(x) = n x^{n-1} + a.
+    \]
+
+    To find critical points, we set the derivative equal to zero:
+    \[
+    f'(x) = 0 \implies n x^{n-1} + a = 0 \implies n x^{n-1} = -a \implies x^{n-1} = -\frac{a}{n}.
+    \]
+
+    - If \( a = 0 \): The derivative becomes 
+    \[
+    f'(x) = n x^{n-1},
+    \]
+    which has one critical point at \( x = 0 \).
+
+    - If \( a > 0 \): The equation 
+    \[
+    x^{n-1} = -\frac{a}{n}
+    \]
+    has no real solutions because the left side cannot be negative and the right side is negative. Thus, there are no critical points.
+
+    - If \( a < 0 \): The equation 
+    \[
+    x^{n-1} = -\frac{a}{n}
+    \]
+    has two distinct real solutions because \( n-1 \) is even, allowing for two critical points.
+
+    Now, assume for contradiction that \( f(x) = 0 \) has four distinct real roots, say \( r_1, r_2, r_3, r_4 \).
+
+    By Rolle's Theorem, since \( f(x) \) is continuous and differentiable, there must be at least one critical point between \( r_1 \) and \( r_2 \), and another between \( r_2 \) and \( r_3 \) and another between $r_3$ and $r_4$. This implies that \( f(x) \) has at least three critical points, which contradicts the earlier finding that \( f(x) \) can have at most two critical points.
+
+    Therefore, we conclude that the equation 
+    \[
+    x^n + ax + b = 0
+    \]
+    can have at most three distinct real roots when \( n \) is an odd positive integer.
+
+\item [59. ]
+\begin{enumerate}
+
+    \item Let \( f(x) = (1 + x)^n - (1 + nx) \), where \( n > 1 \) and \( x > 0 \). We aim to prove that \( f(x) > 0 \) for all \( x > 0 \). 
+    
+    First, evaluate \( f(x) \) at \( x = 0 \):
+    \[
+    f(0) = (1 + 0)^n - (1 + n \cdot 0) = 1 - 1 = 0
+    \]
+    Hence, \( f(0) = 0 \).
+
+    Next, compute the derivative of \( f(x) \):
+    \[
+    f'(x) = \frac{d}{dx} \left( (1 + x)^n - (1 + nx) \right)
+    \]
+    Using the chain rule, we get
+    \[
+    f'(x) = n(1 + x)^{n-1} - n
+    \]
+    Factoring out \( n \), we have
+    \[
+    f'(x) = n \left( (1 + x)^{n-1} - 1 \right)
+    \]
+    Since \( n > 1 \) and \( x > 0 \), it follows that \( (1 + x)^{n-1} > 1 \), which implies \( f'(x) > 0 \) for all \( x > 0 \).
+
+    Now, assume for contradiction that $f(c_1) = 0$ for $c_1 > 0$. By Rolle's Theorem, there must be a point \( c \in (0, c_1) \) where \( f'(c) = 0\).
+
+    For \( f'(c) = 0 \), we require
+    \[
+    (1 + c)^{n-1} = 1
+    \]
+    which implies \( 1 + c = 1 \), or \( c = 0 \). This contradicts the assumption that $c>0$
+
+    Therefore, the assumption that \( f(c_1) = 0 \) must be false, and we conclude that \( f(x) > 0 \) for all \( x > 0 \). Thus, \( (1 + x)^n > 1 + nx \) for all \( x > 0 \) and \( n > 1 \).
+
+    \item We aim to prove by induction that \((1 + x)^n > 1 + nx\) for all \( x > 0 \) and \( n \geq 2 \).
+    
+    \textbf{Base Case:} For \( n = 2 \), we want to show:
+    \[
+    (1 + x)^2 > 1 + 2x
+    \]
+    Expanding both sides:
+    \[
+    (1 + x)^2 = 1 + 2x + x^2
+    \]
+    Since \( x^2 > 0 \) for all \( x > 0 \), it follows that:
+    \[
+    1 + 2x + x^2 > 1 + 2x
+    \]
+    Thus, the inequality holds for \( n = 2 \).
+
+    \textbf{Inductive Hypothesis:} Assume the inequality holds for some \( n = k \), i.e., 
+    \[
+    (1 + x)^k > 1 + kx
+    \]
+    This implies:
+    \[
+    (1 + x)^k - (1 + kx) > 0 \quad \text{for all} \quad x > 0.
+    \]
+
+    \textbf{Inductive Step:} We now need to prove the inequality for \( n = k+1 \), i.e., show that:
+    \[
+    (1 + x)^{k+1} > 1 + (k+1)x
+    \]
+    Take everything to the left-hand side (LHS):
+    \[
+    (1 + x)^{k+1} - (1 + (k+1)x) > 0
+    \]
+    Express \( (1 + x)^{k+1} \) as \( (1 + x)^k \cdot (1 + x) \):
+    \[
+    (1 + x)^k \cdot (1 + x) - (1 + (k+1)x)
+    \]
+    Expanding both sides, we get:
+    \[
+    (1 + x)^k \cdot (1 + x) = (1 + x)^k + x(1 + x)^k
+    \]
+    and
+    \[
+    1 + (k+1)x = 1 + kx + x.
+    \]
+    Substituting these into the expression gives:
+    \[
+    \left( (1 + x)^k + x(1 + x)^k \right) - (1 + kx + x)
+    \]
+    Simplifying further, we have:
+    \[
+    (1 + x)^k - (1 + kx) + x \left( (1 + x)^k - 1 \right)
+    \]
+    By the inductive hypothesis, \( (1 + x)^k - (1 + kx) > 0 \) for all \( x > 0 \). Moreover, since \( (1 + x)^k > 1 \) for \( x > 0 \) and \( k \geq 1 \), the term \( x \left( (1 + x)^k - 1 \right) > 0 \) for all \( x > 0 \).
+
+    Since each term is positive, we conclude that:
+    \[
+    (1 + x)^{k+1} - (1 + (k+1)x) > 0 \quad \text{for all} \quad x > 0.
+    \]
+\end{enumerate}
+
+\item [42.]
+
+To begin:
+\[
+D = \sqrt{x^2 + f(x)^2}
+\]
+Differentiating with respect to x using chain rule,
+\[
+D' = \frac{2f(x)f'(x) + 2x}{2 \sqrt{f(x)^{2} + x^{2}}}
+\]
+
+Since D has an extrema at c, $D'(c) = 0$
+\[
+\frac{2f(c)f'(c) + 2c}{2 \sqrt{f(c)^{2} + c^{2}}} = 0
+\]
+\[
+2f(c)f'(c) + 2c = 0
+\]
+\[
+f(c)f'(c) = -c
+\]
+\[
+f'(c) = \frac{-c}{f(c)}
+\]
+
+Thus at point c, the slope of the tangent to $f(x)$ at c is $ m_1 = \frac{-c}{f(c)}$ 
+
+The line passing through $(0,0)$ and $(c,f(c)$ has a slope of:
+\[
+m_2 = \frac{f(c) - 0}{c-0} = \frac{f(c)}{c}
+\]
+
+Now, because $m_1 \times m_2 = -1$, these lines are perpendicular to each other.
+
+\item [39.]
+If \( f \) is continuous on \([a, b]\) and \( f(a) = f(b) \), we want to show that \( f \) has at least one critical point in \((a, b)\).
+\begin{enumerate}
+    \item If \( f \) is constant on \([a, b]\), then \( f'(x) = 0 \) for all \( x \in (a, b) \), meaning every point in \((a, b)\) is a critical point.
+    \item If \( f \) is not constant and differentiable, we can apply the Mean Value Theorem. According to the Mean Value Theorem, there exists some point \( c \in (a, b) \) such that:
+   \[
+   f'(c) = \frac{f(b) - f(a)}{b - a} = \frac{0}{b - a} = 0.
+   \]
+   Thus, \( c \) is a critical point.
+   \item If \( f \) is not differentiable at some point \( c \in (a, b) \), then \( c \) is also a critical point because critical points include points where the derivative does not exist.
+\end{enumerate}
+
+
+\item [41. ] An example of a function that satisfies the conditions is the Dirichlet function:
+
+f(x) = \begin{cases}
+    1, & x\in \mathbb{Q}\\
+    0, & x\notin \mathbb{Q}
+\end{cases}
+
+This satisfies all conditions.
+
+\item [48. ]
+\begin{enumerate}
+    \item 
+   The first derivative is:
+   \[
+   p'(x) = 3x^2 + 2ax + b
+   \]
+
+   Setting \( p'(x) = 0 \):
+   \[
+   3x^2 + 2ax + b = 0
+   \]
+
+   Using the quadratic formula:
+   \[
+   x_{1,2} = \frac{-2a \pm \sqrt{(2a)^2 - 4 \cdot 3 \cdot b}}{2 \cdot 3} = \frac{-2a \pm \sqrt{4a^2 - 12b}}{6} = \frac{-a \pm \sqrt{a^2 - 3b}}{3}
+   \]
+
+   Let \( x_1 = \frac{-a + \sqrt{a^2 - 3b}}{3} \)  and \( x_2 = \frac{-a - \sqrt{a^2 - 3b}}{3} \).
+
+
+    \item Calculate the midpoint.
+
+   The midpoint \( M \) of \( x_1 \) and \( x_2 \):
+   \[
+   M = \frac{x_1 + x_2}{2} = \frac{\left(\frac{-a + \sqrt{a^2 - 3b}}{3}\right) + \left(\frac{-a - \sqrt{a^2 - 3b}}{3}\right)}{2} = \frac{-2a}{6} = \frac{-a}{3}
+   \]
+
+    \item Show that \( M \) is a point of inflection.
+
+   The second derivative is:
+   \[
+   p''(x) = 6x + 2a
+   \]
+
+   Setting \( p''(x) = 0 \):
+   \[
+   6x + 2a = 0 \quad \Rightarrow \quad x = -\frac{a}{3}
+   \]
+
+   Thus, the midpoint \( M = -\frac{a}{3} \) is where \( p''(x) = 0 \), indicating a point of inflection.
+
+    \item 
+    For sake of brevity and ease of calculation, we can express \( p'(x) = e(x - r)(x - s) \), where \( r \) and \( s \) are the critical points and roots of the first derivative. Expanding this:
+
+    \[
+    p'(x) = e(x^2 - (r+s)x + rs)
+    \]
+
+    To find \( p(x) \), we can reverse differentiate $p'(x)$:
+
+    \[
+    p(x) = e\left(\frac{x^3}{3} - \frac{(r+s)x^2}{2} + rsx\right) + C
+    \]
+
+    Now, we calculte \( p(r) \) and \( p(s) \), the \( y \)-coordinates at the critical points:
+
+    \[
+    p(r) = e\left(\frac{r^3}{3} - \frac{(r+s)r^2}{2} + rsr\right) + C
+    \]
+
+    \[
+    p(s) = e\left(\frac{s^3}{3} - \frac{(r+s)s^2}{2} + rss\right) + C
+    \]
+
+    Next, we compute the averages of \( p(r) \) and \( p(s) \):
+
+    \[
+    \frac{p(r) + p(s)}{2} = \frac{e\left[\left(\frac{r^3}{3} - \frac{(r+s)r^2}{2} + r^2s\right) + \left(\frac{s^3}{3} - \frac{(r+s)s^2}{2} + rs^2\right)\right] + 2C}{2}
+    \]
+
+    Simplifing:
+
+    \[
+    = \frac{e\left[\frac{r^3 + s^3}{3} - \frac{(r+s)(r^2 + s^2)}{2} + rs(r+s)\right] + 2C}{2}
+    \]
+
+    Using the following expression: \( r^3 + s^3 = (r+s)(r^2 - rs + s^2) \), this becomes:
+
+    \[
+    = e\left(\frac{(r+s)((r+s)^2 - 3rs)}{12}\right) + C
+    \]
+
+    Now, compute \( p\left( \frac{r+s}{2} \right) \), the \( y \)-coordinate at the midpoint \( M_x = \frac{r+s}{2} \):
+
+    \[
+    p(M_x) = e\left[\frac{\left(\frac{r+s}{2}\right)^3}{3} - \frac{(r+s)\left(\frac{r+s}{2}\right)^2}{2} + rs\left(\frac{r+s}{2}\right)\right] + C
+    \]
+
+    Simplifying:
+
+    \[
+    = e\left[\frac{(r+s)^3}{24} - \frac{(r+s)^3}{8} + \frac{rs(r+s)}{2}\right] + C
+    \]
+
+    Factoring out common terms:
+
+    \[
+    p(M_x) = e\left[\frac{(r+s)((r+s)^2 - 3rs)}{12}\right] + C
+    \]
+
+    This shows that the \( y \)-coordinate at the midpoint is the same as the average of \( p(r) \) and \( p(s) \), confirming that the midpoint lies at the point of inflection.
+
+
+
+\end{enumerate}
+
+\item [52. ]
+
+\[
+f(x) = \frac{1+x-3x^2}{x}
+\]
+
+The vertical asymptote is $x=0$
+
+The oblique asymptote is found by division:
+
+
+\polylongdiv{1+x-3x^2}{x}
+\newpage
+Thus, the oblique asymptote is $y=-3x+1$
+
+\includegraphics[width=1\linewidth]{Math 134//Images/Screenshot 2024-10-20 at 7.39.22 PM.png}
+
+\item [48. ]
+\begin{enumerate}
+    \item 
+    \[
+    h = \frac{gt^2}{2}
+    \]
+    \[
+    h = \frac{9 \cdot 9.8}{2} = 44.1m = 144.69 \text{ ft}
+    \]
+
+    \item 
+    Speed of sound = 1080 ft/s
+
+    Time spent by sound to travel up from water = $\frac{h}{1080}$
+
+    \[
+    h = \frac{1}{2} \cdot g \cdot \left(3-\frac{h}{1800}\right)^2
+    \]
+    \[
+    h = 16.1\left(9 - \frac{6h}{1800} + \frac{h^2}{3,240,000}\right)
+    \]
+    Factorising of this function is not feasible, thus, I obtain the value of h:
+
+    \[
+    h =133.038 ft
+    \]
+\end{enumerate}
+
+\item [20.]
+\[
+dv = V'(r) \cdot h
+\]
+\[
+V'(r) = 4\pi r^2
+\]
+\[
+\frac{8 \times 10^6}{4 \pi \times 4000^2} = h
+\]
+\[
+h = 0.00397 \text{ miles} \approx 64 m
+\]
+
+\item Worksheet 4:
+\begin{enumerate}
+    \item
+    The cone has radius \(b\) and height \(a\). Let the cylinder's radius be \(r\) and height \(h\). Using similar triangles, the radius of the cone at height \(h\) is \(\frac{b(a-h)}{a}\). Hence, \(r = \frac{b(a-h)}{a}\) for the cylinder to fit inside.
+    
+    \item  
+    The volume \(V\) of the cylinder is:
+    \[
+    V = \pi r^2 h = \pi \left(\frac{b(a-h)}{a}\right)^2 h = \pi \frac{b^2 (a-h)^2 h}{a^2}.
+    \]
+
+    \item  
+    Differentiating \(V\):
+    \[
+    \frac{dV}{dh} = \pi \frac{b^2}{a^2} \left[ 2(a-h)(-1) h + (a-h)^2 \right] = \pi \frac{b^2}{a^2} (a-h)(a - 3h).
+    \]
+    Equating \(\frac{dV}{dh} = 0\) to find the critical points:  
+    \[
+    (a-h)(a - 3h) = 0.
+    \]     This gives two solutions: \(h = a\) and \(h = \frac{a}{3}\). Since \(h = a\)) does not work, \(h = \frac{a}{3}\) is the selected h size
+
+    \item 
+    Substituting \(h = \frac{a}{3}\) into the expression for \(r\):
+    \[
+    r = \frac{b(a - \frac{a}{3})}{a} = \frac{2b}{3}.
+    \]
+    The maximum volume is:
+    \[
+    V = \pi \left(\frac{2b}{3}\right)^2 \cdot \frac{a}{3} = \frac{4\pi b^2 a}{27}.
+    \]
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
