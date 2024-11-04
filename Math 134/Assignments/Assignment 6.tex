@@ -1,0 +1,364 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amsfonts}
+\usepackage{polynom}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 134 Homework \#4}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+
+
+
+\begin{document} 
+\begin{enumerate}[start=1,label={\bfseries. },leftmargin=1in]
+\item [21. ]
+
+    \[
+    F(x) = \int_0^x \left[ t \int_1^t f(u) \, du \right] dt.
+    \]
+    
+    \begin{enumerate}
+    \item
+    $F'(x) = x \int_1^x f(u) \, du$
+    \item 
+    $F'(1) = 0$
+    \item
+    $F''(x) = x f(x) + \int_1^x f(u) \, du$
+    \item 
+    $F''(1) = f(1)$
+    \end{enumerate} 
+
+\item [36. ]
+
+\begin{enumerate}
+    \item $F'(x) = x \int_1^x f(u)du$
+    \item $F'(1) = 0$
+    \item $F''(x) = \int_1^x f(u)du + x\cdot f(x)$
+    \item $F''(1) = f(1)$
+\end{enumerate}
+
+\item [2. ]
+Let $f(x) = 4x-x^2$ and the line as $g(x)=ax$. 
+
+To find the area under curves, we must first find the intersection of both curves:
+
+\[
+ax= 4x-x^2
+\]
+\[
+x^2 - 4x + ax =0
+\]
+\[
+x(x+a-4) = 0
+\]
+
+Thus:
+\[
+x = 0 \quad or \quad x=4-a
+\]
+
+\[
+\int_0^{4-a} ((4-a)x -x^2)dx = \frac{1}{2}\int_0^4 4x-x^2dx
+\]
+\[
+\left(\frac{(4-a)x^2}{2} - \frac{x^3}{3}\right) \Bigg|_0^{4-a} = \frac{1}{2}\left(2x^2 - \frac{x^3}{3}\right) \Bigg|_0^{4}
+\]
+\[
+\frac{(4-a)^3}{2} - \frac{(4-a)^3}{3} = \frac{1}{2} \left(2(4^2) - \frac{4^3}{3}\right) - 0
+\]
+\[
+\frac{(4-a)^3}{6} = 5.\overline{33}
+\]
+\[
+(4-a)^3 = 32
+\]
+\[
+a \approx 0.825
+\]
+
+\item [16]
+\begin{enumerate}
+    \item This statement is true as:
+\[
+(f + g)_{\text{avg}} = \frac{1}{b - a} \int_a^b (f(x) + g(x)) \, dx 
+\]
+\[
+= \frac{1}{b - a} \int_a^b f(x) \, dx + \frac{1}{b - a} \int_a^b g(x) \, dx = f_{\text{avg}} + g_{\text{avg}}
+\]
+\item This statement is true as \(\alpha\) is a constant, we can factor it out of the integral:
+
+\[
+(\alpha f)_{\text{avg}} = \frac{1}{b - a} \int_a^b \alpha f(x) \, dx 
+\]
+\[
+= \alpha \cdot \frac{1}{b - a} \int_a^b f(x) \, dx = \alpha f_{\text{avg}}
+\]
+
+\item This statement is false as:
+\[
+(fg)_{avg} = \frac{1}{b - a} \int_a^b f(x) g(x)dx
+\]
+\[
+f_{avg} = \frac{1}{b - a} \int_a^b f(x)dx
+\]
+\[
+g_{avg} = \frac{1}{b - a} \int_a^b g(x)dx
+\]
+\[
+f_{avg}\cdot g_{avg} = \frac{1}{(b-a)^2}\int_a^b f(x)dx\int_a^b g(x)dx
+\]
+
+Thus: 
+\[
+(fg)_{avg} \neq f_{avg}\cdot g_{avg}
+\]
+
+
+\item This statement is false as:
+\[
+(fg)_{avg} = \frac{1}{b - a} \int_a^b f(x) g(x)dx
+\]
+\[
+f_{avg} = \frac{1}{b - a} \int_a^b f(x)dx
+\]
+\[
+g_{avg} = \frac{1}{b - a} \int_a^b g(x)dx
+\]
+\[
+f_{avg}\cdot g_{avg} = \frac{b-a}{b-a}\frac{\int_a^b f(x)dx}{\int_a^b g(x)dx}
+\]
+\[
+f_{avg}\cdot g_{avg} = \frac{\int_a^b f(x)dx}{\int_a^b g(x)dx}
+\]
+
+Thus:
+
+\[
+(fg)_{avg} \neq \frac{f_{avg}}{g_{avg}}
+\]
+
+
+\end{enumerate}
+
+\item [35. ]
+Assume for sake of contradiction that two distinct continuous functions $f(x)$ and $g(x)$ have the same average over every interval. Define $h(x) = f(x) - g(x)$. $|h(x)| > 0$ for at least 1 interval. 
+Let $[a,b]$ represent any arbitrary interval. Thus, for any arbitrary interval, the averages are equal. 
+\[
+\frac{1}{b-a}\int_a^bf(x)dx = \frac{1}{b-a}\int_a^bg(x)dx = 0
+\]
+\[
+\int_a^bf(x)dx - \int_a^bg(x)dx = 0
+\]
+\[
+\int_a^b f(x) - g(x) dx = 0
+\]
+\[
+\int_a^bh(x) dx= 0
+\]
+However, this is a contradiction as $h(x) > 0$ for at least one interval. The integral of $h(x)$ being 0 for all intervals implies that $h(x) = 0$ for all intervals, however, that contradicts our prior statement, thus disproving the assumption.
+
+\item [40. ]
+Here’s the full solution with the steps for evaluating the integral in LaTeX:
+
+To find the area in the first quadrant bounded by the coordinate axes and the parabola \( y = 1 + a - ax^2 \) (where \( a > 0 \)), we proceed as follows:
+
+1. Intersection Points:
+   - Y-axis: At \( x = 0 \), \( y = 1 + a \).
+   - X-axis: Set \( y = 0 \):
+     \[
+     1 + a - ax^2 = 0
+     \]
+     Solving for \( x \), we get:
+     \[
+     x^2 = \frac{1 + a}{a} \Rightarrow x = \sqrt{\frac{1 + a}{a}}
+     \]
+   So the parabola intersects the x-axis at \( x = \sqrt{\frac{1 + a}{a}} \).
+
+2. Set up the Integral for the Area:  
+   The area \( A \) in the first quadrant bounded by the parabola, the x-axis, and the y-axis is given by:
+   \[
+   A = \int_0^{\sqrt{\frac{1 + a}{a}}} \left(1 + a - ax^2\right) \, dx
+   \]
+   Expanding this integral:
+   \[
+   A = \int_0^{\sqrt{\frac{1 + a}{a}}} (1 + a - ax^2) \, dx
+   \]
+   We can separate the integral as follows:
+   \[
+   A = \int_0^{\sqrt{\frac{1 + a}{a}}} 1 \, dx + \int_0^{\sqrt{\frac{1 + a}{a}}} a \, dx - \int_0^{\sqrt{\frac{1 + a}{a}}} ax^2 \, dx
+   \]
+   Evaluating each term separately:
+   
+   - For the first term:
+     \[
+     \int_0^{\sqrt{\frac{1 + a}{a}}} 1 \, dx = \left[ x \right]_0^{\sqrt{\frac{1 + a}{a}}} = \sqrt{\frac{1 + a}{a}}
+     \]
+   
+   - For the second term:
+     \[
+     \int_0^{\sqrt{\frac{1 + a}{a}}} a \, dx = a \cdot \left[ x \right]_0^{\sqrt{\frac{1 + a}{a}}} = a \cdot \sqrt{\frac{1 + a}{a}} = \sqrt{a(a + 1)}
+     \]
+
+   - For the third term:
+     \[
+     \int_0^{\sqrt{\frac{1 + a}{a}}} ax^2 \, dx = a \cdot \left[ \frac{x^3}{3} \right]_0^{\sqrt{\frac{1 + a}{a}}} = a \cdot \frac{\left( \sqrt{\frac{1 + a}{a}} \right)^3}{3} = \frac{a}{3} \cdot \frac{(1 + a)^{3/2}}{a^{3/2}} = \frac{2}{3} \sqrt{\frac{a + 1}{a}} (a + 1)
+     \]
+
+     Now that we have the function for area on basis of a, we will equate the derivative to 0 and obtain the value of that minimizes area.
+
+     \[
+     A'(a) =\frac{2}{3}\left(\sqrt{1 + \frac{1}{a}} - \frac{a + 1}{2 \sqrt{\frac{1}{a} + 1} \, a^{2}}
+     \right)
+     \]
+     \[
+     =\frac{2 \sqrt{\frac{1}{a} + 1}}{3} - \frac{a + 1}{3 \sqrt{\frac{1}{a} + 1} \, a^{2}}
+     \]
+     \[
+     =\frac{2a^{2} + a - 1}{3 \sqrt{\frac{1}{a} + 1} \, a^{2}} = 0
+     \]
+     \[
+     2a^2 + a -1 = 0
+     \]
+     \[
+     (a+1)(a-0.5) = 0
+     \]
+     \[
+     a=0.5 \quad or \quad a=-1
+     \]
+     We select $a=0.5$ as $a>0$ is given. 
+
+  \item [10. ]
+  Firstly, we find the intersections of the curves
+  \[
+  2-x = x^2
+  \]
+  \[
+  x^2 -2 +x
+  \]
+  \[
+  x=-2 \quad or \quad x=1
+  \]
+     \begin{enumerate}
+       \item Around $y=0$:
+       \[
+       V = \pi\int_{-2}^1 (f(x))^2 - (g(x))^2dx
+       \]
+       \[
+       V = \pi\int_{-2}^1 x^4 - 4 + 4x - x^2 dx
+       \]
+       \item Around $y=4$
+       \[
+       V = \pi\int_{-2}^1 (4-f(x))^2 - (4-g(x))^2dx
+       \]
+       \[
+       V = \pi\int_{-2}^112 - 4 x - 9 x^2 + x^4dx
+       \]
+       \item Around $y = -1$
+       \[
+       V = \pi\int_{-2}^1 (-1-f(x))^2 - (-1-g(x))^2dx
+       \]
+       \[
+       V = \pi\int_{-2}^1(-8 + 6 x + x^2 + x^4)dx
+       \]
+       \item Around $y=\frac{1}{4}$
+       We first find intersections of $y=\frac{1}{4}$ with graph. 
+       \[
+       x^2 = \frac{1}{4}
+       \]
+       \[
+       x = \pm 0.5
+       \]
+       So we setup the integral as:
+       \[
+       \pi\int_{-2}^{-0.5} \left(\frac{1}{4}-f(x)\right)^2 - \left(\frac{1}{4}-g(x)\right)^2 dx + \pi\int_{-0.5}^{0.5}\left(\frac{1}{4} - g(x)\right)^2dx
+       \]
+       \[
+       +\pi\int_{0.5}^{2} \left(\frac{1}{4}-f(x)\right)^2 - \left(\frac{1}{4}-g(x)\right)^2 dx
+       \]
+       Plugging in functions:
+       \[
+       \pi\int_{-2}^{-0.5}0.5 (-6 + 7 x - 3 x^2 + 2 x^4)dx
+       \]
+       \[
+       + \int_{-0.5}^{0.5}\frac{1}{16} - \frac{x^2}{2} + x^4 dx
+       \]
+       \[
+       +\pi\int_{0.5}^{2}0.5 (-6 + 7 x - 3 x^2 + 2 x^4)dx
+       \]
+     \end{enumerate}
+
+    \item [44. ]
+    \begin{enumerate}
+
+        \item Initial Setup:
+        
+        Given a hemispherical punch bowl with diameter 2 feet, the radius \( R \) is:
+        \[
+        R = \frac{2 \text{ feet}}{2} = 1 \text{ foot}
+        \]
+        
+        Since the punch is filled to within 1 inch of the top, the initial height of punch from the bottom of the bowl is:
+        \[
+        H_{\text{initial}} = 1 - \frac{1}{12} = \frac{11}{12} \text{ feet}
+        \]
+        
+        \item Initial Volume of Punch:
+        
+        We use the disk method to find the volume of punch, rotating the region around the \( y \)-axis from \( y = 0 \) to \( y = \frac{11}{12} \). The volume is:
+        \[
+        V_{\text{initial}} = \pi \int_0^{\frac{11}{12}} \left(\sqrt{1 - y^2}\right)^2 \, dy = \pi \int_0^{\frac{11}{12}} (1 - y^2) \, dy
+        \]
+        Calculating this integral:
+        \[
+        V_{\text{initial}} = \pi \int_0^{\frac{11}{12}} (1 - y^2) \, dy = \pi \left[ y - \frac{y^3}{3} \right]_0^{\frac{11}{12}} = \pi \left( \frac{11}{12} - \frac{\left(\frac{11}{12}\right)^3}{3} \right)
+        \]
+        Simplifying, we get:
+        \[
+        V_{\text{initial}} \approx 2.073 \text{ cubic feet}
+        \]
+        
+        \item Final Volume of Punch:
+        
+        Thirty minutes later, there are only 2 inches of punch left, which is:
+        \[
+        H_{\text{final}} = \frac{1}{6} \text{ feet}
+        \]
+        
+        Using the disk method, the volume is:
+        \[
+        V_{\text{final}} = \pi \int_0^{\frac{1}{6}} (1 - y^2) \, dy = \pi \left[ y - \frac{y^3}{3} \right]_0^{\frac{1}{6}} = \pi \left( \frac{1}{6} - \frac{\left(\frac{1}{6}\right)^3}{3} \right)
+        \]
+        Simplifying, we get:
+        \[
+        V_{\text{final}} \approx 0.519 \text{ cubic feet}
+        \]
+        
+        \item Punch Consumed:
+        
+        The amount of punch consumed is the difference:
+        \[
+        V_{\text{consumed}} = V_{\text{initial}} - V_{\text{final}} \approx 2.073 - 0.519 = 1.554 \text{ cubic feet}
+        \]
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+    
+
+\end{document}
