@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-
+\usepackage{bigints}
 \usepackage{graphicx}			% Use this package to include images
 \usepackage{amsmath}	
 \usepackage{amsfonts}
@@ -15,7 +15,7 @@
 % Creates the header and footer. You can adjust the look and feel of these here.
 \pagestyle{fancy}
 \fancyhead[l]{Aditya Gupta}
-\fancyhead[c]{Math 134 Homework \#4}
+\fancyhead[c]{Math 134 Homework \#6}
 \fancyhead[r]{\today}
 \fancyfoot[c]{\thepage}
 \renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
@@ -155,7 +155,7 @@ Thus:
 \end{enumerate}
 
 \item [35. ]
-Assume for sake of contradiction that two distinct continuous functions $f(x)$ and $g(x)$ have the same average over every interval. Define $h(x) = f(x) - g(x)$. $|h(x)| > 0$ for at least 1 interval. 
+Assume for sake of contradiction that two distinct continuous functions $f(x)$ and $g(x)$ have the same average over every interval. Define $h(x) = f(x) - g(x)$. $|h(x)| > 0$ for at least 1 value of c. This implies that $|h(x)| > 0 $ for at least 1 interval. We discussed this in Office Hours and this showed up in the midterm review. This also implies that $\int_{a}^b h(x)dx > 0$ for at least 1 interval of $[a,b]$
 Let $[a,b]$ represent any arbitrary interval. Thus, for any arbitrary interval, the averages are equal. 
 \[
 \frac{1}{b-a}\int_a^bf(x)dx = \frac{1}{b-a}\int_a^bg(x)dx = 0
@@ -169,7 +169,7 @@ Let $[a,b]$ represent any arbitrary interval. Thus, for any arbitrary interval, 
 \[
 \int_a^bh(x) dx= 0
 \]
-However, this is a contradiction as $h(x) > 0$ for at least one interval. The integral of $h(x)$ being 0 for all intervals implies that $h(x) = 0$ for all intervals, however, that contradicts our prior statement, thus disproving the assumption.
+However, this is a contradiction as $\int_{a}^b h(x) > 0$ for at least one interval, thus disproving the assumption.
 
 \item [40. ]
 Here’s the full solution with the steps for evaluating the integral in LaTeX:
@@ -255,21 +255,21 @@ To find the area in the first quadrant bounded by the coordinate axes and the pa
      \begin{enumerate}
        \item Around $y=0$:
        \[
-       V = \pi\int_{-2}^1 (f(x))^2 - (g(x))^2dx
+       V = \pi\int_{-2}^1 (2-x)^2 - (x^2)^2dx
        \]
        \[
        V = \pi\int_{-2}^1 x^4 - 4 + 4x - x^2 dx
        \]
        \item Around $y=4$
        \[
-       V = \pi\int_{-2}^1 (4-f(x))^2 - (4-g(x))^2dx
+       V = \pi\int_{-2}^1 (4 - 2 +x)^2 - (4-x^2)^2dx
        \]
        \[
        V = \pi\int_{-2}^112 - 4 x - 9 x^2 + x^4dx
        \]
        \item Around $y = -1$
        \[
-       V = \pi\int_{-2}^1 (-1-f(x))^2 - (-1-g(x))^2dx
+       V = \pi\int_{-2}^1 (-1-(2-x))^2 - (-1-x^2)^2dx
        \]
        \[
        V = \pi\int_{-2}^1(-8 + 6 x + x^2 + x^4)dx
@@ -284,17 +284,15 @@ To find the area in the first quadrant bounded by the coordinate axes and the pa
        \]
        So we setup the integral as:
        \[
-       \pi\int_{-2}^{-0.5} \left(\frac{1}{4}-f(x)\right)^2 - \left(\frac{1}{4}-g(x)\right)^2 dx + \pi\int_{-0.5}^{0.5}\left(\frac{1}{4} - g(x)\right)^2dx
+       \pi\int_{-2}^{-0.5} \left(\frac{1}{4}-(2-x)\right)^2 - \left(\frac{1}{4}-x^2\right)^2 dx
        \]
        \[
-       +\pi\int_{0.5}^{2} \left(\frac{1}{4}-f(x)\right)^2 - \left(\frac{1}{4}-g(x)\right)^2 dx
+       +\pi\int_{0.5}^{2} \left(\frac{1}{4}-(2-x)\right)^2 - \left(\frac{1}{4}-x^2\right)^2 dx
        \]
+       We have left out the area under the $y=\frac{1}{4}$ as when rotated, it gets included in the area of the part above $y=\frac{1}{4}$
        Plugging in functions:
        \[
        \pi\int_{-2}^{-0.5}0.5 (-6 + 7 x - 3 x^2 + 2 x^4)dx
-       \]
-       \[
-       + \int_{-0.5}^{0.5}\frac{1}{16} - \frac{x^2}{2} + x^4 dx
        \]
        \[
        +\pi\int_{0.5}^{2}0.5 (-6 + 7 x - 3 x^2 + 2 x^4)dx
@@ -354,6 +352,36 @@ To find the area in the first quadrant bounded by the coordinate axes and the pa
         V_{\text{consumed}} = V_{\text{initial}} - V_{\text{final}} \approx 2.073 - 0.519 = 1.554 \text{ cubic feet}
         \]
     \end{enumerate}
+    \item [46]
+
+    Consider a circle of radius \( r \) centered at the origin. We drill a cylindrical hole of height \( h \) through the center along the \( y \)-axis. The cylinder’s height is \( h \), so the boundaries along the \( y \)-axis are at \( y = \pm \frac{h}{2} \).
+
+    At any height y, the outer radius of the solid:
+    \[
+    \text{Outer radius of the disc} = \sqrt{r^2 - y^2}.
+    \]
+
+    Similarly, the inner radius (due to the cylindrical cavity) at height \( y \) is:
+    \[
+    \text{Inner radius of the disc} = \sqrt{r^2 - \frac{h^2}{4}}.
+    \]
+
+    Thus, the volume of the ring shape is:
+    \[
+    V(y) = \pi \bigint_{\frac{-h}{2}}^{\frac{h}{2}}\left( \left( \sqrt{r^2 - y^2} \right)^2 - \left( \sqrt{r^2 - \frac{h^2}{4}} \right)^2 \right) dy
+    \]
+
+    Expanding and simplifying, we get:
+    \[
+    V(y) = \pi \bigints_{-h/2}^{h/2}\left( -y^2 + \frac{h^2}{4} \right) dy
+    \]
+    
+
+
+    We notice that the \( r^2 \) terms cancel out, leaving \( V(y) \) dependent only on \( y \) and \( h \), not on \( r \). 
+
+    Since the volume integral would involve only \( y \) and \( h \) (with no dependence on \( r \)), we conclude that the volume of the solid is independent of the radius \( r \) of the original sphere.
+
 \end{enumerate}
 
 
