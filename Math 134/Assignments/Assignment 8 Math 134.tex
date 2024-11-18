@@ -1,0 +1,714 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 134 Homework \#8}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+
+\begin{enumerate}
+
+
+    \item [78. ]
+    \begin{enumerate}
+        \item 
+Consider the integral:
+\[
+\int_a^b f''(x)(x-b) \, dx.
+\]
+To evaluate this integral, we apply integration by parts. Let:
+\begin{align*}
+u &= x-b, & dv &= f''(x) \, dx, \\
+du &= dx, & v &= f'(x).
+\end{align*}
+
+By the integration by parts formula :
+\[
+\int_a^b f''(x)(x-b) \, dx = \Big[ (x-b)f'(x) \Big]_a^b - \int_a^b f'(x) \, dx.
+\]
+
+Evaluating the term \(\Big[ (x-b)f'(x) \Big]_a^b\):
+\begin{itemize}
+    \item At \(x = b\): \((b-b)f'(b) = 0\),
+    \item At \(x = a\): \((a-b)f'(a)\).
+\end{itemize}
+Thus:
+\[
+\Big[ (x-b)f'(x) \Big]_a^b = 0 - (a-b)f'(a) = f'(a)(b-a).
+\]
+
+Substituting this back into the integration by parts result:
+\[
+\int_a^b f''(x)(x-b) \, dx = f'(a)(b-a) - \int_a^b f'(x) \, dx.
+\]
+
+Rearranging the above equation:
+\[
+\int_a^b f'(x) \, dx = f'(a)(b-a) - \int_a^b f''(x)(x-b) \, dx.
+\]
+
+Substitute this into the expression for \(f(b) - f(a)\):
+\[
+f(b) - f(a) = \int_a^b f'(x) \, dx = f'(a)(b-a) - \int_a^b f''(x)(x-b) \, dx.
+\]
+
+This completes the proof.
+
+\item 
+Consider the integral:
+\[
+\int_a^b 0.5 \cdot f'''(x)\cdot(x-b)^2 dx
+\]
+
+To evaluate this integral, we apply integration by parts. Let:
+\begin{align*}
+u &= (x-b)^2, & dv &= 0.5\cdot f'''(x) \, dx, \\
+du &= 2(x-b)dx, & v &=0.5 \cdot f''(x).
+\end{align*}
+Thus:
+\[
+\int_a^b 0.5 \cdot f'''(x)\cdot(x-b)^2 dx = \left[0.5\cdot f''(x)\cdot (x-b)^2\right]_a^b - \int_a^b f''(x)(x-b)dx
+\]
+Substituting in the value of second term from part a and solving term 1
+\[
+\int_a^b 0.5 \cdot f'''(x)\cdot(x-b)^2 dx = -0.5\cdot f''(a)(b-a)^2 + f(b) - f(a) - f'(a)(b-a)
+\]
+
+Rearranging the terms:
+\[
+f(b) - f(a) = f'(a)(b-a) + 0.5\cdot f''(a)(b-a)^2 + \int_a^b 0.5 \cdot f'''(x)\cdot(x-b)^2 dx
+\]
+
+    \end{enumerate}
+    \item [53. ]
+    \begin{enumerate}
+        \item 
+        We begin by splitting \(\sin^n x\) as \(\sin x \cdot \sin^{n-1} x\). Using integration by parts:
+        \[
+        \int \sin^n x \, dx = \int \sin x \cdot \sin^{n-1} x \, dx.
+        \]
+        Let:
+        \[
+        u = \sin^{n-1} x, \quad dv = \sin x \, dx.
+        \]
+        Then:
+        \[
+        du = (n-1) \sin^{n-2} x \cos x \, dx, \quad v = -\cos x.
+        \]
+        Substituting into the integration by parts formula \(\int u \, dv = uv - \int v \, du\), we get:
+        \[
+        \int \sin^n x \, dx = -\sin^{n-1} x \cos x + \int \cos x \cdot (n-1) \sin^{n-2} x \cos x \, dx.
+        \]
+        Simplifying:
+        \[
+        \int \sin^n x \, dx = -\sin^{n-1} x \cos x + (n-1) \int \sin^{n-2} x \cos^2 x \, dx.
+        \]
+        Using the Pythagorean identity \(\cos^2 x = 1 - \sin^2 x\), substitute and simplify:
+        \[
+        \int \sin^n x \, dx = -\sin^{n-1} x \cos x + (n-1) \int \sin^{n-2} x (1 - \sin^2 x) \, dx.
+        \]
+        Expanding the terms:
+        \[
+        \int \sin^n x \, dx = -\sin^{n-1} x \cos x + (n-1) \int \sin^{n-2} x \, dx - (n-1) \int \sin^n x \, dx.
+        \]
+        Bring the \(\int \sin^n x \, dx\) term to the left-hand side:
+        \[
+        n \int \sin^n x \, dx = -\sin^{n-1} x \cos x + (n-1) \int \sin^{n-2} x \, dx.
+        \]
+        Dividing through by \(n\):
+        \[
+        \int \sin^n x \, dx = -\frac{1}{n} \sin^{n-1} x \cos x + \frac{n-1}{n} \int \sin^{n-2} x \, dx.
+        \]
+
+        \item
+        Now consider the definite integral:
+        \[
+        \int_0^{\pi/2} \sin^n x \, dx.
+        \]
+        Using the result from part (a):
+        \[
+        \int \sin^n x \, dx = -\frac{1}{n} \sin^{n-1} x \cos x + \frac{n-1}{n} \int \sin^{n-2} x \, dx.
+        \]
+        At the limits \(x = 0\) and \(x = \pi/2\), \(\sin (0) = 0\) and \(\cos \frac{\pi}{2} = 0\). Thus, the term \(-\frac{1}{n} \sin^{n-1} x \cos x\) evaluates to 0, leaving:
+        \[
+        \int_0^{\pi/2} \sin^n x \, dx = \frac{n-1}{n} \int_0^{\pi/2} \sin^{n-2} x \, dx.
+        \]
+
+    $\blacksquare$
+    \item Base Case: \(n = 2\) (Even)
+For \(n = 2\), the integral is:
+\[
+\int_0^{\pi/2} \sin^2 x \, dx.
+\]
+Using the trigonometric identity \(\sin^2 x = \frac{1}{2}(1 - \cos 2x)\), this becomes:
+\[
+\int_0^{\pi/2} \sin^2 x \, dx = \frac{1}{2} \int_0^{\pi/2} 1 \, dx - \frac{1}{2} \int_0^{\pi/2} \cos 2x \, dx.
+\]
+The first term evaluates to:
+\[
+\frac{1}{2} \int_0^{\pi/2} 1 \, dx = \frac{1}{2} \cdot \frac{\pi}{2} = \frac{\pi}{4}.
+\]
+The second term vanishes because \(\cos 2x\) is symmetric about \(\pi/4\):
+\[
+\int_0^{\pi/2} \cos 2x \, dx = \left[ \frac{\sin 2x}{2} \right]_0^{\pi/2} = 0.
+\]
+Thus:
+\[
+\int_0^{\pi/2} \sin^2 x \, dx = \frac{\pi}{4}.
+\]
+This matches the formula for \(n = 2\) since:
+\[
+\frac{(2-1)}{2} \cdot \frac{\pi}{2} = \frac{\pi}{4}.
+\]
+Induction Step: 
+Assume the formula holds for even \(n = 2k\). That is:
+\[
+\int_0^{\pi/2} \sin^{2k} x \, dx = \frac{(2k-1) \cdot (2k-3) \cdots 5 \cdot 3 \cdot 1}{2k \cdot (2k-2) \cdots 6 \cdot 4 \cdot 2} \cdot \frac{\pi}{2}.
+\]
+We show it holds for \(n = 2k+2\). Using the previously established formula:
+\[
+\int_0^{\pi/2} \sin^{2k+2} x \, dx = \frac{2k+1}{2k+2} \int_0^{\pi/2} \sin^{2k} x \, dx.
+\]
+Substituting the inductive hypothesis:
+\[
+\int_0^{\pi/2} \sin^{2k+2} x \, dx = \frac{2k+1}{2k+2} \cdot \frac{(2k-1) \cdot (2k-3) \cdots 5 \cdot 3 \cdot 1}{2k \cdot (2k-2) \cdots 6 \cdot 4 \cdot 2} \cdot \frac{\pi}{2}.
+\]
+Simplify the numerator and denominator:
+\[
+\int_0^{\pi/2} \sin^{2k+2} x \, dx = \frac{(2k+1) \cdot (2k-1) \cdots 5 \cdot 3 \cdot 1}{(2k+2) \cdot 2k \cdot (2k-2) \cdots 6 \cdot 4 \cdot 2} \cdot \frac{\pi}{2}.
+\]
+Thus, the formula holds for \(n = 2k+2\).
+
+\item 
+Base Case: \(n = 3\) (Odd)
+For \(n = 3\), the integral is:
+\[
+\int_0^{\pi/2} \sin^3 x \, dx.
+\]
+Using the reduction formula from part (b):
+\[
+\int_0^{\pi/2} \sin^3 x \, dx = \frac{2}{3} \int_0^{\pi/2} \sin x \, dx.
+\]
+The integral \(\int_0^{\pi/2} \sin x \, dx\) evaluates as:
+\[
+\int_0^{\pi/2} \sin x \, dx = \left[-\cos x \right]_0^{\pi/2} = -\cos \frac{\pi}{2} + \cos 0 = 0 + 1 = 1.
+\]
+Thus:
+\[
+\int_0^{\pi/2} \sin^3 x \, dx = \frac{2}{3} \cdot 1 = \frac{2}{3}.
+\]
+This matches the formula for \(n = 3\):
+\[
+\frac{(3-1)}{3} = \frac{2}{3}.
+\]
+
+
+Induction Step: 
+Assume the formula holds for odd \(n = 2k+1\). That is:
+\[
+\int_0^{\pi/2} \sin^{2k+1} x \, dx = \frac{(2k) \cdot (2k-2) \cdots 4 \cdot 2}{(2k+1) \cdot (2k-1) \cdots 5 \cdot 3}.
+\]
+We show it holds for \(n = 2k+3\). Using the previously established formula:
+\[
+\int_0^{\pi/2} \sin^{2k+3} x \, dx = \frac{2k+2}{2k+3} \int_0^{\pi/2} \sin^{2k+1} x \, dx.
+\]
+Substituting the inductive hypothesis:
+\[
+\int_0^{\pi/2} \sin^{2k+3} x \, dx = \frac{2k+2}{2k+3} \cdot \frac{(2k) \cdot (2k-2) \cdots 4 \cdot 2}{(2k+1) \cdot (2k-1) \cdots 5 \cdot 3}.
+\]
+Simplify the numerator and denominator:
+\[
+\int_0^{\pi/2} \sin^{2k+3} x \, dx = \frac{(2k+2) \cdot (2k) \cdot (2k-2) \cdots 4 \cdot 2}{(2k+3) \cdot (2k+1) \cdot (2k-1) \cdots 5 \cdot 3}.
+\]
+Thus, the formula holds for \(n = 2k+3\).
+\end{enumerate}
+
+\item [54. ]
+Consider the integral:
+\[
+\int_0^{\frac{\pi}{2}}\sin^n x dx
+\]
+
+We take a u-substitution:
+\[
+u = x - \frac{\pi}{2}
+\]
+\[
+x = u + \frac{\pi}{2}
+\]
+\[
+du = dx
+\]
+Thus, the integral can be expressed as:
+\[
+\int_{-\frac{\pi}{2}}^0 \sin^n\left(x+\frac{\pi}{2}\right)dx
+\]
+By using sine addition formula:
+\[
+\sin(x + \pi/2) = \sin x \cos\left(\frac{\pi}{2}\right) + \cos x \sin\left(\frac{\pi}{2}\right).
+\]
+
+We know:
+\[
+\cos\left(\frac{\pi}{2}\right) = 0 \quad \text{and} \quad \sin\left(\frac{\pi}{2}\right) = 1.
+\]
+
+Substituting these values:
+\[
+\sin(x + \pi/2) = \sin x \cdot 0 + \cos x \cdot 1 = \cos x.
+\]
+
+Thus, we have shown:
+\[
+\sin(x + \pi/2) = \cos x.
+\]
+
+\[
+\int_{-\frac{\pi}{2}}^0 \cos^n\left(x\right)dx
+\]
+Since $\cos(x)$ is an even function, it is symmetric around the y axis, implying that the limits can be changed to:
+\[
+\int_0^{\frac{\pi}{2}} \cos^n\left(x\right)dx
+\]
+Thus, we have expressed equality in:
+\[
+\int_0^{\frac{\pi}{2}} \cos^n\left(x\right)dx = \int_0^{\frac{\pi}{2}}\sin^n (x) dx
+\]
+
+\item [51. ]
+\begin{enumerate}
+    \item 
+
+The area under the graph for the bounds is given by the integral:
+\[
+\int_{a}^{a\sqrt{2}} \sqrt{x^2 - a^2} dx
+\]
+Using the inverse trigonometric substitution:
+\[
+x = a \sec\theta, \quad dx = a \sec\theta \tan\theta \, d\theta, \quad \text{and} \quad \sqrt{x^2 - a^2} = a \tan\theta.
+\]
+The limits transform to:
+\[
+x = a \implies \sec\theta = 1 \implies \theta = 0, \quad
+x = \sqrt{2}a \implies \sec\theta = \sqrt{2} \implies \theta = \frac{\pi}{4}
+\]
+Substituting into integral,
+\[
+A = \int_0^{\pi/4} a \tan\theta \cdot a \sec\theta \tan\theta \, d\theta = a^2 \int_0^{\pi/4} \tan^2\theta \sec\theta \, d\theta.
+\]
+Using \( \tan^2\theta = \sec^2\theta - 1 \), this becomes:
+\[
+A = a^2 \int_0^{\pi/4} (\sec^2\theta - 1) \sec\theta \, d\theta = a^2 \left[\int_0^{\pi/4} \sec^3\theta \, d\theta - \int_0^{\pi/4} \sec\theta \, d\theta \right].
+\]
+The integral of \( \sec^3\theta \) is known from lecture:
+\[
+\int \sec^3\theta \, d\theta = \frac{1}{2} \sec\theta \tan\theta + \frac{1}{2} \ln|\sec\theta + \tan\theta| + C.
+\]
+
+Evaluate from \( \theta = 0 \) to \( \theta = \frac{\pi}{4} \):
+\[
+\int_0^{\pi/4} \sec^3\theta \, d\theta = \frac{1}{2} \sec\left(\frac{\pi}{4}\right) \tan\left(\frac{\pi}{4}\right) + \frac{1}{2} \ln\left(\sec\left(\frac{\pi}{4}\right) + \tan\left(\frac{\pi}{4}\right)\right)
+\]
+\[
+-\left[ \frac{1}{2} \sec(0) \tan(0) + \frac{1}{2} \ln\left(\sec(0) + \tan(0)\right) \right].
+\]
+Simplify:
+\[
+\int_0^{\pi/4} \sec^3\theta \, d\theta = \frac{\sqrt{2}}{2} + \frac{1}{2} \ln\left(1 + \sqrt{2}\right).
+\]
+Integral of $\sec \theta$:
+\[
+\int \sec\theta \, d\theta = \ln|\sec\theta + \tan\theta| + C.
+\]
+Evaluate from \( \theta = 0 \) to \( \theta = \frac{\pi}{4} \):
+\[
+\int_0^{\pi/4} \sec\theta \, d\theta = \ln\left(\sec\left(\frac{\pi}{4}\right) + \tan\left(\frac{\pi}{4}\right)\right) - \ln\left(\sec(0) + \tan(0)\right).
+\]
+Simplify:
+\[
+\int_0^{\pi/4} \sec\theta \, d\theta = \ln\left(1 + \sqrt{2}\right).
+\]
+
+\[
+A = a^2 \left( \left( \frac{\sqrt{2}}{2} + \frac{1}{2} \ln(1 + \sqrt{2}) \right) - \ln(1 + \sqrt{2}) \right).
+\]
+Simplify:
+\[
+A = \frac{a^2}{2}[\sqrt{2} - \ln(\sqrt{2} + 1)]
+\]
+
+To find the \( x \)-coordinate of the centroid \( \bar{x} \):
+
+\[
+\bar{x} = \frac{1}{A} \int_a^{\sqrt{2}a} x \sqrt{x^2 - a^2} \, dx.
+\]
+
+Let \( u = x^2 - a^2 \), so \( du = 2x \, dx \). When \( x = a \), \( u = 0 \); and when \( x = \sqrt{2}a \), \( u = a^2 \). The integral becomes:
+\[
+\int_a^{\sqrt{2}a} x \sqrt{x^2 - a^2} \, dx = \frac{1}{2} \int_0^{a^2} \sqrt{u} \, du.
+\]
+
+
+
+The integral of \( \sqrt{u} \) is:
+\[
+\int \sqrt{u} \, du = \frac{2}{3} u^{3/2} + C.
+\]
+Evaluate from \( u = 0 \) to \( u = a^2 \):
+\[
+\int_0^{a^2} \sqrt{u} \, du = \frac{2}{3} (a^2)^{3/2} - \frac{2}{3}(0)^{3/2}.
+\]
+Simplify:
+\[
+\int_0^{a^2} \sqrt{u} \, du = \frac{2}{3} a^3.
+\]
+
+Substituting back:
+
+\[
+\int_a^{\sqrt{2}a} x \sqrt{x^2 - a^2} \, dx = \frac{1}{2} \cdot \frac{2}{3} a^3 = \frac{a^3}{3}.
+\]
+
+Recall that the area \( A \) is:
+\[
+A = a^2 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right).
+\]
+Thus:
+\[
+\bar{x} = \frac{\frac{a^3}{3}}{a^2 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)} = \frac{2a}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)}.
+\]
+
+
+Now for y-coordinate
+
+To find the \( y \)-coordinate of the centroid \( \bar{y} \):
+
+\[
+\bar{y} = \frac{1}{2A} \int_a^{\sqrt{2}a} \left( \sqrt{x^2 - a^2} \right)^2 \, dx.
+\]
+The integral becomes:
+\[
+\int_a^{\sqrt{2}a} \left( \sqrt{x^2 - a^2} \right)^2 \, dx = \int_a^{\sqrt{2}a} \left( x^2 - a^2 \right) \, dx.
+\]
+
+\[
+\int_a^{\sqrt{2}a} \left( x^2 - a^2 \right) \, dx = \int_a^{\sqrt{2}a} x^2 \, dx - \int_a^{\sqrt{2}a} a^2 \, dx.
+\]
+
+The integral of \( x^2 \) is:
+\[
+\int x^2 \, dx = \frac{x^3}{3}.
+\]
+Evaluate from \( x = a \) to \( x = \sqrt{2}a \):
+\[
+\int_a^{\sqrt{2}a} x^2 \, dx = \frac{(\sqrt{2}a)^3}{3} - \frac{a^3}{3}.
+\]
+Simplify:
+\[
+\int_a^{\sqrt{2}a} x^2 \, dx = \frac{(\sqrt{2})^3 a^3}{3} - \frac{a^3}{3} = \frac{2\sqrt{2}a^3}{3} - \frac{a^3}{3} = \frac{a^3}{3}(2\sqrt{2} - 1).
+\]
+
+Second term: \( \int_a^{\sqrt{2}a} a^2 \, dx \)
+
+The integral of \( a^2 \) is:
+\[
+\int_a^{\sqrt{2}a} a^2 \, dx = a^2 \int_a^{\sqrt{2}a} 1 \, dx = a^2 \left[ x \right]_a^{\sqrt{2}a}.
+\]
+Evaluate:
+\[
+\int_a^{\sqrt{2}a} a^2 \, dx = a^2 \left( \sqrt{2}a - a \right) = a^3 (\sqrt{2} - 1).
+\]
+
+Combine the results:
+
+\[
+\int_a^{\sqrt{2}a} \left( x^2 - a^2 \right) \, dx = \frac{a^3}{3}(2\sqrt{2} - 1) - a^3 (\sqrt{2} - 1).
+\]
+Factorize \( a^3 (\sqrt{2} - 1) \):
+\[
+\int_a^{\sqrt{2}a} \left( x^2 - a^2 \right) \, dx = a^3 (\sqrt{2} - 1) \left( \frac{2}{3} - 1 \right).
+\]
+Simplify:
+\[
+\int_a^{\sqrt{2}a} \left( x^2 - a^2 \right) \, dx = a^3 (\sqrt{2} - 1) \left( -\frac{1}{3} \right) = -\frac{a^3}{3} (\sqrt{2} - 1)
+\]
+
+
+The area \( A \) is:
+\[
+A = a^2 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)
+\]
+Thus:
+\[
+\bar{y} = \frac{-\frac{a^3}{3} (\sqrt{2} - 1)}{2a^2 \left( \sqrt{2} - \ln|\sqrt{2} + 1| \right)}
+\]
+Simplify:
+\[
+\bar{y} = \frac{(2 - \sqrt{2})a}{3 \left( \sqrt{2} - \ln|\sqrt{2} + 1| \right) }
+\]
+\item 
+The volume of the solid is given by:
+\[
+V = 2 \pi \bar{R} A,
+\]
+where:
+\[
+\bar{R} = \bar{y} = \frac{(2 - \sqrt{2})a}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)},
+\]
+and the area of the region is:
+\[
+A = \frac{a^2}{2} \left[ \sqrt{2} - \ln(\sqrt{2} + 1) \right].
+\]
+
+Substituting these into the formula for \(V\):
+\[
+V = 2 \pi \left( \frac{(2 - \sqrt{2})a}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)} \right) \cdot \left( \frac{a^2}{2} \left[ \sqrt{2} - \ln(\sqrt{2} + 1) \right] \right).
+\]
+
+Simplify:
+\[
+V = 2 \pi \cdot \frac{(2 - \sqrt{2})a \cdot \frac{a^2}{2} \left[ \sqrt{2} - \ln(\sqrt{2} + 1) \right]}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)}.
+\]
+
+Cancel \(\sqrt{2} - \ln(\sqrt{2} + 1)\):
+\[
+V = 2 \pi \cdot \frac{(2 - \sqrt{2})a \cdot \frac{a^2}{2}}{3}.
+\]
+
+Simplify further:
+\[
+V = \frac{2\pi (2 - \sqrt{2}) a^3}{6} = \frac{\pi (2 - \sqrt{2}) a^3}{3}.
+\]
+
+Thus, the volume of the solid is:
+\[
+V = \frac{\pi (2 - \sqrt{2}) a^3}{3}.
+\]
+
+The \(x\)-coordinate of the centroid of the solid is given by:
+\[
+\bar{x} V = \int_a^b \pi x f(x)^2 dx,
+\]
+where \(f(x) = \sqrt{x^2 - a^2}\), and the limits are \(x = a\) to \(x = \sqrt{2}a\).
+
+
+Substitute this into the integral:
+\[
+\bar{x} V = \int_a^{\sqrt{2}a} \pi x (x^2 - a^2) dx.
+\]
+
+Distribute \(x\):
+\[
+\bar{x} V = \pi \int_a^{\sqrt{2}a} (x^3 - a^2x) dx.
+\]
+
+Separate the integral:
+\[
+\bar{x} V = \pi \left[ \int_a^{\sqrt{2}a} x^3 dx - a^2 \int_a^{\sqrt{2}a} x dx \right].
+\]
+
+
+For the first term:
+\[
+\int x^3 dx = \frac{x^4}{4}.
+\]
+Evaluate from \(x = a\) to \(x = \sqrt{2}a\):
+\[
+\int_a^{\sqrt{2}a} x^3 dx = \frac{(\sqrt{2}a)^4}{4} - \frac{a^4}{4} = \frac{4a^4}{4} - \frac{a^4}{4} = \frac{3a^4}{4}.
+\]
+
+For the second term:
+\[
+\int x dx = \frac{x^2}{2}.
+\]
+Evaluate from \(x = a\) to \(x = \sqrt{2}a\):
+\[
+\int_a^{\sqrt{2}a} x dx = \frac{(\sqrt{2}a)^2}{2} - \frac{a^2}{2} = \frac{2a^2}{2} - \frac{a^2}{2} = \frac{a^2}{2}.
+\]
+
+Multiply by \(a^2\):
+\[
+a^2 \int_a^{\sqrt{2}a} x dx = a^2 \cdot \frac{a^2}{2} = \frac{a^4}{2}.
+\]
+
+\[
+\bar{x} V = \pi \left[ \frac{3a^4}{4} - \frac{a^4}{2} \right].
+\]
+
+Simplify:
+\[
+\bar{x} V = \pi \left[ \frac{3a^4}{4} - \frac{2a^4}{4} \right] = \pi \cdot \frac{a^4}{4}.
+\]
+
+The volume is:
+\[
+V = \frac{\pi (2 - \sqrt{2}) a^3}{3}.
+\]
+
+Substitute \(V\) into \(\bar{x} V = \pi \cdot \frac{a^4}{4}\):
+\[
+\bar{x} \cdot \frac{\pi (2 - \sqrt{2}) a^3}{3} = \pi \cdot \frac{a^4}{4}.
+\]
+
+\[
+\bar{x} \cdot \frac{(2 - \sqrt{2}) a^3}{3} = \frac{a^4}{4}.
+\]
+
+\[
+\bar{x} = \frac{\frac{a^4}{4}}{\frac{(2 - \sqrt{2}) a^3}{3}} = \frac{3a}{4(2 - \sqrt{2})}.
+\]
+
+The centroid of the solid is:
+\[
+(\bar{x}, \bar{y}) = \left( \frac{3a}{4(2 - \sqrt{2})}, 0 \right).
+\]
+
+\item 
+The formula for the volume of a solid generated by revolving a region about the $y$-axis is given by:
+\[
+V = 2 \pi \bar{x} A,
+\]
+where:
+\begin{align*}
+\bar{x} &= \frac{2a}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)}, \\
+A &= \frac{a^2}{2} \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right).
+\end{align*}
+
+Substituting these values into the formula for $V$, we have:
+\[
+V = 2 \pi \left( \frac{2a}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)} \right) \left( \frac{a^2}{2} \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right) \right).
+\]
+
+Simplify the expression:
+\[
+V = 2 \pi \cdot \frac{2a \cdot \frac{a^2}{2} \cdot \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)}{3 \left( \sqrt{2} - \ln(\sqrt{2} + 1) \right)}.
+\]
+
+Cancel the terms $\sqrt{2} - \ln(\sqrt{2} + 1)$:
+\[
+V = 2 \pi \cdot \frac{2a \cdot \frac{a^2}{2}}{3}.
+\]
+
+Simplify further:
+\[
+V = 2 \pi \cdot \frac{2a^3}{6} = \frac{4 \pi a^3}{6} = \frac{2 \pi a^3}{3}.
+\]
+
+Thus, the volume of the solid is:
+\[
+V = \frac{2 \pi a^3}{3}.
+\]
+
+The $y$-coordinate of the centroid of the solid is given by:
+\[
+\bar{y} V = \int_a^{\sqrt{2}a} \pi x \left( f(x)^2 \right) dx,
+\]
+where $f(x) = \sqrt{x^2 - a^2}$ and $V = \frac{2 \pi a^3}{3}$.
+
+
+
+Factor out $\pi$:
+\[
+\pi \int_a^{\sqrt{2}a} x \left( x^2 - a^2 \right) dx = \pi \int_a^{\sqrt{2}a} \left( x^3 - a^2x \right) dx.
+\]
+
+
+\[
+\pi \int_a^{\sqrt{2}a} \left( x^3 - a^2x \right) dx = \pi \left[ \int_a^{\sqrt{2}a} x^3 dx - a^2 \int_a^{\sqrt{2}a} x dx \right].
+\]
+
+\[
+\int x^3 dx = \frac{x^4}{4}.
+\]
+Evaluate from $a$ to $\sqrt{2}a$:
+\[
+\int_a^{\sqrt{2}a} x^3 dx = \frac{(\sqrt{2}a)^4}{4} - \frac{a^4}{4}.
+\]
+Simplify:
+\[
+(\sqrt{2}a)^4 = (\sqrt{2})^4 a^4 = 4a^4.
+\]
+Thus:
+\[
+\int_a^{\sqrt{2}a} x^3 dx = \frac{4a^4}{4} - \frac{a^4}{4} = \frac{3a^4}{4}.
+\]
+
+\[
+\int x dx = \frac{x^2}{2}.
+\]
+Evaluate from $a$ to $\sqrt{2}a$:
+\[
+\int_a^{\sqrt{2}a} x dx = \frac{(\sqrt{2}a)^2}{2} - \frac{a^2}{2}.
+\]
+Simplify:
+\[
+(\sqrt{2}a)^2 = (\sqrt{2})^2 a^2 = 2a^2.
+\]
+Thus:
+\[
+\int_a^{\sqrt{2}a} x dx = \frac{2a^2}{2} - \frac{a^2}{2} = \frac{a^2}{2}.
+\]
+
+Multiply by $a^2$:
+\[
+a^2 \int_a^{\sqrt{2}a} x dx = a^2 \cdot \frac{a^2}{2} = \frac{a^4}{2}.
+\]
+
+Substitute back into the integral:
+\[
+\pi \int_a^{\sqrt{2}a} \left( x^3 - a^2x \right) dx = \pi \left[ \frac{3a^4}{4} - \frac{a^4}{2} \right].
+\]
+
+Simplify:
+\[
+\pi \int_a^{\sqrt{2}a} \left( x^3 - a^2x \right) dx = \pi \left[ \frac{3a^4}{4} - \frac{2a^4}{4} \right] = \pi \cdot \frac{a^4}{4}.
+\]
+
+Substitute the integral and $V = \frac{2 \pi a^3}{3}$ into the formula for $\bar{y}$:
+\[
+\bar{y} = \frac{\pi \cdot \frac{a^4}{4}}{\frac{2 \pi a^3}{3}}.
+\]
+
+Cancel $\pi$:
+\[
+\bar{y} = \frac{\frac{a^4}{4}}{\frac{2a^3}{3}}.
+\]
+
+Simplify:
+\[
+\bar{y} = \frac{3a}{8}.
+\]
+
+Volume:
+\[
+V = \frac{2 \pi a^3}{3}.
+\]
+Centroid:
+\[
+(\bar{x}, \bar{y}) = (0, \frac{3a}{8}).
+\]
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
