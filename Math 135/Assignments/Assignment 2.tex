@@ -1,0 +1,326 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#2}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+
+\begin{enumerate}
+\item [69.]
+We want to show that the improper integral  
+\[
+\int_1^\infty f(x) \, dx
+\]  
+converges if and only if the sequence  
+\[
+a_n = \int_1^n f(x) \, dx
+\]  
+converges.
+
+If the sequence \(a_n\) converges, then the improper integral converges. Since \(a_n = \int_1^n f(x) \, dx\), the convergence of \(a_n\) implies that as \(n \to \infty\), \(a_n\) approaches a finite limit \(L\). The improper integral  
+\[
+\int_1^\infty f(x) \, dx
+\]  
+is defined as  
+\[
+\int_1^\infty f(x) \, dx = \lim_{n \to \infty} \int_1^n f(x) \, dx.
+\]  
+Since \(\lim_{n \to \infty} a_n = L\), the improper integral also converges to \(L\). Additionally, since \(f(x)\) is positive and decreasing, this ensures that \(a_n\) is monotonic (non-decreasing) and bounded below by 0, and there is no oscillation in the sequence. Thus, the convergence of \(a_n\) implies the convergence of \(\int_1^\infty f(x) \, dx\).
+
+Conversely, if the improper integral converges, then the sequence \(a_n\) converges. If \(\int_1^\infty f(x) \, dx\) converges, then  
+\[
+\int_1^\infty f(x) \, dx = \lim_{n \to \infty} \int_1^n f(x) \, dx
+\]  
+exists as a finite value \(L\). Since \(a_n = \int_1^n f(x) \, dx\), the convergence of \(\int_1^\infty f(x) \, dx\) implies that the sequence \(a_n\) approaches \(L\). Furthermore, the fact that \(f(x)\) is positive and decreasing guarantees that \(a_n\) is monotonic and bounded, with no oscillation, making convergence straightforward. Thus, \(a_n\) converges.
+
+In conclusion, the improper integral \(\int_1^\infty f(x) \, dx\) converges if and only if the sequence \(a_n = \int_1^n f(x) \, dx\) converges.
+\item [31. ]
+ Let \(\sum_{k=0}^\infty a_k\) be a convergent series, and let 
+\[
+R_n = \sum_{k=n+1}^\infty a_k
+\]
+be the remainder of the series after the \(n\)-th partial sum. We aim to prove that \(R_n \to 0\) as \(n \to \infty\).
+
+Since the series \(\sum_{k=0}^\infty a_k\) converges, the sequence of partial sums
+\[
+s_n = \sum_{k=0}^n a_k
+\]
+has a finite limit \(S\), where 
+\[
+S = \lim_{n \to \infty} s_n.
+\]
+
+By definition of the remainder \(R_n\), we have
+\[
+S = s_n + R_n,
+\]
+where
+\[
+R_n = \sum_{k=n+1}^\infty a_k.
+\]
+
+Rearranging this equation gives
+\[
+R_n = S - s_n.
+\]
+
+As \(n \to \infty\), the partial sum \(s_n \to S\), since the series converges. Therefore,
+\[
+R_n = S - s_n \to S - S = 0 \quad \text{as } n \to \infty.
+\]
+
+Hence, \(R_n \to 0\) as \(n \to \infty\), as required.
+
+\item [28. ]
+\item [42. ]
+The terms of the series are \((a_{k+1} - a_k)\), which represent differences between consecutive terms of the sequence \(a_n\). The partial sum \(S_n\) is given by:
+\[
+S_n = \sum_{k=1}^n (a_{k+1} - a_k) = (a_2 - a_1) + (a_3 - a_2) + \cdots + (a_{n+1} - a_n).
+\]
+This simplifies to:
+\[
+S_n = a_{n+1} - a_1.
+\]
+Since \(a_n \to L\), we have \(a_{n+1} \to L\). Therefore:
+\[
+S_n = a_{n+1} - a_1 \to L - a_1 \quad \text{as } n \to \infty.
+\]
+Thus, the series \(\sum_{k=1}^\infty (a_{k+1} - a_k)\) converges.
+
+Now we prove that if \(\sum_{k=1}^\infty (a_{k+1} - a_k)\) converges, then \(a_n \to L\).
+
+Let \(S_n = \sum_{k=1}^n (a_{k+1} - a_k)\) be the \(n\)-th partial sum. As shown earlier:
+\[
+S_n = a_{n+1} - a_1.
+\]
+Since the series converges, the partial sums \((S_n)\) converge to some finite limit \(S\). Hence:
+\[
+a_{n+1} - a_1 \to S \quad \text{as } n \to \infty.
+\]
+Rearranging gives:
+\[
+a_{n+1} \to S + a_1.
+\]
+Let \(L = S + a_1\). Then \(a_{n+1} \to L\), which implies \(a_n \to L\) as \(n \to \infty\).
+
+\item [48. ]
+\begin{enumerate}
+    \item If $\sum b_k$ diverges, then $\sum a_k$ diverges.
+
+    We are given that $\frac{a_k}{b_k} \to \infty$, which implies $a_k > b_k$ for sufficiently large $k$. Since $\sum b_k$ diverges and $a_k > b_k$, the comparison test guarantees that $\sum a_k$ also diverges.
+
+    \item If $\sum a_k$ converges, then $\sum b_k$ converges.
+
+    Since $\frac{a_k}{b_k} \to \infty$, we have $a_k \gg b_k$ for large $k$, meaning $b_k$ is significantly smaller than $a_k$. If $\sum a_k$ converges, then for large $k$, $b_k \leq c_k a_k$, where $c_k \to 0$. The convergence of $\sum a_k$ implies that $\sum b_k$ also converges by the comparison test.
+
+    \item Show by example that if $\sum a_k$ diverges, then $\sum b_k$ may converge or diverge.
+
+    \begin{enumerate}
+        \item Example 1: $\sum b_k$ diverges.
+
+        Let $a_k = k^2$ and $b_k = k$. Then $\frac{a_k}{b_k} = k \to \infty$, and $\sum a_k = \sum k^2$ diverges. Similarly, $\sum b_k = \sum k$ diverges.
+
+        \item Example 2: $\sum b_k$ converges.
+
+        Let $a_k = \frac{1}{k}$ and $b_k = \frac{1}{k^2}$. Then $\frac{a_k}{b_k} = k \to \infty$, $\sum a_k = \sum \frac{1}{k}$ diverges (harmonic series), but $\sum b_k = \sum \frac{1}{k^2}$ converges.
+    \end{enumerate}
+
+    \item Show by example that if $\sum b_k$ converges, then $\sum a_k$ may converge or diverge.
+
+    \begin{enumerate}
+        \item Example 1: $\sum a_k$ converges.
+
+        Let $a_k = \frac{1}{k^2}$ and $b_k = \frac{1}{k^3}$. Then $\frac{a_k}{b_k} = k \to \infty$, $\sum b_k = \sum \frac{1}{k^3}$ converges, and $\sum a_k = \sum \frac{1}{k^2}$ also converges.
+
+        \item Example 2: $\sum a_k$ diverges.
+
+        Let $a_k = \frac{1}{k}$ and $b_k = \frac{1}{k^2}$. Then $\frac{a_k}{b_k} = k \to \infty$, $\sum b_k = \sum \frac{1}{k^2}$ converges, but $\sum a_k = \sum \frac{1}{k}$ diverges.
+    \end{enumerate}
+\end{enumerate}
+
+\item [6.]
+\begin{enumerate}
+    \item 
+    \[
+\int_2^\infty \frac{dx}{x(\ln(x))^p}
+\]
+
+Let \( u = \ln(x) \), so \( du = \frac{1}{x}dx \). The limits of integration become:
+\[
+x = 2 \implies u = \ln(2), \quad x \to \infty \implies u \to \infty.
+\]
+
+Substituting, the integral becomes:
+\[
+\int_2^\infty \frac{dx}{x(\ln(x))^p} = \int_{\ln(2)}^\infty \frac{1}{u^p} \, du.
+\]
+
+Now, consider the integral:
+\[
+\int_a^\infty u^{-p} \, du, \quad a = \ln(2).
+\]
+
+The convergence of this integral depends on \( p \):
+- If \( p > 1 \), the integral converges because the antiderivative of \( u^{-p} \) is:
+\[
+\frac{u^{1-p}}{1-p}, \quad p \neq 1.
+\]
+As \( u \to \infty \), \( u^{1-p} \) approaches 0 for \( p > 1 \), so the integral converges.
+
+- If \( p \leq 1 \), \( u^{1-p} \) does not approach a finite value as \( u \to \infty \), so the integral diverges.
+
+Therefore, the original integral converges if and only if \( p > 1 \):
+\[
+\int_2^\infty \frac{dx}{x(\ln(x))^p} \text{ converges if and only if } p > 1.
+\]
+
+\item 
+We aim to show that the series 
+
+\[
+\sum_{k=2}^\infty \frac{1}{k (\ln(k))^2}
+\]
+
+converges and to calculate its sum to one decimal place with an error less than \(0.05\).
+
+To determine convergence, consider the related function:
+\[
+f(x) = \frac{1}{x (\ln(x))^2}, \quad x > 1.
+\]
+The function \(f(x)\) is positive, continuous, and decreasing for \(x > 2\), satisfying the conditions for the Integral Test. Therefore, the convergence of the series is equivalent to the convergence of the improper integral:
+\[
+\int_2^\infty \frac{1}{x (\ln(x))^2} \, dx.
+\]
+
+Using the substitution \( u = \ln(x) \), we have \( du = \frac{1}{x} dx \). When \(x = 2\), \(u = \ln(2)\), and as \(x \to \infty\), \(u \to \infty\). Substituting, the integral becomes:
+\[
+\int_2^\infty \frac{1}{x (\ln(x))^2} \, dx = \int_{\ln(2)}^\infty \frac{1}{u^2} \, du.
+\]
+
+The antiderivative of \(u^{-2}\) is:
+\[
+\int u^{-2} \, du = -\frac{1}{u}.
+\]
+
+Applying the limits:
+\[
+\int_{\ln(2)}^\infty \frac{1}{u^2} \, du = -\frac{1}{u} \Big|_{\ln(2)}^\infty = 0 - \left(-\frac{1}{\ln(2)}\right) = \frac{1}{\ln(2)}.
+\]
+
+Since the improper integral converges to a finite value, the series 
+\[
+\sum_{k=2}^\infty \frac{1}{k (\ln(k))^2}
+\]
+also converges by the Integral Test.
+
+To approximate the sum of the series, we split it as:
+\[
+\sum_{k=2}^\infty \frac{1}{k (\ln(k))^2} = S_N + R_N,
+\]
+where \(S_N = \sum_{k=2}^N \frac{1}{k (\ln(k))^2}\) is the partial sum up to \(N\), and \(R_N = \sum_{k=N+1}^\infty \frac{1}{k (\ln(k))^2}\) is the remainder.
+
+The remainder \(R_N\) can be approximated using the same integral:
+\[
+R_N \approx \int_{N+1}^\infty \frac{1}{x (\ln(x))^2} \, dx.
+\]
+
+Using the substitution \(u = \ln(x)\), we get:
+\[
+R_N \approx \int_{\ln(N+1)}^\infty \frac{1}{u^2} \, du.
+\]
+
+The anti-derivative of \(u^{-2}\) is \(-\frac{1}{u}\), so:
+\[
+R_N = -\frac{1}{u} \Big|_{\ln(N+1)}^\infty = \frac{1}{\ln(N+1)}.
+\]
+
+To ensure \(R_N < 0.05\), we solve:
+\[
+\frac{1}{\ln(N+1)} < 0.05 \implies \ln(N+1) > 20 \implies N+1 > e^{20}.
+\]
+
+Thus, to ensure an error less than 0.05, we must calculate the partial sums till \(e^{20}\)
+
+Calculating the partial sums till $e^{20}$:
+
+\[
+\sum_{k = 2}^{485165196} \frac{1}{k (\ln(k))^2} \approx 2.06
+\]
+
+To do the above, I used python whose code is attached at the end.
+
+\item 
+The series 
+
+\[
+\sum_{k=2}^\infty \frac{1}{k \ln(k)}
+\]
+
+can be analyzed using the integral test. The term \(\frac{1}{k \ln(k)}\) is positive, continuous, and decreasing for \(k > 1\). Consider the integral:
+
+\[
+\int_{2}^\infty \frac{1}{x \ln(x)} dx.
+\]
+
+Let \( u = \ln(x) \), so \( du = \frac{1}{x} dx \). Substituting, we get:
+
+\[
+\int \frac{1}{x \ln(x)} dx = \int \frac{1}{u} du = \ln(u) + C = \ln(\ln(x)) + C.
+\]
+
+Now evaluate the improper integral:
+
+\[
+\int_{2}^\infty \frac{1}{x \ln(x)} dx = \lim_{t \to \infty} \ln(\ln(t)) - \ln(\ln(2)).
+\]
+
+As \( t \to \infty \), \(\ln(\ln(t)) \to \infty\). Therefore, the integral diverges.
+
+By the integral test, the series 
+
+\[
+\sum_{k=2}^\infty \frac{1}{k \ln(k)}
+\]
+
+diverges.
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Python:}
+\begin{lstlisting}
+import numpy as np
+
+def compute_sum(upper_limit):
+    total_sum = 0
+    for n in range(2, upper_limit + 1):
+        total_sum += 1 / (n * (np.log(n))**2)
+    return total_sum
+
+upper_limit = 485165196
+result = compute_sum(upper_limit)
+print(result)
+\end{lstlisting}
+\end{document}

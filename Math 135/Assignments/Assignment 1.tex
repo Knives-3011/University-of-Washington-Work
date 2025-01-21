@@ -1,0 +1,232 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#1}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+
+\begin{enumerate}
+\item 
+We are given that \(b_n\) is bounded, so \(|b_n| \leq M\) for all \(n\), where \(M\) is some real number. We also know that \(a_n \to 0\), so the limit of \(a_n\) is \(0\).
+
+
+For every \(\epsilon > 0\), there exists a positive integer \(K\) such that if \(n \geq K\), then:
+\[
+|a_n| < \frac{\epsilon}{M}.
+\]
+
+Now, consider the product \(a_n b_n\). We know:
+\[
+|a_n b_n| = |a_n| \cdot |b_n|.
+\]
+
+Since \(|b_n| \leq M\), we have:
+\[
+|a_n b_n| \leq |a_n| \cdot M.
+\]
+
+For \(n \geq K\), substituting \(|a_n| < \frac{\epsilon}{M}\), we get:
+\[
+|a_n b_n| \leq \frac{\epsilon}{M} \cdot M = \epsilon.
+\]
+
+Thus, for all \(n \geq K\), \(|a_n b_n| < \epsilon\), implying $a_n \cdot b_n \to 0$.
+
+\item First, we prove the sequence is bounded below by \(\sqrt{2}\). The recurrence relation is given as
+\[
+a_{n+1} = \frac{a_n^2 + 2}{2a_n}
+\]
+with the initial value \(a_1 = \frac{3}{2}\). Clearly, \(a_1 > \sqrt{2}\). Assume \(a_n \geq \sqrt{2}\). To show \(a_{n+1} \geq \sqrt{2}\), we use the recurrence relation:
+\[
+a_{n+1} = \frac{a_n^2 + 2}{2a_n}.
+\]
+Taking the following expression:
+\[
+(a_n - \sqrt{2})^2 \geq 0
+\]
+The above is true as squares are always non-negative.
+Expanding out,
+
+\[
+a^2_{n} -2\sqrt{2}a_n + 2 \geq 0
+\]
+
+\[
+a^2_{n} + 2 \geq 2\sqrt{2}a_n
+\]
+
+Dividing by $2a_n$
+
+\[
+\frac{a^2_{n} + 2}{2a_n} \geq \sqrt{2}
+\]
+
+Replacing in the recurrence relation:
+
+\[
+a_{n+1} \geq \sqrt{2}
+\]
+Thus, as long as $a_n \geq \sqrt{2}$
+Next, we prove the sequence is decreasing. To show \(a_{n+1} \leq a_n\), consider the difference:
+\[
+a_{n+1} - a_n = \frac{a_n^2 + 2}{2a_n} - a_n.
+\]
+Simplify the expression:
+\[
+a_{n+1} - a_n = \frac{a_n^2 + 2 - 2a_n^2}{2a_n} = \frac{2 - a_n^2}{2a_n}.
+\]
+For \(a_n \geq \sqrt{2}\), we have \(a_n^2 \geq 2\), so
+\[
+2 - a_n^2 \leq 0.
+\]
+Since \(2a_n > 0\), it follows that
+\[
+\frac{2 - a_n^2}{2a_n} \leq 0.
+\]
+Hence,
+\[
+a_{n+1} - a_n \leq 0,
+\]
+which implies \(a_{n+1} \leq a_n\). Thus, the sequence is decreasing.
+
+Since the sequence is both bounded below by \(\sqrt{2}\) and decreasing, it converges to a limit \(L\). Taking the limit as \(n \to \infty\) in the recurrence relation
+\[
+L = \frac{L^2 + 2}{2L},
+\]
+multiplying through by \(2L\) (where \(L > 0\)), we get
+\[
+2L^2 = L^2 + 2,
+\]
+which simplifies to
+\[
+L^2 = 2.
+\]
+Therefore,
+\[
+L = \sqrt{2}.
+\]
+The sequence \((a_n)\) converges to \(\sqrt{2}\).
+
+\item 
+For the differentiable function \(f(x)\) on \([n, n+1]\), the Mean Value Theorem guarantees the existence of some \(c_n \in (n, n+1)\) such that:
+\[
+f(n+1) - f(n) = f'(c_n).
+\]
+From the problem, we know that:
+\[
+f'(x) \to 0 \quad \text{as} \quad x \to \infty.
+\]
+Since \(c_n \in (n, n+1)\), as \(n \to \infty\), \(c_n \to \infty\). Hence, \(f'(c_n) \to 0\).
+
+Therefore, as \(n \to \infty\),
+\[
+f(n+1) - f(n) = f'(c_n) \to 0.
+\]
+Using the result from the Mean Value Theorem and the given condition \(f'(x) \to 0\), we conclude:
+\[
+\lim_{n \to \infty} (f(n+1) - f(n)) = 0.
+\]
+
+\item Given the recurrence relation:
+\[
+a_1 = a, \quad a_{n+1} = \alpha a_n + \beta,
+\]
+we determine the conditions under which a limit exists and find the limit in two ways.
+
+\textbf{Guess and Check Method:}
+
+The recurrence relation is:
+\[
+a_{n+1} = \alpha a_n + \beta.
+\]
+
+Expanding the recurrence relation:
+\[
+a_2 = \alpha a_1 + \beta
+\]
+\[
+a_3 = \alpha a_2 + \beta = \alpha(\alpha a_1 + \beta) + \beta = \alpha^2 a_1 + \alpha \beta + \beta,
+\]
+\[
+a_4 = \alpha a_3 + \beta = \alpha(\alpha^2 a_1 + \alpha \beta + \beta) + \beta = \alpha^3 a_1 + \alpha^2 \beta + \alpha \beta + \beta.
+\]
+Following this pattern:
+\[
+a_n = \alpha^n a + \beta(1 + \alpha + \alpha^2 + \dots + \alpha^{n-1}).
+\]
+The second term is a geometric series. We know the sum formula for a finite geometric series as we were taught about it in class:
+\[
+1 + \alpha + \alpha^2 + \dots + \alpha^{n-1} = \frac{1 - \alpha^n}{1 - \alpha}, \quad \text{(for \(|\alpha| \neq 1\)}.
+\]
+Substituting this back, we get:
+\[
+a_n = \alpha^n a + \frac{\beta(1 - \alpha^n)}{1 - \alpha}.
+\]
+
+If \(|\alpha| < 1\):
+\[
+\lim_{n \to \infty} \alpha^n = 0.
+\]
+Thus:
+\[
+\lim_{n \to \infty} a_n = \frac{\beta}{1 - \alpha}.
+\]
+
+If \(|\alpha| \geq 1\), the term \(\alpha^n a\) does not converge to 0, and the sequence diverges.
+
+Thus:
+\[
+\lim_{n \to \infty} a_n = \frac{\beta}{1 - \alpha}.
+\]
+
+\textbf{Using the Fixed Point Theorem:}
+
+The recurrence relation:
+\[
+a_{n+1} = \alpha a_n + \beta
+\]
+defines a function \(f(x) = \alpha x + \beta\).
+
+A fixed point \(L\) satisfies \(f(L) = L\):
+\[
+L = \alpha L + \beta.
+\]
+Solving for \(L\):
+\[
+L = \frac{\beta}{1 - \alpha}, \quad \text{(for \(|\alpha| \neq 1\)}.
+\]
+
+The Fixed Point Theorem states that the sequence \((a_n)\) will converge to the fixed point \(L\) if the derivative of \(f(x)\), which is \(|\alpha|\), satisfies \(|\alpha| < 1\). Thus, the condition for convergence is:
+\[
+|\alpha| < 1.
+\]
+
+Under the condition \(|\alpha| < 1\), the sequence converges to:
+\[
+\lim_{n \to \infty} a_n = \frac{\beta}{1 - \alpha}.
+\]
+
+
+\end{enumerate}
+
+\end{document}

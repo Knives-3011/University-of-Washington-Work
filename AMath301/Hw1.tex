@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Amath Homework \#1}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+
+\begin{enumerate}
+\item \text{A[:4, :5][(A[:4, :5] $\leq$ 19) $\vert$ (A[:4, :5] $\geq$ 30)] = 0}
+
+\item 
+
+First, I will calculate the midpoint of the interval:
+\[
+c = \frac{a + b}{2} = \frac{0 + 2}{2} = 1.
+\]
+
+Then I will evaluate the function at the endpoints and the midpoint:
+\[
+f(0) = 0^3 + 0^2 + 0 - 2 = -2, \quad f(2) = 2^3 + 2^2 + 2 - 2 = 12, \quad f(1) = 1^3 + 1^2 + 1 - 2 = 1.
+\]
+
+Since \( f(0) \cdot f(1) < 0 \), the root lies in the interval \([0, 1]\).
+
+For the second iteration, the new interval is \([0, 1]\). The midpoint is:
+\[
+c = \frac{a + b}{2} = \frac{0 + 1}{2} = \frac{1}{2}.
+\]
+
+Evaluate the function at this new midpoint:
+\[
+f\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^3 + \left(\frac{1}{2}\right)^2 + \frac{1}{2} - 2 = \frac{1}{8} + \frac{1}{4} + \frac{1}{2} - 2.
+\]
+
+Simplify:
+\[
+f\left(\frac{1}{2}\right) = \frac{1}{8} + \frac{2}{8} + \frac{4}{8} - \frac{16}{8} = -\frac{9}{8}.
+\]
+
+Since \( f(0) \cdot f\left(\frac{1}{2}\right) < 0 \), the root lies in the interval \([0, \frac{1}{2}]\).
+
+After two iterations, the final interval is \([0, \frac{1}{2}]\). The midpoint of this interval is:
+\[
+x = \frac{0 + \frac{1}{2}}{2} = \frac{1}{4}.
+\]
+
+Thus, the midpoint \(x\)-value of the final interval is \( \frac{1}{4} \).
+
+\item 
+
+\begin{enumerate}
+    \item Code
+    \begin{lstlisting}[language=Python, frame=single]
+fc = np.exp(xc) - np.tan(xc)
+if fc * (np.exp(xl) - np.tan(xl)) < 0: 
+    xr = xc
+else: 
+    xl = xc
+    \end{lstlisting}
+
+    \item Explanation of Change:
+    The product \( fc \cdot f(x_l) \) is used to check whether the root lies between \( x_l \) and the midpoint \( xc \). If the product is negative, it indicates a sign change between \( x_l \) and \( xc \), so the right bound \( x_r \) is updated to \( xc \). Otherwise, the left bound \( x_l \) is updated to \( xc \). This ensures that the interval continues to bracket the root, regardless of whether \( f(x) \) is increasing, decreasing, or more complex around \( x^* \).
+
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+
+\item 
+The bisection algorithm requires the function $f(x)$ to change sign over the interval $[-1, 1]$. However, $f(x) = (x e^x - 1)^2$ is always non-negative ($f(x) \geq 0$) on $[-1, 1]$ and does not cross zero except at a single root ($x^*$). Since there is no sign change, the bisection method fails to determine the root.
+
+\item   
+The function $g(x) = \sqrt{f(x)} = |x e^x - 1|$ still has the root at $x^*$ (where $g(x) = 0$). Also, it satisfies the property needed for the bisection method: $g(x)$ changes sign over the interval $[-1, 1]$, as $g(x)$ is defined in terms of the original function's magnitude. This ensures the root can be isolated and approximated.
+
+\item 
+No, the approach does not always work. A counterexample is:
+
+Let \( h(x) = (x - 0.5)^2 \) on the interval \([0, 1]\).  
+Here, \( h(x) \geq 0 \), and \( h(x) = 0 \) only at \( x^* = 0.5 \). The transformed function \( g(x) = \sqrt{h(x)} = |x - 0.5| \) does not change sign on \([0, 1]\), so the bisection method fails to locate the root.
+
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

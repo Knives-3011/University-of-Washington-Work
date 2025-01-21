@@ -1,0 +1,688 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 134 Homework \#11}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+\begin{enumerate}
+\item [30.]
+We solve the differential equation:
+\[
+y' + ry = 0,
+\]
+where \( r \) is constant.
+
+The general solution is found as follows:
+The equation is separable:
+\[
+\frac{dy}{dx} = -ry.
+\]
+Separating variables:
+\[
+\frac{1}{y} \, dy = -r \, dx.
+\]
+Integrating both sides:
+\[
+\ln |y| = -rx + C.
+\]
+Exponentiating:
+\[
+y = Ce^{-rx}.
+\]
+Thus, the general solution is:
+\[
+y(x) = Ce^{-rx},
+\]
+where \( C \) is an arbitrary constant.
+
+Now we address the individual parts of the problem:
+
+\begin{enumerate}
+    \item[(a)] If \( y(a) = 0 \) for some \( a \geq 0 \), then \( y(x) = 0 \) for all \( x \)\\
+    From the general solution:
+    \[
+    y(x) = Ce^{-rx}.
+    \]
+    If \( y(a) = 0 \), then:
+    \[
+    C e^{-ra} = 0.
+    \]
+    Since \( e^{-ra} \neq 0 \) for any \( r \) and \( a \), it must be that \( C = 0 \). If \( C = 0 \), then:
+    \[
+    y(x) = 0 \quad \text{for all } x.
+    \]
+    This shows that \( y(x) \) is either identically zero (\( y(x) = 0 \)) or never zero.
+
+    \item[(b)] If \( r < 0 \), all nonzero solutions are unbounded\\
+    For \( r < 0 \), the solution is:
+    \[
+    y(x) = Ce^{-rx}.
+    \]
+    Since \( r < 0 \), \( -r > 0 \), so \( e^{-rx}\) grows exponentially as \( x \to \infty \). For \( C \neq 0 \), \( y(x) \) becomes unbounded as \( x \to \infty \).
+
+    \item[(c)] If \( r > 0 \), all solutions tend to 0 as \( x \to \infty \)\\
+    For \( r > 0 \), the solution is:
+    \[
+    y(x) = Ce^{-rx}.
+    \]
+    Since \( r > 0 \), \( e^{-rx} \to 0 \) as \( x \to \infty \). Thus, for any \( C \), \( y(x) \to 0 \) as \( x \to \infty \).
+
+    \item[(d)] Solutions if \( r = 0 \)\\
+    If \( r = 0 \), the equation becomes:
+    \[
+    y' = 0.
+    \]
+    Integrating:
+    \[
+    y = C,
+    \]
+    where \( C \) is a constant. Thus, the solution is a constant function.
+\end{enumerate}
+
+\item [31. ]
+\begin{enumerate}
+    \item Show that if \( y_1 \) and \( y_2 \) are solutions, then \( u = y_1 + y_2 \) is also a solution.
+        If \( y_1 \) is a solution, then:
+        \[
+        y_1' + p(x)y_1 = 0
+        \]
+        If \( y_2 \) is a solution, then:
+        \[
+        y_2' + p(x)y_2 = 0
+        \]
+        Define \( u = y_1 + y_2 \). Then:
+        \[
+        u' = y_1' + y_2'
+        \]
+        Substitute \( u \) and \( u' \) into the original differential equation:
+        \[
+        u' + p(x)u = (y_1' + y_2') + p(x)(y_1 + y_2)
+        \]
+        Simplify:
+        \[
+        u' + p(x)u = (y_1' + p(x)y_1) + (y_2' + p(x)y_2)
+        \]
+        Since \( y_1' + p(x)y_1 = 0 \) and \( y_2' + p(x)y_2 = 0 \), we have:
+        \[
+        u' + p(x)u = 0 + 0 = 0
+        \]
+        Therefore, \( u = y_1 + y_2 \) is a solution.
+
+    \item Show that if \( y \) is a solution and \( C \) is a constant, then \( u = Cy \) is also a solution.
+
+        If \( y \) is a solution, then:
+        \[
+        y' + p(x)y = 0
+        \]
+        Define \( u = Cy \), where \( C \) is a constant. Then:
+        \[
+        u' = C y'
+        \]
+        Substitute \( u \) and \( u' \) into the original differential equation:
+        \[
+        u' + p(x)u = C y' + p(x)(C y)
+        \]
+        Factor out \( C \):
+        \[
+        u' + p(x)u = C (y' + p(x)y)
+        \]
+        Since \( y' + p(x)y = 0 \), we have:
+        \[
+        u' + p(x)u = C \cdot 0 = 0
+        \]
+        Therefore, \( u = Cy \) is a solution.
+\end{enumerate}
+
+\item [34. ] Show that if \( y_1 \) and \( y_2 \) are solutions of \( y' + p(x)y = q(x) \), then \( y = y_1 - y_2 \) is a solution of \( y' + p(x)y = 0 \).
+    \begin{proof}
+        If \( y_1 \) is a solution of \( y' + p(x)y = q(x) \), then:
+        \[
+        y_1' + p(x)y_1 = q(x)
+        \]
+        Similarly, if \( y_2 \) is a solution of \( y' + p(x)y = q(x) \), then:
+        \[
+        y_2' + p(x)y_2 = q(x)
+        \]
+        Define \( y = y_1 - y_2 \). Then:
+        \[
+        y' = y_1' - y_2'
+        \]
+        Substitute \( y \) and \( y' \) into the differential equation \( y' + p(x)y \):
+        \[
+        y' + p(x)y = (y_1' - y_2') + p(x)(y_1 - y_2)
+        \]
+        Simplify:
+        \[
+        y' + p(x)y = (y_1' + p(x)y_1) - (y_2' + p(x)y_2)
+        \]
+        Since \( y_1' + p(x)y_1 = q(x) \) and \( y_2' + p(x)y_2 = q(x) \), we have:
+        \[
+        y' + p(x)y = q(x) - q(x) = 0
+        \]
+        Therefore, \( y = y_1 - y_2 \) is a solution of \( y' + p(x)y = 0 \).
+    \end{proof}
+\item [23. ] 
+\begin{enumerate}
+
+\item We start with the differential equation:
+    \[
+    \frac{m \, dv}{dt} = -\alpha v - \beta v^2.
+    \]
+
+    Rearranging, we get:
+    \[
+    \frac{dv}{\alpha v + \beta v^2} = -\frac{1}{m} \, dt.
+    \]
+
+    Factorizing the denominator:
+    \[
+    \alpha v + \beta v^2 = v(\alpha + \beta v).
+    \]
+
+    The equation becomes:
+    \[
+    \int \frac{1}{v(\alpha + \beta v)} \, dv = -\frac{1}{m} \int dt.
+    \]
+
+    To solve the integral on the left, decompose the fraction:
+    \[
+    \frac{1}{v(\alpha + \beta v)} = \frac{1}{\alpha} \left( \frac{1}{v} - \frac{\beta}{\alpha + \beta v} \right).
+    \]
+
+    Thus, the integral becomes:
+    \[
+    \int \frac{1}{v(\alpha + \beta v)} \, dv = \frac{1}{\alpha} \int \frac{1}{v} \, dv - \frac{\beta}{\alpha} \int \frac{1}{\alpha + \beta v} \, dv.
+    \]
+
+    Solve each term:
+    \[
+    \int \frac{1}{v} \, dv = \ln|v|, \quad \int \frac{1}{\alpha + \beta v} \, dv = \frac{1}{\beta} \ln|\alpha + \beta v|.
+    \]
+
+    Substituting back:
+    \[
+    \int \frac{1}{v(\alpha + \beta v)} \, dv = \frac{1}{\alpha} \ln|v| - \frac{1}{\alpha} \ln|\alpha + \beta v| + C.
+    \]
+
+    Combining the logarithms:
+    \[
+    \frac{1}{\alpha} \ln\left(\frac{v}{\alpha + \beta v}\right) = -\frac{1}{m}t + C_1.
+    \]
+
+    Multiply through by \( \alpha \):
+    \[
+    \ln\left(\frac{v}{\alpha + \beta v}\right) = -\frac{\alpha}{m}t + C_2,
+    \]
+    where \( C_2 = \alpha C_1 \).
+
+    Exponentiate both sides:
+    \[
+    \frac{v}{\alpha + \beta v} = Ce^{-\frac{\alpha}{m}t},
+    \]
+    where \( C = e^{C_2} \).
+
+    Rearrange to isolate \( v \):
+    \[
+    \alpha + \beta v = \frac{\alpha}{v} \implies v \left(Ce^{-\frac{\alpha}{m}t} - \beta\right) = \alpha.
+    \]
+
+    Solving for \( v \):
+    \[
+    v = \frac{\alpha}{Ce^{\frac{\alpha}{m}t} - \beta}.
+    \]
+
+\item 
+    Starting with the general solution:
+    \[
+    v(t) = \frac{\alpha}{C e^{\frac{\alpha}{m}t} - \beta}.
+    \]
+    
+    Apply the initial condition \(v(0) = v_0\):
+    
+    Substitute \(t = 0\) and \(v(0) = v_0\) into the solution:
+    \[
+    v_0 = \frac{\alpha}{C - \beta}.
+    \]
+    
+    Rearrange to solve for \(C\):
+    \[
+    C - \beta = \frac{\alpha}{v_0}.
+    \]
+    
+    Thus:
+    \[
+    C = \frac{\alpha}{v_0} + \beta.
+    \]
+    
+    Substituting \(C\) back into \(v(t)\):
+    
+    Substitute \(C = \frac{\alpha}{v_0} + \beta\) into the general solution:
+    \[
+    v(t) = \frac{\alpha}{\left(\frac{\alpha}{v_0} + \beta\right)e^{\frac{\alpha}{m}t} - \beta}.
+    \]
+    
+    Multiply the numerator and denominator by \(v_0\) to simplify:
+    \[
+    v(t) = \frac{\alpha v_0}{\alpha e^{\frac{\alpha}{m}t} + \beta v_0 (e^{\frac{\alpha}{m}t} - 1)}.
+    \]
+
+    \item
+    The denominator is:
+    \[
+    \alpha e^{\frac{\alpha}{m}t} + \beta v_0 (e^{\frac{\alpha}{m}t} - 1).
+    \]
+
+    Factor \(e^{\frac{\alpha}{m}t}\) from the terms involving the exponential:
+    \[
+    \alpha e^{\frac{\alpha}{m}t} + \beta v_0 (e^{\frac{\alpha}{m}t} - 1) = e^{\frac{\alpha}{m}t} \left( \alpha + \beta v_0 \right) - \beta v_0.
+    \]
+
+    As \(t \to \infty\), the term \(-\beta v_0\) becomes negligible compared to the \(e^{\frac{\alpha}{m}t}\)-dependent term. Thus, the denominator approximates:
+    \[
+    \alpha e^{\frac{\alpha}{m}t} + \beta v_0 (e^{\frac{\alpha}{m}t} - 1) \sim e^{\frac{\alpha}{m}t} (\alpha + \beta v_0).
+    \]
+
+    For large \(t\), substitute the approximation of the denominator into \(v(t)\):
+    \[
+    v(t) \sim \frac{a v_0}{e^{\frac{\alpha}{m}t} (\alpha + \beta v_0)}.
+    \]
+
+    Factor \(e^{\frac{\alpha}{m}t}\) from the denominator:
+    \[
+    v(t) \sim \frac{\alpha v_0}{(\alpha + \beta v_0)e^{\frac{\alpha}{m}t}}.
+    \]
+
+    Since \(e^{\frac{\alpha}{m}t} \to \infty\) as \(t \to \infty\), the fraction:
+    \[
+    \frac{1}{e^{\frac{\alpha}{m}t}} \to 0.
+    \]
+
+    Thus:
+    \[
+    v(t) \to 0 \quad \text{as } t \to \infty.
+    \]
+
+\end{enumerate}
+\item [24. ]
+
+\begin{enumerate}
+    \item Expression for $t$ in terms of $v$, $v_0$, and $v_c$
+    
+    The net force acting on the parachutist is:
+    \[
+    m \frac{dv}{dt} = mg - \beta v^2.
+    \]
+
+    Rewriting:
+    \[
+    \frac{dv}{dt} = g \left(1 - \frac{v^2}{v_c^2}\right),
+    \]
+    where $v_c = \sqrt{\frac{mg}{\beta}}$.
+
+    Separating variables:
+    \[
+    \frac{dv}{1 - \frac{v^2}{v_c^2}} = g \, dt.
+    \]
+
+    Using partial fraction decomposition:
+    \[
+    \frac{1}{1 - \frac{v^2}{v_c^2}} = \frac{v_c}{2(v_c - v)} + \frac{v_c}{2(v_c + v)}.
+    \]
+
+    Integrating both sides:
+    \[
+    \int \left( \frac{1}{v_c - v} + \frac{1}{v_c + v} \right) dv = \int \frac{2g}{v_c} dt.
+    \]
+
+    The left-hand side becomes:
+    \[
+    \frac{1}{2v_c} \ln \left| \frac{v_c + v}{v_c - v} \right|.
+    \]
+
+    The right-hand side:
+    \[
+    \frac{2g}{v_c} t + C.
+    \]
+
+    At $t = 0$, $v = v_0$, giving:
+    \[
+    C = \frac{1}{2v_c} \ln \left| \frac{v_c + v_0}{v_c - v_0} \right|.
+    \]
+
+    Substituting $C$:
+    \[
+    \frac{1}{2v_c} \ln \left| \frac{v_c + v}{v_c - v} \right| = \frac{2g}{v_c} t + \frac{1}{2v_c} \ln \left| \frac{v_c + v_0}{v_c - v_0} \right|.
+    \]
+
+    Rearranging for $t$:
+    \[
+    t = \frac{v_c}{2g} \ln \left| \frac{(v_c + v)(v_c - v_0)}{(v_c - v)(v_c + v_0)} \right|.
+    \]
+
+    \item Velocity $v(t)$ as a function of time
+
+    Starting from:
+    \[
+    t = \frac{v_c}{2g} \ln \left( \frac{(v_c + v)(v_c - v_0)}{(v_c - v)(v_c + v_0)} \right).
+    \]
+
+    Multiply through by $\frac{2g}{v_c}$:
+    \[
+    \ln \left( \frac{(v_c + v)(v_c - v_0)}{(v_c - v)(v_c + v_0)} \right) = \frac{2g}{v_c} t.
+    \]
+
+    Exponentiate both sides:
+    \[
+    \frac{(v_c + v)(v_c - v_0)}{(v_c - v)(v_c + v_0)} = e^{\frac{2g}{v_c} t}.
+    \]
+
+    Cross-multiply:
+    \[
+    (v_c + v)(v_c - v_0) = e^{\frac{2g}{v_c} t} (v_c - v)(v_c + v_0).
+    \]
+
+    Expand and rearrange terms:
+    \[
+    v = \frac{e^{\frac{2g}{v_c} t} (v_c^2 + v_0 v_c) - (v_c^2 - v_0 v_c)}{e^{\frac{2g}{v_c} t} (-v_c - v_0) + (v_c - v_0)}.
+    \]
+
+    Simplified form:
+    \[
+    v(t) = v_c \frac{1 - e^{-\frac{2g}{v_c}t}}{1 + e^{-\frac{2g}{v_c}t}}.
+    \]
+
+    \item Acceleration $a(t)$ as a function of time
+
+    The acceleration is:
+    \[
+    a(t) = g \left( 1 - \frac{v^2}{v_c^2} \right).
+    \]
+
+    Substituting $v(t)$:
+    \[
+    v(t)^2 = v_c^2 \frac{(1 - e^{-\frac{2g}{v_c}t})^2}{(1 + e^{-\frac{2g}{v_c}t})^2}.
+    \]
+
+    So:
+    \[
+    a(t) = g \frac{4e^{-\frac{2g}{v_c}t}}{(1 + e^{-\frac{2g}{v_c}t})^2}.
+    \]
+
+    As $t \to \infty$, $e^{-\frac{2g}{v_c}t} \to 0$, and:
+    \[
+    a(t) \to 0.
+    \]
+
+    \item Show that $v(t) \to v_c$ as $t \to \infty$
+
+    From:
+    \[
+    v(t) = v_c \frac{1 - e^{-\frac{2g}{v_c}t}}{1 + e^{-\frac{2g}{v_c}t}},
+    \]
+
+    as $t \to \infty$, $e^{-\frac{2g}{v_c}t} \to 0$, so:
+    \[
+    v(t) \to v_c \frac{1 - 0}{1 + 0} = v_c.
+    \]
+
+    Thus:
+    \[
+    \lim_{t \to \infty} v(t) = v_c.
+    \]
+
+\end{enumerate}
+
+\item [27.] 
+\[
+F_{\text{net}} = F_g - F_r = m \frac{dv}{dt},
+\] 
+which gives the differential equation 
+\[
+100 \frac{dv}{dt} = 980 - 2v,
+\] 
+or equivalently, 
+\[
+\frac{dv}{dt} = 9.8 - 0.02v.
+\] 
+Separating variables, we get 
+\[
+\frac{dv}{9.8 - 0.02v} = dt,
+\] 
+and integrating both sides yields 
+\[
+\int \frac{1}{9.8 - 0.02v} dv = \int dt,
+\] 
+which simplifies to 
+\[
+-50 \ln|9.8 - 0.02v| = t + C.
+\] 
+Solving for \( v \), we find 
+\[
+v = \frac{9.8 - e^{-\frac{t + C}{50}}}{0.02}.
+\] 
+Using the initial condition \( v(0) = 0 \), we determine 
+\[
+C = -50 \ln(9.8).
+\] 
+Substituting \( C \) into the velocity equation, we have 
+\[
+v = \frac{9.8 - e^{-\frac{t - 50\ln(9.8)}{50}}}{0.02}.
+\] 
+At \( t = 10 \), substituting into this equation gives 
+\[
+v(10) \approx 88.82 \, \text{m/s}.
+\] 
+Therefore, the velocity of the package at the instant the parachute opens is approximately \( 88.82 \, \text{m/s} \).
+
+\[
+F_g = mg = 980 \, \text{N}, \quad F_r = 4v^2, \quad \text{and} \quad F_{\text{net}} = F_g - F_r = m \frac{dv}{dt}.
+\]
+
+\[
+100 \frac{dv}{dt} = 980 - 4v^2,
+\]
+which simplifies to:
+\[
+\frac{dv}{dt} = 9.8 - 0.04v^2.
+\]
+Separating variables:
+\[
+\frac{dv}{9.8 - 0.04v^2} = dt.
+\]
+Rewriting the denominator:
+\[
+9.8 - 0.04v^2 = 9.8 \left(1 - \frac{v^2}{245}\right).
+\]
+Thus:
+\[
+\int \frac{dv}{9.8 \left(1 - \frac{v^2}{245}\right)} = \int dt.
+\]
+Factoring out \( 9.8 \) and recognizing the form of the integral:
+\[
+\frac{1}{9.8} \int \frac{1}{1 - \frac{v^2}{245}} dv = \int dt.
+\]
+The integral on the left evaluates to:
+\[
+\frac{1}{9.8} \cdot \frac{5^{3/2}}{14} \left( \ln|v + 7\sqrt{5}| - \ln|v - 7\sqrt{5}| \right) = t + C.
+\]
+Simplify:
+\[
+\frac{5^{3/2}}{14} \left( \ln|v + 7\sqrt{5}| - \ln|v - 7\sqrt{5}| \right) = 9.8 (t + C).
+\]
+At \( t = 0 \), the velocity is \( v(0) = 88.82 \, \text{m/s} \), so:
+\[
+\frac{5^{3/2}}{14} \left( \ln|88.82 + 7\sqrt{5}| - \ln|88.82 - 7\sqrt{5}| \right) = 9.8 C.
+\]
+Calculate the constant:
+\[
+C = \frac{1}{9.8} \cdot \frac{5^{3/2}}{14} \left( \ln|88.82 + 7\sqrt{5}| - \ln|88.82 - 7\sqrt{5}| \right).
+\]
+Numerically, \( C \approx 0.284 \).
+
+The equation for \( v(t) \) becomes:
+\[
+\frac{5^{3/2}}{14} \left( \ln|v + 7\sqrt{5}| - \ln|v - 7\sqrt{5}| \right) = 9.8t + 9.8 \cdot 0.284.
+\]
+Exponentiate both sides:
+\[
+\frac{v + 7\sqrt{5}}{v - 7\sqrt{5}} = e^{\frac{14}{5^{3/2}} (t + 0.284)}.
+\]
+Reorganize:
+\[
+v + 7\sqrt{5} = (v - 7\sqrt{5}) \cdot e^{\frac{14}{5^{3/2}} (t + 0.284)}.
+\]
+Simplify to solve for \( v(t) \):
+\[
+v(t) = \frac{-7\sqrt{5} \left(e^{\frac{14}{5^{3/2}} (t + 0.284)} + 1\right)}{1 - e^{\frac{14}{5^{3/2}} (t + 0.284)}}.
+\]
+Numerically, the equation becomes:
+\[
+v(t) = \frac{-7\sqrt{5} (1.427 \cdot e^{\frac{14}{5^{3/2}}t} + 1)}{1 - 1.427 \cdot e^{\frac{14}{5^{3/2}}t}}.
+\]
+
+To find the terminal velocity of the package, we consider the condition when the net acceleration becomes zero. This occurs when the gravitational force is balanced by the air resistance:
+\[
+F_g = F_r.
+\]
+Given:
+\[
+F_g = 980 \, \text{N}, \quad F_r = 4v^2.
+\]
+At terminal velocity:
+\[
+980 = 4v^2.
+\]
+Solve for \( v \):
+\[
+v^2 = \frac{980}{4} = 245,
+\]
+\[
+v = \sqrt{245}.
+\]
+\[
+v \approx 15.65 \, \text{m/s}.
+\]
+Thus, the terminal velocity of the package is approximately \( 15.65 \, \text{m/s} \).
+
+
+\item [Cooling]
+
+\begin{enumerate}
+    \item 
+    To find the time at which the coffee should cool to a temperature \(T(u)\), such that after adding cream, the resulting temperature is \(110^\circ \text{F}\), we solve:
+    \[
+    T_{\text{mix}} = \frac{12 \cdot T(u) + 2 \cdot 40}{12 + 2} = 110.
+    \]
+    Simplify to find \(T(u)\):
+    \[
+    12 \cdot T(u) + 80 = 1540 \quad \Rightarrow \quad T(u) = 121.67^\circ \text{F}.
+    \]
+    Using Newton's law of cooling:
+    \[
+    T(u) = T_{\text{room}} + (T_0 - T_{\text{room}})e^{-ku},
+    \]
+    where \(T_{\text{room}} = 70^\circ \text{F}\), \(T_0 = 180^\circ \text{F}\), and \(T(u) = 121.67^\circ \text{F}\). Substituting these values:
+    \[
+    121.67 = 70 + 110e^{-ku} \quad \Rightarrow \quad e^{-ku} = \frac{51.67}{110}.
+    \]
+    Solving for \(u\) using \(k = -\frac{1}{20} \ln\left(\frac{40}{110}\right)\):
+    \[
+    u = \frac{20 \ln\left(\frac{51.67}{110}\right)}{\ln\left(\frac{40}{110}\right)} \approx 14.94 \, \text{minutes}.
+    \]
+
+    \item  If cream is added immediately, the initial temperature of the coffee-cream mixture becomes:
+    \[
+    T_{\text{mix}} = \frac{12 \cdot 180 + 2 \cdot 40}{12 + 2} = 160^\circ \text{F}.
+    \]
+    Using Newton's law of cooling:
+    \[
+    T(t) = T_{\text{room}} + (T_{\text{mix}} - T_{\text{room}})e^{-kt},
+    \]
+    where \(T_{\text{mix}} = 160^\circ \text{F}\) and \(T_{\text{room}} = 70^\circ \text{F}\). Solving for \(t\) when \(T(t) = 110^\circ \text{F}\):
+    \[
+    110 = 70 + (160 - 70)e^{-kt} \quad \Rightarrow \quad e^{-kt} = \frac{40}{90}.
+    \]
+    Using \(k = -\frac{1}{20} \ln\left(\frac{40}{110}\right)\), the time is:
+    \[
+    t = \frac{20 \ln\left(\frac{40}{90}\right)}{\ln\left(\frac{40}{110}\right)} \approx 16.03 \, \text{minutes}.
+    \]
+
+    \item If cream is added after 5 minutes, the temperature of the coffee at \(t = 5\) is:
+    \[
+    T(5) = T_{\text{room}} + (T_0 - T_{\text{room}})e^{-5k} = 70 + 110e^{-5k}.
+    \]
+    After adding cream, the new temperature is:
+    \[
+    T_{\text{mix}} = \frac{12 \cdot T(5) + 2 \cdot 40}{14} = \frac{12 \cdot \left(70 + 110e^{-5k}\right) + 80}{14}.
+    \]
+    The coffee-cream mixture cools to \(110^\circ \text{F}\) according to:
+    \[
+    110 = 70 + (T_{\text{mix}} - 70)e^{-k(t - 5)}.
+    \]
+    Solving for \(t - 5\):
+    \[
+    e^{-k(t - 5)} = \frac{40}{T_{\text{mix}} - 70}.
+    \]
+    Using \(k = -\frac{1}{20} \ln\left(\frac{40}{110}\right)\), the total time is:
+    \[
+    t = 5 + \frac{20 \ln\left(\frac{40}{T_{\text{mix}} - 70}\right)}{\ln\left(\frac{40}{110}\right)} \approx 15.76 \, \text{minutes}.
+    \]
+
+    \item  The total cooling time as a function of \(u\), the time at which cream is added, is:
+    \[
+    t_{\text{total}}(u) = u + 20 - \frac{20}{\ln\frac{4}{11}} \ln\left(\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}\right).
+    \]
+    \[
+t'_{\text{total}}(u) = 1 - \frac{20}{\ln\frac{4}{11}} \cdot \frac{1}{\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}} \cdot \frac{d}{du}\left(\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}\right).
+\]
+
+\[
+\frac{d}{du}\left(\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}\right) = \frac{6}{7} \cdot e^{\frac{\ln\frac{4}{11}u}{20}} \cdot \frac{\ln\frac{4}{11}}{20}.
+\]
+Substitute this back into \(t'_{\text{total}}(u)\):
+\[
+t'_{\text{total}}(u) = 1 - \frac{20}{\ln\frac{4}{11}} \cdot \frac{\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} \cdot \frac{\ln\frac{4}{11}}{20}}{\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}}.
+\]
+Simplify:
+\[
+t'_{\text{total}}(u) = 1 - \frac{\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}}}{\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}}.
+\]
+Observing the terms:
+
+- The numerator \(\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}}\) is positive.
+
+- The denominator \(\frac{6}{7}e^{\frac{\ln\frac{4}{11}u}{20}} - \frac{3}{77}\) is also positive for \(u \in [0, 14.93]\), as \(-\frac{3}{77}\) does not dominate the leading term.
+
+Thus, the fraction is always less than 1, and \(t'_{\text{total}}(u) < 0\).
+
+\[
+t'_{\text{total}}(u) < 0 \quad \text{for all } u \in [0, 14.93].
+\]
+    By showing that \(t'_{\text{total}}(u) < 0\) for \(u \in [0, 14.93]\), we conclude that the time function is minimized at \(u = 14.93\) for the existing bounds, meaning the cream should be added at the very end.
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+\end{document}
