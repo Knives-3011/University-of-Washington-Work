@@ -1,0 +1,309 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 136 Homework \#5}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item 
+Let \( V \) be an \( n \)-dimensional vector space, and let \( A: V \to V \) be a linear operator. Let \( \lambda \in \mathbb{C} \) be an eigenvalue of \( A \).
+
+Suppose \( \{\mathbf{v}_1, \dots, \mathbf{v}_k\} \subset V \) is a set of linearly independent eigenvectors of \( A \) corresponding to \( \lambda \), that is,
+\[
+A\mathbf{v}_j = \lambda \mathbf{v}_j \quad \text{for } j = 1, \dots, k.
+\]
+
+Extend this set to a basis \( \{\mathbf{v}_1, \dots, \mathbf{v}_n\} \) of \( V \). With respect to this basis, the matrix representation of \( A \) is of the form (by Exercise 1.8):
+\[
+\begin{pmatrix}
+\lambda I_k & * \\
+0 & B
+\end{pmatrix},
+\]
+where \( I_k \) is the \( k \times k \) identity matrix, and \( B \) is an \( (n-k) \times (n-k) \) matrix.
+
+By Exercise 1.7, the characteristic polynomial of a block upper triangular matrix is the product of the characteristic polynomials of its diagonal blocks. Therefore, the characteristic polynomial of \( A \) is
+\[
+\det(\lambda I_k - \lambda I_k) \cdot \det(B - \lambda I) = (\lambda - \lambda)^k \cdot \det(B - \lambda I) = 0^k \cdot \det(B - \lambda I).
+\]
+
+This implies that \( \lambda \) is a root of the characteristic polynomial of \( A \) with multiplicity at least \( k \). That is, the algebraic multiplicity of \( \lambda \) is at least \( k \).
+
+Since \( k \) was the number of linearly independent eigenvectors of \( A \) corresponding to \( \lambda \), we conclude that the geometric multiplicity of \( \lambda \) is less than or equal to its algebraic multiplicity:
+\[
+\text{geometric multiplicity of } \lambda \leq \text{algebraic multiplicity of } \lambda.
+\]
+
+\item Let \( A \in \mathbb{R}^{n \times n} \) be a square matrix with eigenvalues \( \lambda_1, \lambda_2, \dots, \lambda_n \). The characteristic polynomial of \( A \) is defined as
+
+\[
+\det(A - \lambda I) = (\lambda_1 - \lambda)(\lambda_2 - \lambda) \cdots (\lambda_n - \lambda).
+\]
+
+Rewriting this expression,
+
+\[
+\det(A - \lambda I) = (-1)^n (\lambda - \lambda_1)(\lambda - \lambda_2) \cdots (\lambda - \lambda_n).
+\]
+
+Expanding this polynomial, the coefficient of \( \lambda^{n-1} \) is
+
+\[
+(-1)^{n-1} \sum_{i=1}^n \lambda_i.
+\]
+
+On the other hand, from matrix theory, the characteristic polynomial can also be written as
+
+\[
+\det(A - \lambda I) = (-1)^n \lambda^n + c_1 \lambda^{n-1} + \cdots + c_n,
+\]
+
+where the coefficient \( c_1 = (-1)^{n-1} \operatorname{tr}(A) \), since the trace is the sum of the diagonal entries and contributes to the coefficient of \( \lambda^{n-1} \) in the expansion of the determinant.
+
+Therefore, comparing the coefficient of \( \lambda^{n-1} \) from both expressions,
+
+\[
+- \sum_{i=1}^n \lambda_i = - \operatorname{tr}(A),
+\]
+
+which implies
+
+\[
+\operatorname{tr}(A) = \sum_{i=1}^n \lambda_i.
+\]
+
+\item 
+\begin{enumerate}
+    \item Find a $2 \times 2$ matrix $A$ such that
+    \[
+    \begin{pmatrix}
+    \varphi_{n+2} \\
+    \varphi_{n+1}
+    \end{pmatrix}
+    =
+    A
+    \begin{pmatrix}
+    \varphi_{n+1} \\
+    \varphi_n
+    \end{pmatrix}
+    \]
+    Using the recurrence relation $\varphi_{n+2} = \varphi_{n+1} + \varphi_n$, we choose
+    \[
+    A = \begin{pmatrix}
+    1 & 1 \\
+    1 & 0
+    \end{pmatrix}
+    \]
+
+    \item Diagonalize $A$ and find a formula for $A^n$.
+
+    First, compute the eigenvalues of $A$. The characteristic polynomial is
+    \[
+    \det(A - \lambda I) = \lambda^2 - \lambda - 1
+    \]
+    Solving this gives
+    \[
+    \lambda_1 = \phi = \frac{1 + \sqrt{5}}{2}, \quad \lambda_2 = \bar{\phi} = \frac{1 - \sqrt{5}}{2}
+    \]
+
+    Next, find eigenvectors.
+
+    For $\lambda = \phi$:
+    \[
+    \text{Solve } (A - \phi I)\vec{v} = 0 \Rightarrow
+    \vec{v}_1 \sim \begin{pmatrix}
+    \phi \\
+    1
+    \end{pmatrix}
+    \]
+
+    For $\lambda = \bar{\phi}$:
+    \[
+    \vec{v}_2 \sim \begin{pmatrix}
+    \bar{\phi} \\
+    1
+    \end{pmatrix}
+    \]
+
+    Define
+    \[
+    P = \begin{pmatrix}
+    \phi & \bar{\phi} \\
+    1 & 1
+    \end{pmatrix},
+    \quad
+    D = \begin{pmatrix}
+    \phi & 0 \\
+    0 & \bar{\phi}
+    \end{pmatrix}
+    \]
+    Then,
+    \[
+    A = P D P^{-1} \Rightarrow A^n = P D^n P^{-1}
+    \]
+
+    \item Use the above to find a formula for $\varphi_n$.
+
+    From the recurrence,
+    \[
+    \begin{pmatrix}
+    \varphi_{n+1} \\
+    \varphi_n
+    \end{pmatrix}
+    =
+    A^n
+    \begin{pmatrix}
+    \varphi_1 \\
+    \varphi_0
+    \end{pmatrix}
+    =
+    A^n
+    \begin{pmatrix}
+    1 \\
+    0
+    \end{pmatrix}
+    \]
+
+    Compute $P^{-1}$. Since
+    \[
+    \det(P) = \phi - \bar{\phi} = \sqrt{5},
+    \quad
+    P^{-1} = \frac{1}{\sqrt{5}} \begin{pmatrix}
+    1 & -\bar{\phi} \\
+    -1 & \phi
+    \end{pmatrix}
+    \]
+
+    So,
+    \[
+    \vec{v} = P^{-1} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \frac{1}{\sqrt{5}} \begin{pmatrix} 1 \\ -1 \end{pmatrix}
+    \]
+
+    Then,
+    \[
+    A^n \begin{pmatrix} 1 \\ 0 \end{pmatrix} = P D^n \vec{v}
+    = \frac{1}{\sqrt{5}} P \begin{pmatrix}
+    \phi^n \\
+    -\bar{\phi}^n
+    \end{pmatrix}
+    \]
+
+    Compute:
+    \[
+    \begin{pmatrix}
+    \varphi_{n+1} \\
+    \varphi_n
+    \end{pmatrix}
+    = \frac{1}{\sqrt{5}} \begin{pmatrix}
+    \phi \cdot \phi^n - \bar{\phi} \cdot \bar{\phi}^n \\
+    \phi^n - \bar{\phi}^n
+    \end{pmatrix}
+    \]
+
+    Therefore,
+    \[
+    \varphi_n = \frac{1}{\sqrt{5}}(\phi^n - \bar{\phi}^n)
+    \]
+
+    \item Show that $\left( \frac{\varphi_{n+1}}{\varphi_n}, 1 \right)^T$ converges to an eigenvector of $A$.
+
+    Consider:
+    \[
+    \frac{\varphi_{n+1}}{\varphi_n} = \frac{\phi^{n+1} - \bar{\phi}^{n+1}}{\phi^n - \bar{\phi}^n}
+    = \frac{\phi \cdot \phi^n - \bar{\phi} \cdot \bar{\phi}^n}{\phi^n - \bar{\phi}^n}
+    \to \phi
+    \quad \text{as } n \to \infty
+    \]
+
+    Hence,
+    \[
+    \begin{pmatrix}
+    \frac{\varphi_{n+1}}{\varphi_n} \\
+    1
+    \end{pmatrix}
+    \to
+    \begin{pmatrix}
+    \phi \\
+    1
+    \end{pmatrix}
+    \]
+
+    This is an eigenvector of $A$ corresponding to the dominant eigenvalue $\phi$. Therefore, the convergence is not a coincidence, but a consequence of the fact that the dominant eigenvalue governs the long-term behavior of the recurrence.
+\end{enumerate}
+
+\item \begin{enumerate}
+    \item 
+    Suppose $X_1$ and $X_2$ are linearly dependent. Then there exists a scalar $c \in \mathbb{R}$ such that $X_2 = c X_1$. The complex eigenvector becomes
+    \[
+    Z = X_1 + i X_2 = X_1 + i c X_1 = (1 + i c) X_1
+    \]
+    This implies $Z$ is a scalar multiple of a real vector $X_1$, and thus $Z \in \mathbb{R}^n$, contradicting the fact that $Z$ is a complex eigenvector not entirely in $\mathbb{R}^n$. Hence, $X_1$ and $X_2$ must be linearly independent. Therefore, they span a 2-dimensional real subspace $W = \text{span}(X_1, X_2) \subset \mathbb{R}^n$.
+
+    \item 
+    From the given:
+    \[
+    A Z = \lambda Z = (\alpha + i \beta)(X_1 + i X_2)
+    \]
+    Expanding both sides:
+    \[
+    A X_1 + i A X_2 = (\alpha X_1 - \beta X_2) + i (\beta X_1 + \alpha X_2)
+    \]
+    Matching real and imaginary parts:
+    \[
+    A X_1 = \alpha X_1 - \beta X_2 \quad \text{and} \quad A X_2 = \beta X_1 + \alpha X_2
+    \]
+    Therefore, with respect to the basis $\{X_1, X_2\}$ of $W$, the matrix of $L_W : W \to W$ is:
+    \[
+    \begin{bmatrix}
+    \alpha & \beta \\
+    -\beta & \alpha
+    \end{bmatrix}
+    \]
+    Writing $\lambda = |\lambda| e^{i\theta}$, we have $\alpha = |\lambda| \cos\theta$ and $\beta = |\lambda| \sin\theta$. Substituting:
+    \[
+    \begin{bmatrix}
+    \alpha & \beta \\
+    -\beta & \alpha
+    \end{bmatrix}
+    =
+    |\lambda|
+    \begin{bmatrix}
+    \cos\theta & \sin\theta \\
+    -\sin\theta & \cos\theta
+    \end{bmatrix}
+    \]
+
+    \item 
+    The matrix
+    \[
+    |\lambda|
+    \begin{bmatrix}
+    \cos\theta & \sin\theta \\
+    -\sin\theta & \cos\theta
+    \end{bmatrix}
+    \]
+    represents a rotation by angle $\theta$ in the plane, followed by a scaling by $|\lambda|$. Hence, the geometrical interpretation is that $L_W$ acts on the subspace $W$ by rotating each vector by $\theta$ (counterclockwise) and scaling its magnitude by $|\lambda|$.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,558 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#5}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item 
+Given the differential equation:
+\[
+\frac{dz}{dx} + \frac{x + 1}{x}z = \frac{6}{x}.
+\]
+
+Find the integrating factor \( \mu(x) \):
+
+\[
+\mu(x) = e^{\int \frac{x + 1}{x} dx} = e^{\int 1 + \frac{1}{x} dx} = e^{x} x.
+\]
+
+Multiply through by \( \mu(x) \):
+
+\[
+xe^x \frac{dz}{dx} + (x+1)e^x z = 6e^x.
+\]
+
+The left-hand side is a product derivative:
+
+\[
+\frac{d}{dx} \left( zxe^x \right) = 6e^x.
+\]
+
+Integrate both sides:
+
+\[
+\int \frac{d}{dx} \left( zxe^x \right) dx = \int 6e^x dx.
+\]
+
+\[
+zxe^x = 6e^x + C.
+\]
+
+Solve for \( z \):
+
+\[
+z = \frac{6}{x} + \frac{C}{xe^x}.
+\]
+
+Revert to \( y \):
+
+\[
+y^{-2} = \frac{6}{x} + \frac{C}{xe^x}.
+\]
+
+Take the reciprocal and solve for \( y \):
+
+\[
+y^2 = \frac{x}{6 + \frac{C}{e^x}}.
+\]
+
+Thus, the final solution is:
+
+\[
+y = \pm \sqrt{\frac{x}{6 + \frac{C}{e^x}}}.
+\]
+
+
+\item 
+\begin{enumerate}
+    \item \[
+y'' + p(t) y' + q(t) y = g(t)
+\]
+
+Given that \( y_1 \) is a known solution of the corresponding homogeneous equation:
+
+\[
+y'' + p(t) y' + q(t) y = 0
+\]
+
+we assume the second solution is of the form:
+
+\[
+y_2 = v y_1
+\]
+
+where \( v \) is an unknown function. Differentiating,
+
+\[
+y_2' = v' y_1 + v y_1'
+\]
+
+\[
+y_2'' = v'' y_1 + 2 v' y_1' + v y_1''
+\]
+
+Substituting into the homogeneous equation,
+
+\[
+(v'' y_1 + 2 v' y_1' + v y_1'') + p(t)(v' y_1 + v y_1') + q(t) (v y_1) = 0
+\]
+
+Since \( y_1 \) satisfies the homogeneous equation,
+
+\[
+y_1'' + p y_1' + q y_1 = 0,
+\]
+
+this simplifies to
+
+\[
+v'' y_1 + 2 v' y_1' = 0
+\]
+
+Dividing by \( y_1 \) (assuming \( y_1 \neq 0 \)),
+
+\[
+v'' + 2 \frac{y_1'}{y_1} v' = 0
+\]
+
+Introducing \( u = v' \), so that \( u' = v'' \), this reduces to the first-order equation:
+
+\[
+u' + 2 \frac{y_1'}{y_1} u = 0
+\]
+
+Separating variables,
+
+\[
+\frac{du}{u} = -2 \frac{y_1'}{y_1} dt
+\]
+
+Integrating,
+
+\[
+\ln |u| = -2 \ln |y_1| + C
+\]
+
+\[
+u = C y_1^{-2}
+\]
+
+\[
+v' = C y_1^{-2}
+\]
+
+Integrating,
+
+\[
+v = C \int y_1^{-2} dt + C_2
+\]
+
+Thus, the second solution is:
+
+\[
+y_2 = y_1 \int y_1^{-2} dt
+\]
+
+For the particular solution, we assume:
+
+\[
+y_p = v y_1
+\]
+
+where \( v \) satisfies:
+
+\[
+v'' y_1 + 2 v' y_1' = g(t)
+\]
+
+Using \( u = v' \), we obtain:
+
+\[
+u' y_1 + 2 u y_1' = g(t)
+\]
+
+Multiplying by the integrating factor:
+
+\[
+\mu = e^{\int 2 \frac{y_1'}{y_1} dt} = y_1^2
+\]
+
+\[
+\frac{d}{dt} (y_1^2 u) = g(t) y_1^2
+\]
+
+Integrating,
+
+\[
+y_1^2 u = \int g(t) y_1^2 dt
+\]
+
+\[
+u = y_1^{-2} \int g(t) y_1^2 dt
+\]
+
+Integrating again,
+
+\[
+v = \int y_1^{-2} \int g(t) y_1^2 dt \, dt
+\]
+
+Thus, the particular solution is:
+
+\[
+y_p = y_1 \int y_1^{-2} \int g(t) y_1^2 dt \, dt
+\]
+
+The general solution to the non-homogeneous differential equation is:
+
+\[
+y = c_1 y_1 + c_2 y_2 + y_p
+\]
+
+where:
+
+- \( y_1 \) is the given solution of the homogeneous equation,
+
+- \( y_2 = y_1 \int y_1^{-2} dt \),
+
+- \( y_p = y_1 \int y_1^{-2} \int g(t) y_1^2 dt \, dt \).
+
+\item 
+\[
+x^2 y'' + x y' - y = x^2 e^{-x}
+\]
+
+with a known solution to the homogeneous equation:
+
+\[
+x^2 y'' + x y' - y = 0, \quad y_1 = x.
+\]
+
+We follow the **reduction of order** method.
+
+First, we find a second solution \( y_2 \) of the homogeneous equation.  
+We assume:
+
+\[
+y_2 = v y_1 = v x.
+\]
+
+Computing derivatives,
+
+\[
+y_2' = v' x + v,
+\]
+
+\[
+y_2'' = v'' x + 2 v'.
+\]
+
+Substituting into the homogeneous equation:
+
+\[
+x^2 (v'' x + 2 v') + x (v' x + v) - (v x) = 0.
+\]
+
+Expanding,
+
+\[
+x^3 v'' + 2x^2 v' + x^2 v' + x v - x v = 0.
+\]
+
+\[
+x^3 v'' + 3x^2 v' = 0.
+\]
+
+Dividing by \( x^2 \) (for \( x \neq 0 \)),
+
+\[
+x v'' + 3 v' = 0.
+\]
+
+Introducing \( u = v' \), so that \( u' = v'' \), we obtain:
+
+\[
+x u' + 3 u = 0.
+\]
+
+Separating variables,
+
+\[
+\frac{du}{u} = -\frac{3}{x} dx.
+\]
+
+Integrating,
+
+\[
+\ln |u| = -3 \ln |x| + C.
+\]
+
+\[
+u = C x^{-3}.
+\]
+
+\[
+v' = C x^{-3}.
+\]
+
+Integrating,
+
+\[
+v = \int C x^{-3} dx = C \frac{x^{-2}}{-2} = -\frac{C}{2} x^{-2}.
+\]
+
+Thus,
+
+\[
+y_2 = x v = x \left(-\frac{C}{2} x^{-2}\right) = -\frac{C}{2} x^{-1}.
+\]
+
+So the second solution is:
+
+\[
+y_2 = x^{-1}.
+\]
+
+Thus, the general solution to the homogeneous equation is:
+
+\[
+y_h = c_1 x + c_2 x^{-1}.
+\]
+
+Now, we find the particular solution \( y_p \).  
+We assume:
+
+\[
+y_p = v(x) x.
+\]
+
+Computing derivatives,
+
+\[
+y_p' = v' x + v,
+\]
+
+\[
+y_p'' = v'' x + 2 v'.
+\]
+
+Substituting into the non-homogeneous equation:
+
+\[
+x^2 (v'' x + 2 v') + x (v' x + v) - (v x) = x^2 e^{-x}.
+\]
+
+Expanding,
+
+\[
+x^3 v'' + 2x^2 v' + x^2 v' + x v - x v = x^2 e^{-x}.
+\]
+
+\[
+x^3 v'' + 3x^2 v' = x^2 e^{-x}.
+\]
+
+Dividing by \( x^2 \):
+
+\[
+x v'' + 3 v' = e^{-x}.
+\]
+
+Multiplying by the integrating factor:
+
+\[
+\mu = e^{\int \frac{3}{x} dx} = x^3.
+\]
+
+\[
+\frac{d}{dx} (x^3 v') = x^3 e^{-x}.
+\]
+
+Integrating both sides,
+
+\[
+x^3 v' = \int x^3 e^{-x} dx.
+\]
+
+Using integration by parts:
+
+Let \( u = x^3 \), so that \( du = 3x^2 dx \),  
+and let \( dv = e^{-x} dx \), so that \( v = -e^{-x} \).  
+
+Applying integration by parts:
+
+\[
+\int x^3 e^{-x} dx = -x^3 e^{-x} + \int 3x^2 e^{-x} dx.
+\]
+
+Applying integration by parts to \( \int 3x^2 e^{-x} dx \):
+
+Let \( u = x^2 \), so that \( du = 2x dx \),  
+and let \( dv = e^{-x} dx \), so that \( v = -e^{-x} \).  
+
+\[
+\int x^2 e^{-x} dx = -x^2 e^{-x} + 2 \int x e^{-x} dx.
+\]
+
+Applying integration by parts to \( \int x e^{-x} dx \):
+
+Let \( u = x \), so that \( du = dx \),  
+and let \( dv = e^{-x} dx \), so that \( v = -e^{-x} \).  
+
+\[
+\int x e^{-x} dx = -x e^{-x} + \int e^{-x} dx.
+\]
+
+\[
+= -x e^{-x} - e^{-x}.
+\]
+
+Thus,
+
+\[
+\int x^2 e^{-x} dx = -x^2 e^{-x} - 2x e^{-x} - 2e^{-x}.
+\]
+
+\[
+\int x^3 e^{-x} dx = -x^3 e^{-x} + 3(-x^2 e^{-x} - 2x e^{-x} - 2e^{-x}).
+\]
+
+\[
+= -x^3 e^{-x} + 3x^2 e^{-x} + 6x e^{-x} + 6e^{-x}.
+\]
+
+\[
+= e^{-x} (-x^3 + 3x^2 + 6x + 6).
+\]
+
+Thus,
+
+\[
+x^3 v' = e^{-x} (-x^3 + 3x^2 + 6x + 6).
+\]
+
+Dividing by \( x^3 \):
+
+\[
+v' = e^{-x} \left(-1 + \frac{3}{x} + \frac{6}{x^2} + \frac{6}{x^3} \right).
+\]
+
+Integrating,
+
+\[
+v = -\int e^{-x} dx + 3 \int \frac{e^{-x}}{x} dx + 6 \int \frac{e^{-x}}{x^2} dx + 6 \int \frac{e^{-x}}{x^3} dx.
+\]
+
+Thus,
+
+\[
+y_p = x v(x).
+\]
+
+The final general solution is:
+
+\[
+y = c_1 x + c_2 x^{-1} + x e^{-x} + x \left( -\int e^{-x} dx + 3 \int \frac{e^{-x}}{x} dx + 6 \int \frac{e^{-x}}{x^2} dx + 6 \int \frac{e^{-x}}{x^3} dx \right).
+\]
+\end{enumerate}
+\item 
+Let \( y_1 \) and \( y_2 \) be a fundamental set of solutions to the second-order linear differential equation 
+\[
+y'' + p(t)y' + q(t)y = 0,
+\]
+on the interval \((- \infty, \infty)\), where \( p(t) \) and \( q(t) \) are continuous functions. We aim to prove that there is exactly one zero of \( y_1 \) between two consecutive zeros of \( y_2 \).
+
+Define the function \( f(t) = \frac{y_2(t)}{y_1(t)} \). Differentiating \( f(t) \) gives
+\[
+f'(t) = \frac{y_1(t)y_2'(t) - y_2(t)y_1'(t)}{y_1(t)^2}.
+\]
+The numerator of \( f'(t) \) is the Wronskian:
+\[
+W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t),
+\]
+and hence
+\[
+f'(t) = \frac{W(t)}{y_1(t)^2}.
+\]
+
+By Abel's identity, the Wronskian satisfies the equation
+\[
+W'(t) + p(t)W(t) = 0,
+\]
+which implies
+\[
+W(t) = Ce^{-\int p(t) \, dt},
+\]
+where \( C \) is a constant. Since \( y_1 \) and \( y_2 \) form a fundamental set of solutions, \( C \neq 0 \), and thus \( W(t) \neq 0 \) for all \( t \).
+
+Suppose \( y_1 \) has more than one zero between two consecutive zeros of \( y_2 \). Let \( t_1 \) and \( t_2 \) be two such zeros of \( y_1 \) with \( t_1 < t_2 \). Since \( y_2(t) = 0 \) at the consecutive zeros, \( f(t) \) is zero at \( t_1 \) and \( t_2 \). By Rolle's Theorem, \( f'(t)=0 \) at some \( t \in (t_1, t_2) \).
+
+However, \( f'(t) = \frac{W(t)}{y_1(t)^2} \), and \( W(t) \neq 0 \), so \( f'(t) \neq 0 \). This contradiction shows that \( y_1 \) cannot have more than one zero between two consecutive zeros of \( y_2 \).
+
+Similarly, \( y_1 \) must have at least one zero between two consecutive zeros of \( y_2 \) because \( f(t) \) changes sign as \( y_2(t) \) crosses zero.
+
+Thus, there is exactly one zero of \( y_1 \) between two consecutive zeros of \( y_2 \).
+
+\item Let \( y_1 \) and \( y_2 \) be solutions to the second-order linear differential equation 
+\[
+y'' + py' + qy = 0,
+\]
+where \( p \) and \( q \) are continuous functions on the interval \( I = (a, b) \).
+
+Assume that \( y_1 \) and \( y_2 \) either both vanish at the same point \( t_0 \), or both have maxima or minima at \( t_0 \).
+
+The Wronskian of \( y_1 \) and \( y_2 \) is defined as
+\[
+W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t).
+\]
+By Abel's identity, the Wronskian satisfies
+\[
+W'(t) + p(t)W(t) = 0,
+\]
+which implies
+\[
+W(t) = Ce^{-\int p(t) \, dt},
+\]
+where \( C \) is a constant.
+
+If \( y_1(t_0) = y_2(t_0) = 0 \), then at \( t_0 \),
+\[
+W(t_0) = y_1(t_0)y_2'(t_0) - y_2(t_0)y_1'(t_0) = 0.
+\]
+Since \( e^{-\int p(t) \, dt} \neq 0 \), the Wronskian \( W(t) \) is always zero on the interval \( I \). Thus, \( y_1 \) and \( y_2 \) are linearly dependent.
+
+Similarly, if \( y_1 \) and \( y_2 \) both have extrema at \( t_0 \), then \( y_1'(t_0) = 0 \) and \( y_2'(t_0) = 0 \). At \( t_0 \),
+\[
+W(t_0) = y_1(t_0)y_2'(t_0) - y_2(t_0)y_1'(t_0) = 0.
+\]
+Again, \( W(t) = 0 \) for all \( t \), implying that \( y_1 \) and \( y_2 \) are linearly dependent.
+
+Hence, in either case, one solution is a multiple of the other.
+
+\end{enumerate}
+
+
+
+
+\end{document}

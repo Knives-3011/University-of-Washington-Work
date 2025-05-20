@@ -1,0 +1,194 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#10}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item 
+\begin{enumerate}
+    \item
+
+    Since \( \mathbf{G}(t) \) is an antiderivative of \( \mathbf{f}(t) \), we have:
+    \[
+    \mathbf{G}'(t) = \mathbf{f}(t).
+    \]
+    Substituting this into the integral, we get:
+    \[
+    \int_a^b \mathbf{f}(t) dt = \int_a^b \mathbf{G}'(t) dt.
+    \]
+    By the Fundamental Theorem of Calculus:
+    \[
+    \int_a^b \mathbf{G}'(t) dt = \mathbf{G}(b) - \mathbf{G}(a).
+    \]
+    Thus, the result follows:
+    \[
+    \int_a^b \mathbf{f}(t) dt = \mathbf{G}(b) - \mathbf{G}(a).
+    \]
+
+    \item 
+
+    Let \( \mathbf{F} \) and \( \mathbf{G} \) be two antiderivatives of \( \mathbf{f} \), meaning:
+    \[
+    \mathbf{F}'(t) = \mathbf{f}(t), \quad \mathbf{G}'(t) = \mathbf{f}(t) \quad \text{for all } t \in I.
+    \]
+    Define \( \mathbf{H}(t) = \mathbf{F}(t) - \mathbf{G}(t) \). Then,
+    \[
+    \mathbf{H}'(t) = \mathbf{F}'(t) - \mathbf{G}'(t) = \mathbf{f}(t) - \mathbf{f}(t) = \mathbf{0}.
+    \]
+    Since \( \mathbf{H}'(t) = \mathbf{0} \) for all \( t \in I \), \( \mathbf{H}(t) \) must be a constant vector, say \( \mathbf{C} \). That is,
+    \[
+    \mathbf{F}(t) - \mathbf{G}(t) = \mathbf{C}.
+    \]
+    Rearranging gives:
+    \[
+    \mathbf{F} = \mathbf{G} + \mathbf{C},
+    \]
+    where \( \mathbf{C} \) is a constant vector. \qed
+\end{enumerate}
+\item 
+\[
+\mathbf{g}(t) = \frac{\mathbf{f}(t)}{\|\mathbf{f}(t)\|}
+\]
+
+We need to compute:
+
+\[
+\frac{d}{dt} \left( \frac{\mathbf{f}(t)}{\|\mathbf{f}(t)\|} \right)
+\]
+
+Using the quotient rule:
+
+\[
+\frac{d}{dt} \left( \frac{\mathbf{f}(t)}{\|\mathbf{f}(t)\|} \right) =
+\frac{\mathbf{f}'(t) \|\mathbf{f}(t)\| - \mathbf{f}(t) \frac{d}{dt} \|\mathbf{f}(t)\|}{\|\mathbf{f}(t)\|^2}
+\]
+
+Since 
+
+\[
+\|\mathbf{f}(t)\| = \sqrt{\mathbf{f}(t) \cdot \mathbf{f}(t)}
+\]
+
+differentiate using the chain rule:
+
+\[
+\frac{d}{dt} \|\mathbf{f}(t)\| = \frac{1}{2} (2 \mathbf{f}(t) \cdot \mathbf{f}'(t)) \cdot \|\mathbf{f}(t)\|^{-1}
+= \frac{\mathbf{f}(t) \cdot \mathbf{f}'(t)}{\|\mathbf{f}(t)\|}
+\]
+
+Substituting this:
+
+\[
+\frac{d}{dt} \left( \frac{\mathbf{f}(t)}{\|\mathbf{f}(t)\|} \right) =
+\frac{\mathbf{f}'(t) \|\mathbf{f}(t)\| - \mathbf{f}(t) \frac{\mathbf{f}(t) \cdot \mathbf{f}'(t)}{\|\mathbf{f}(t)\|}}{\|\mathbf{f}(t)\|^2}
+\]
+
+Factor out \(\|\mathbf{f}(t)\|\):
+
+\[
+= \frac{\mathbf{f}'(t) \|\mathbf{f}(t)\|}{\|\mathbf{f}(t)\|^2} - \frac{\mathbf{f}(t) (\mathbf{f}(t) \cdot \mathbf{f}'(t))}{\|\mathbf{f}(t)\|^3}
+\]
+
+\[
+= \frac{\mathbf{f}'(t)}{\|\mathbf{f}(t)\|} - \frac{\mathbf{f}(t) \cdot \mathbf{f}'(t)}{\|\mathbf{f}(t)\|^3} \mathbf{f}(t)
+\]
+
+Thus, the required result is:
+
+\[
+\frac{d}{dt} \left( \frac{\mathbf{f}(t)}{\|\mathbf{f}(t)\|} \right) =
+\frac{\mathbf{f}'(t)}{\|\mathbf{f}(t)\|} - \frac{\mathbf{f}(t) \cdot \mathbf{f}'(t)}{\|\mathbf{f}(t)\|^3} \mathbf{f}(t).
+\]
+
+\item 
+The curvature is defined as:
+
+\[
+\kappa = \left\| \frac{d\mathbf{T}}{ds} \right\|
+\]
+
+where the unit tangent vector is given by:
+
+\[
+\mathbf{T} = \frac{\mathbf{r'}}{\|\mathbf{r'}\|}
+\]
+
+Using the chain rule,
+
+\[
+\frac{d\mathbf{T}}{ds} = \frac{d\mathbf{T}}{dt} \cdot \frac{dt}{ds}
+\]
+
+From the Fundamental Theorem of Calculus,
+
+\[
+\frac{ds}{dt} = \|\mathbf{r'}(t)\|
+\]
+
+which implies
+
+\[
+\frac{dt}{ds} = \frac{1}{\|\mathbf{r'}(t)\|}
+\]
+
+Substituting this, we obtain
+
+\[
+\kappa = \left\| \frac{d\mathbf{T}}{dt} \right\| \frac{1}{\|\mathbf{r'}\|}
+\]
+
+or equivalently,
+
+\[
+\kappa = \frac{\| d\mathbf{T}/dt \|}{\|\mathbf{r'}\|}
+\]
+
+Since 
+
+\[
+\mathbf{T} = \frac{\mathbf{r'}}{\|\mathbf{r'}\|}
+\]
+
+differentiating both sides using the product rule gives:
+
+\[
+\frac{d\mathbf{T}}{dt} = \frac{1}{\|\mathbf{r'}\|} \mathbf{r''} - \frac{(\mathbf{r'} \cdot \mathbf{r''}) \mathbf{r'}}{\|\mathbf{r'}\|^3}
+\]
+
+Taking the magnitude and using the cross product identity:
+
+\[
+\left\| \frac{d\mathbf{T}}{dt} \right\| = \frac{\|\mathbf{r'} \times \mathbf{r''} \|}{\|\mathbf{r'}\|^2}
+\]
+
+Substituting this into the curvature formula,
+
+\[
+\kappa = \frac{\| \mathbf{r'} \times \mathbf{r''} \|}{\|\mathbf{r'}\|^3}
+\]
+
+Thus, the formula is proven. \qed
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,797 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#6}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item [Lesson 19]
+\begin{enumerate}
+
+\item 
+
+Given the differential equation:
+
+\[
+f_n(x)y^{(n)} + \cdots + f_1(x)y' + f_0(x)y = Q(x),
+\]
+
+where $y_p$ is a particular solution, meaning:
+
+\[
+f_n(x)y_p^{(n)} + \cdots + f_1(x)y_p' + f_0(x)y_p = Q(x).
+\]
+
+To show that $A y_p$ is a solution when $Q(x)$ is replaced by $A Q(x)$, substitute $y = A y_p$:
+
+\[
+y' = A y_p', \quad y^{(n)} = A y_p^{(n)}.
+\]
+
+Substituting into the differential equation:
+
+\[
+f_n(x)(A y_p^{(n)}) + \cdots + f_1(x)(A y_p') + f_0(x)(A y_p).
+\]
+
+Factoring out $A$:
+
+\[
+A \left( f_n(x)y_p^{(n)} + \cdots + f_1(x)y_p' + f_0(x)y_p \right) = A Q(x).
+\]
+
+Thus, $A y_p$ satisfies the equation with $Q(x)$ replaced by $A Q(x)$. $\qed$
+
+\item 
+
+Given the differential equation:
+
+\[
+f_n(x)y^{(n)} + \cdots + f_1(x)y' + f_0(x)y = Q(x),
+\]
+
+where $y_{p_1}$ is a particular solution corresponding to $Q_1(x)$:
+
+\[
+f_n(x)y_{p_1}^{(n)} + \cdots + f_1(x)y_{p_1}' + f_0(x)y_{p_1} = Q_1(x).
+\]
+
+Similarly, $y_{p_2}$ corresponds to $Q_2(x)$:
+
+\[
+f_n(x)y_{p_2}^{(n)} + \cdots + f_1(x)y_{p_2}' + f_0(x)y_{p_2} = Q_2(x).
+\]
+
+Define $y_p = y_{p_1} + y_{p_2}$. Compute derivatives:
+
+\[
+y_p^{(n)} = y_{p_1}^{(n)} + y_{p_2}^{(n)}, \quad y_p' = y_{p_1}' + y_{p_2}'.
+\]
+
+Substituting into the equation:
+
+\[
+f_n(x)y_p^{(n)} + \cdots + f_1(x)y_p' + f_0(x)y_p = f_n(x)(y_{p_1}^{(n)} + y_{p_2}^{(n)}) + \cdots + f_0(x)(y_{p_1} + y_{p_2}).
+\]
+
+Splitting terms:
+
+\[
+\left( f_n(x)y_{p_1}^{(n)} + \cdots + f_0(x)y_{p_1} \right) + \left( f_n(x)y_{p_2}^{(n)} + \cdots + f_0(x)y_{p_2} \right).
+\]
+
+Substituting known values:
+
+\[
+Q_1(x) + Q_2(x).
+\]
+
+Thus, $y_p = y_{p_1} + y_{p_2}$ is a solution to the equation with $Q(x)$ replaced by $Q_1(x) + Q_2(x)$. $\qed$
+
+\item 
+
+Given the differential equation:
+
+\[
+f_n(x)y^{(n)} + \cdots + f_1(x)y' + f_0(x)y = R(x) + iS(x),
+\]
+
+where $f_0(x), \dots, f_n(x)$ are real-valued functions and $y_p(x) = u(x) + i v(x)$.
+
+Since differentiation is linear:
+
+\[
+y_p^{(n)} = u^{(n)} + i v^{(n)}, \quad y_p' = u' + iv'.
+\]
+
+Substituting:
+
+\[
+f_n(x)(u^{(n)} + i v^{(n)}) + \cdots + f_0(x)(u + i v) = R(x) + iS(x).
+\]
+
+Distribute terms:
+
+\[
+f_n(x)u^{(n)} + i f_n(x)v^{(n)} + \cdots + f_0(x)u + i f_0(x)v = R(x) + iS(x).
+\]
+
+Equating real and imaginary parts:
+
+\[
+f_n(x)u^{(n)} + \cdots + f_0(x)u = R(x), \quad f_n(x)v^{(n)} + \cdots + f_0(x)v = S(x).
+\]
+
+Thus, $u(x)$ satisfies the equation with $R(x)$, and $v(x)$ satisfies the equation with $S(x)$. $\qed$
+
+\item 
+
+A set of functions $f_1, f_2, \dots, f_n$ is linearly dependent if there exist constants $c_1, c_2, \dots, c_n$, not all zero, such that:
+
+\[
+c_1 f_1(x) + c_2 f_2(x) + \dots + c_n f_n(x) = 0.
+\]
+
+Suppose two functions in the set are identical, say $f_i(x) = f_j(x)$ for some $i \neq j$.
+
+Consider the linear combination:
+
+\[
+(1) f_i(x) + (-1) f_j(x) = 0.
+\]
+
+Since $f_i(x) = f_j(x)$, this holds identically. The coefficients are not all zero, proving linear dependence. $\qed$
+
+\end{enumerate}
+
+\item [Lesson 20]
+1. Given the differential equation:
+\[
+y'' + 2y' = 0
+\]
+The characteristic equation is:
+\[
+r^2 + 2r = 0
+\]
+Solving for \( r \):
+\[
+r(r + 2) = 0 \Rightarrow r = 0, -2
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 + C_2 e^{-2t}
+\]
+
+2. Given the differential equation:
+\[
+y'' - 3y' + 2y = 0
+\]
+The characteristic equation is:
+\[
+r^2 - 3r + 2 = 0
+\]
+Factoring:
+\[
+(r - 1)(r - 2) = 0
+\]
+Solving for \( r \):
+\[
+r = 1, 2
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 e^t + C_2 e^{2t}
+\]
+
+3. Given the differential equation:
+\[
+y'' - y = 0
+\]
+The characteristic equation is:
+\[
+r^2 - 1 = 0
+\]
+Solving for \( r \):
+\[
+r = \pm1
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 e^t + C_2 e^{-t}
+\]
+
+4. Given the differential equation:
+\[
+y''' + y'' - 6y' = 0
+\]
+The characteristic equation is:
+\[
+r^3 + r^2 - 6r = 0
+\]
+Factoring:
+\[
+r(r + 3)(r - 2) = 0
+\]
+Solving for \( r \):
+\[
+r = 0, -3, 2
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 + C_2 e^{-3t} + C_3 e^{2t}
+\]
+
+7. Given the differential equation:
+\[
+y''' + y'' - 10y' - 6y = 0
+\]
+The characteristic equation is:
+\[
+r^3 + r^2 - 10r - 6 = 0
+\]
+Factoring \( (r - 3) \) using synthetic division:
+\[
+(r - 3)(r^2 - 4) = 0
+\]
+Solving for \( r \):
+\[
+r = 3, -2 + \sqrt{2}, -2 - \sqrt{2}
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 e^{3t} + C_2 e^{(-2+\sqrt{2})t} + C_3 e^{(-2-\sqrt{2})t}
+\]
+
+8. Given the differential equation:
+\[
+y^{(4)} - y''' - 4y'' + 4y' = 0
+\]
+The characteristic equation is:
+\[
+r^4 - r^3 - 4r^2 + 4r = 0
+\]
+Factoring:
+\[
+r(r - 1)(r - 2)(r + 2) = 0
+\]
+Solving for \( r \):
+\[
+r = 0, 1, 2, -2
+\]
+Thus, the general solution is:
+\[
+y(t) = C_1 + C_2 e^t + C_3 e^{2t} + C_4 e^{-2t}
+\]
+
+\item [Lesson 21]
+\begin{enumerate}
+    \item Solution for  \( y'' + 3y' + 2y = 4 \):
+
+    The corresponding homogeneous equation is:
+
+    \[
+    y'' + 3y' + 2y = 0.
+    \]
+
+    The characteristic equation is:
+
+    \[
+    r^2 + 3r + 2 = 0.
+    \]
+
+    Factoring:
+
+    \[
+    (r+1)(r+2) = 0 \Rightarrow r = -1, -2.
+    \]
+
+    Thus, the general solution to the homogeneous equation is:
+
+    \[
+    y_h = C_1 e^{-x} + C_2 e^{-2x}.
+    \]
+
+    To find the particular solution, we assume \( y_p = A \), since the right-hand side is a constant. Substituting into the equation:
+
+    \[
+    0 + 0 + 2A = 4 \Rightarrow A = 2.
+    \]
+
+    Hence, the general solution is:
+
+    \[
+    y = C_1 e^{-x} + C_2 e^{-2x} + 2.
+    \]
+
+    \item Solution for  \( y'' + 3y' + 2y = 12e^x \):
+
+    The corresponding homogeneous equation is:
+
+    \[
+    y'' + 3y' + 2y = 0.
+    \]
+
+    The characteristic equation is:
+
+    \[
+    r^2 + 3r + 2 = 0.
+    \]
+
+    Factoring:
+
+    \[
+    (r+1)(r+2) = 0 \Rightarrow r = -1, -2.
+    \]
+
+    Thus, the general solution to the homogeneous equation is:
+
+    \[
+    y_h = C_1 e^{-x} + C_2 e^{-2x}.
+    \]
+
+    To find the particular solution, we assume \( y_p = A e^x \), since the right-hand side is \( 12e^x \). Substituting into the equation:
+
+    \[
+    (Ae^x)'' + 3(Ae^x)' + 2(Ae^x) = 12e^x.
+    \]
+
+    \[
+    A e^x + 3A e^x + 2A e^x = 12 e^x.
+    \]
+
+    \[
+    (1+3+2)A e^x = 12 e^x \Rightarrow 6A = 12 \Rightarrow A = 2.
+    \]
+
+    Hence, the general solution is:
+
+    \[
+    y = C_1 e^{-x} + C_2 e^{-2x} + 2e^x.
+    \]
+
+    \item Solution for  \( y'' + 3y' + 2y = e^{ix} \):
+
+    The corresponding homogeneous equation is:
+
+    \[
+    y'' + 3y' + 2y = 0.
+    \]
+
+    The characteristic equation is:
+
+    \[
+    r^2 + 3r + 2 = 0.
+    \]
+
+    Factoring:
+
+    \[
+    (r+1)(r+2) = 0 \Rightarrow r = -1, -2.
+    \]
+
+    Thus, the general solution to the homogeneous equation is:
+
+    \[
+    y_h = C_1 e^{-x} + C_2 e^{-2x}.
+    \]
+
+    To find the particular solution, we assume \( y_p = A e^{ix} \), since the right-hand side is \( e^{ix} \). Substituting into the equation:
+
+    \[
+    (Ae^{ix})'' + 3(Ae^{ix})' + 2(Ae^{ix}) = e^{ix}.
+    \]
+
+    \[
+    (-A e^{ix} + 3iA e^{ix} + 2A e^{ix}) = e^{ix}.
+    \]
+
+    \[
+    (1 + 3i)A = 1.
+    \]
+
+    Solving for \( A \):
+
+    \[
+    A = \frac{1}{1+3i}.
+    \]
+
+    Multiplying by the complex conjugate:
+
+    \[
+    A = \frac{1-3i}{(1+3i)(1-3i)} = \frac{1-3i}{1+9} = \frac{1-3i}{10}.
+    \]
+
+    Hence, the general solution is:
+
+    \[
+    y = C_1 e^{-x} + C_2 e^{-2x} + \left(\frac{1}{10} - \frac{3i}{10} \right) e^{ix}.
+    \]
+
+
+    \item Solution for  \( y^{(4)} - 2y'' + y = x - \sin x \):
+
+    The corresponding homogeneous equation is:
+
+    \[
+    y^{(4)} - 2y'' + y = 0.
+    \]
+
+    The characteristic equation is:
+
+    \[
+    r^4 - 2r^2 + 1 = 0.
+    \]
+
+    Let \( u = r^2 \), then the equation transforms into:
+
+    \[
+    u^2 - 2u + 1 = 0.
+    \]
+
+    \[
+    (u - 1)(u - 1) = 0 \Rightarrow u = 1 \Rightarrow r^2 = 1.
+    \]
+
+    \[
+    r = \pm 1.
+    \]
+
+    Thus, the general solution to the homogeneous equation is:
+
+    \[
+    y_h = C_1 e^x + C_2 e^{-x} + C_3 x e^x + C_4 x e^{-x}.
+    \]
+
+    To find the particular solution, consider the right-hand side \( x - \sin x \). We assume:
+
+    \[
+    y_p = Ax + B + C\sin x + D\cos x.
+    \]
+
+    Taking derivatives:
+
+    \[
+    y_p' = A + C\cos x - D\sin x.
+    \]
+
+    \[
+    y_p'' = -C\sin x - D\cos x.
+    \]
+
+    \[
+    y_p^{(4)} = C\sin x + D\cos x.
+    \]
+
+    Substituting into the equation:
+
+    \[
+    C\sin x + D\cos x - 2(-C\sin x - D\cos x) + (Ax + B + C\sin x + D\cos x) = x - \sin x.
+    \]
+
+    Simplifying,
+
+    \[
+    Ax + B + 4C\sin x + 4D\cos x = x - \sin x.
+    \]
+
+    Comparing coefficients:
+
+    - \( A = 1 \), \( B = 0 \),
+    - \( 4C = -1 \Rightarrow C = -\frac{1}{4} \),
+    - \( 4D = 0 \Rightarrow D = 0 \).
+
+    Thus, the particular solution is:
+
+    \[
+    y_p = x - \frac{1}{4} \sin x.
+    \]
+
+    Hence, the general solution is:
+
+    \[
+    y = C_1 e^x + C_2 e^{-x} + C_3 x e^x + C_4 x e^{-x} + x - \frac{1}{4} \sin x.
+    \]
+
+    \item Solution for  \( y''' + 3y'' + 3y' + y = 2e^{-x} - x^2 e^{-x} \):
+
+    The corresponding homogeneous equation is:
+
+    \[
+    y''' + 3y'' + 3y' + y = 0.
+    \]
+
+    The characteristic equation is:
+
+    \[
+    r^3 + 3r^2 + 3r + 1 = 0.
+    \]
+
+    Factoring:
+
+    \[
+    (r+1)^3 = 0.
+    \]
+
+    Thus, the general solution to the homogeneous equation is:
+
+    \[
+    y_h = C_1 e^{-x} + C_2 x e^{-x} + C_3 x^2 e^{-x}.
+    \]
+
+    To find the particular solution, note that \( e^{-x} \) and \( x^2 e^{-x} \) already appear in the homogeneous solution. So we assume:
+
+    \[
+    y_p = x^3 (A + Bx^2) e^{-x}.
+    \]
+
+    Taking derivatives:
+
+    \[
+    y_p' = e^{-x} \left[ 3Ax^2 + 5Bx^4 - Ax^3 - Bx^5 \right].
+    \]
+
+    \[
+    y_p'' = e^{-x} \left[ 6Ax + 20Bx^3 - 3Ax^2 - 5Bx^4 \right].
+    \]
+
+    \[
+    y_p''' = e^{-x} \left[ 6A + 60Bx^2 - 6Ax - 15Bx^3 \right].
+    \]
+
+    Substituting into the differential equation:
+
+    \[
+    (6A + 60Bx^2 - 6Ax - 15Bx^3) + 3(6Ax + 20Bx^3 - 3Ax^2 - 5Bx^4) + 3(3Ax^2 + 5Bx^4 - Ax^3 - Bx^5) + (A + Bx^2).
+    \]
+
+    Simplifying:
+
+    \[
+    7A + 12Ax + 25Bx^2 + (24B - 3A)x^3 + 3Bx^4 - 3Bx^5 = 2 - x^2.
+    \]
+
+    Comparing coefficients:
+ \( A = \frac{20}{60} = \frac{1}{3} \) and \( B = -\frac{1}{60} \).
+
+    Thus, the particular solution is:
+
+    \[
+    y_p = \frac{x^3 e^{-x}}{60} (20 - x^2).
+    \]
+
+    Hence, the general solution is:
+
+    \[
+    y = C_1 e^{-x} + C_2 x e^{-x} + C_3 x^2 e^{-x} + \frac{x^3 e^{-x}}{60} (20 - x^2).
+    \]
+
+\end{enumerate}
+
+\item [Lesson 22]
+\begin{enumerate}
+
+    \item Solution to \( y'' + y = \sec x \)
+    
+        Solve the homogeneous equation:
+        \[
+        y'' + y = 0
+        \]
+        The characteristic equation is:
+        \[
+        r^2 + 1 = 0 \Rightarrow r = \pm i.
+        \]
+        Thus, the general solution to the homogeneous equation is:
+        \[
+        y_h = C_1 \cos x + C_2 \sin x.
+        \]
+
+        Using variation of parameters, assume:
+        \[
+        y_p = u_1 \cos x + u_2 \sin x.
+        \]
+
+        We solve for \( u_1' \) and \( u_2' \) using:
+        \[
+        u_1' \cos x + u_2' \sin x = 0
+        \]
+        \[
+        - u_1' \sin x + u_2' \cos x = \sec x.
+        \]
+
+        From the first equation:
+        \[
+        u_1' = -u_2' \tan x.
+        \]
+
+        Substituting into the second equation:
+        \[
+        -(-u_2' \tan x) \sin x + u_2' \cos x = \sec x
+        \]
+
+        \[
+        u_2' \sin x \tan x + u_2' \cos x = \sec x.
+        \]
+
+        Since \( \sin x \tan x = \frac{\sin^2 x}{\cos x} \), we get:
+        \[
+        u_2' \frac{\sin^2 x + \cos^2 x}{\cos x} = \sec x.
+        \]
+
+        Using \( \sin^2 x + \cos^2 x = 1 \), we simplify:
+        \[
+        u_2' \frac{1}{\cos x} = \sec x \Rightarrow u_2' = 1.
+        \]
+
+        \[
+        u_2 = \int 1 \, dx = x.
+        \]
+
+        Similarly, solving for \( u_1 \):
+
+        \[
+        u_1' = -\tan x.
+        \]
+
+        Integrating:
+        \[
+        u_1 = \int -\tan x \,dx = \ln |\cos x|.
+        \]
+
+        The particular solution is:
+        \[
+        y_p = (\ln |\cos x|) \cos x + x \sin x.
+        \]
+
+        Final general solution:
+        \[
+        y = C_1 \cos x + C_2 \sin x + (\ln |\cos x|) \cos x + x \sin x.
+        \]
+
+    
+
+    \item Solution to \( y'' + y = \cot x \)
+
+    
+        Solve the homogeneous equation:
+        \[
+        y'' + y = 0
+        \]
+        The characteristic equation is:
+        \[
+        r^2 + 1 = 0 \Rightarrow r = \pm i.
+        \]
+        Thus, the general solution to the homogeneous equation is:
+        \[
+        y_h = C_1 \cos x + C_2 \sin x.
+        \]
+
+        Using variation of parameters, assume:
+        \[
+        y_p = u_1 \cos x + u_2 \sin x.
+        \]
+
+        Setting up the system:
+        \[
+        u_1' \cos x + u_2' \sin x = 0.
+        \]
+        \[
+        - u_1' \sin x + u_2' \cos x = \cot x.
+        \]
+
+        Solving for \( u_2' \):
+
+        \[
+        u_2' = \frac{1}{\cos x} \cot x.
+        \]
+
+        \[
+        u_2' = \frac{\cos x}{\sin x}.
+        \]
+
+        \[
+        u_2 = \int \frac{\cos x}{\sin x} dx = \ln |\csc x - \cot x|.
+        \]
+
+        The particular solution is:
+        \[
+        y_p = \sin x \log (\csc x - \cot x).
+        \]
+
+        Final general solution:
+        \[
+        y = C_1 \cos x + C_2 \sin x + \sin x \log (\csc x - \cot x).
+        \]
+
+    
+
+    \item Solution to \( y'' + y = \sec^3 x \)
+
+        Solve the homogeneous equation:
+        \[
+        y'' + y = 0
+        \]
+        The characteristic equation is:
+        \[
+        r^2 + 1 = 0 \Rightarrow r = \pm i.
+        \]
+        Thus, the general solution to the homogeneous equation is:
+        \[
+        y_h = C_1 \cos x + C_2 \sin x.
+        \]
+
+        Using variation of parameters, assume:
+        \[
+        y_p = u_1 \cos x + u_2 \sin x.
+        \]
+
+        Setting up the system:
+        \[
+        u_1' \cos x + u_2' \sin x = 0.
+        \]
+        \[
+        - u_1' \sin x + u_2' \cos x = \sec^3 x.
+        \]
+
+        Solving for \( u_2' \):
+
+        \[
+        u_2' = \frac{1}{\cos^2 x}.
+        \]
+
+        \[
+        u_2 = \int \frac{1}{\cos^2 x} dx = \tan x.
+        \]
+
+        \[
+        u_1' = -\tan x \tan x = -\tan^2 x.
+        \]
+
+        \[
+        u_1 = \int -\tan^2 x dx.
+        \]
+
+        Using \( \tan^2 x = \sec^2 x - 1 \):
+
+        \[
+        u_1 = -\int (\sec^2 x - 1) dx.
+        \]
+
+        \[
+        u_1 = -\tan x + x.
+        \]
+
+        The particular solution is:
+        \[
+        y_p = \frac{\sin^2 x}{\cos x} - \frac{1}{2 \cos x}.
+        \]
+
+        Final general solution:
+        \[
+        y = \frac{\sin^2 x}{\cos x} + C_3 \sin x + C_2 \cos x - \frac{1}{2 \cos x}.
+        \]
+
+
+
+\end{enumerate}
+\end{enumerate}
+\end{document}

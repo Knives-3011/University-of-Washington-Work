@@ -1,0 +1,272 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Amath Homework \#5}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+\begin{enumerate}
+\item 
+\begin{enumerate}
+     \item \textbf{(a) False} \\
+    The centered finite-difference formula given is second-order accurate, meaning the truncation error is proportional to \( (\Delta t)^2 \). However, this does not mean the \textbf{relative error} is exactly \( 10^{-4} \) when \( \Delta t = 0.01 \). 
+    
+    The actual relative error depends on both the function being approximated and the coefficient of the error term in the Taylor expansion, which isn't necessarily 1.
+
+    \item \textbf{(b) True} \\
+    Differentiation tends to amplify high-frequency noise present in the data. This happens because small variations in the function get exaggerated when derivatives are taken repeatedly.
+
+    As a result, numerical differentiation is often preceded by \textbf{smoothing techniques} (such as filtering or averaging) to minimize the impact of noise and prevent unwanted oscillations.
+
+    \item \textbf{(c) False} \\
+    The \texttt{scipy.integrate.quad} function is based on \textbf{adaptive Gaussian quadrature}, not simply a large number of Simpson's Rule subdivisions.
+
+    Gaussian quadrature uses carefully chosen sample points and weights to achieve high accuracy with fewer evaluations, rather than brute force subdivision.
+
+    Typically, \texttt{quad} adaptively chooses points where the function varies most, rather than dividing into billions of intervals.
+\end{enumerate}
+
+\item 
+The Taylor series expansion of $f(t+\Delta t)$ is:
+
+\begin{equation}
+    f(t+ \Delta t) = f(t) + \Delta t f'(t) + \frac{(\Delta t)^2}{2} f''(t) + \frac{(\Delta t)^3}{6} f'''(t) + \frac{(\Delta t)^4}{24} f^{(4)}(c)
+\end{equation}
+
+We simplify the finite difference expression:
+
+\begin{equation}
+    \frac{1}{(\Delta t)^2} \left( 2f(t) - 5f(t+\Delta t) + 4f(t+2\Delta t) - f(t+3\Delta t) \right).
+\end{equation}
+
+Expanding each term using Taylor series:
+
+\begin{align*}
+    f(t+\Delta t) &= f(t) + \Delta t f'(t) + \frac{(\Delta t)^2}{2} f''(t) + \frac{(\Delta t)^3}{6} f'''(t) + \frac{(\Delta t)^4}{24} f^{(4)}(t) + O(\Delta t^5), \\
+    f(t+2\Delta t) &= f(t) + 2\Delta t f'(t) + 2 (\Delta t)^2 f''(t) + \frac{8(\Delta t)^3}{6} f'''(t) + \frac{16(\Delta t)^4}{24} f^{(4)}(t) + O(\Delta t^5), \\
+    f(t+3\Delta t) &= f(t) + 3\Delta t f'(t) + \frac{9(\Delta t)^2}{2} f''(t) + \frac{27(\Delta t)^3}{6} f'''(t) + \frac{81(\Delta t)^4}{24} f^{(4)}(t) + O(\Delta t^5).
+\end{align*}
+
+Substituting these expansions:
+
+\begin{align*}
+    &2f(t) - 5f(t+\Delta t) + 4f(t+2\Delta t) - f(t+3\Delta t) = \\
+    &2f(t) - 5\left( f(t) + \Delta t f'(t) + \frac{(\Delta t)^2}{2} f''(t) + \frac{(\Delta t)^3}{6} f'''(t) + \frac{(\Delta t)^4}{24} f^{(4)}(t) \right) \\
+    &+ 4\left( f(t) + 2\Delta t f'(t) + 2 (\Delta t)^2 f''(t) + \frac{8(\Delta t)^3}{6} f'''(t) + \frac{16(\Delta t)^4}{24} f^{(4)}(t) \right) \\
+    &- \left( f(t) + 3\Delta t f'(t) + \frac{9(\Delta t)^2}{2} f''(t) + \frac{27(\Delta t)^3}{6} f'''(t) + \frac{81(\Delta t)^4}{24} f^{(4)}(t) \right).
+\end{align*}
+
+Grouping like terms:
+
+\begin{align*}
+    \text{Constant Term:} & \quad 2f(t) - 5f(t) + 4f(t) - f(t) = 0. \\
+    \text{First Derivative Term:} & \quad (-5\Delta t + 8\Delta t - 3\Delta t) f'(t) = 0. \\
+    \text{Second Derivative Term:} & \quad \left( -\frac{5(\Delta t)^2}{2} + 8(\Delta t)^2 - \frac{9(\Delta t)^2}{2} \right) f''(t) \\
+    & = (\Delta t)^2 f''(t). \\
+    \text{Third Derivative Term:} & \quad \left( -\frac{5(\Delta t)^3}{6} + \frac{32(\Delta t)^3}{6} - \frac{27(\Delta t)^3}{6} \right) f'''(t) = 0. \\
+    \text{Fourth Derivative Term:} & \quad \left( -\frac{5}{24} + \frac{64}{24} - \frac{81}{24} \right) (\Delta t)^4 f^{(4)}(t) = -\frac{11}{12} (\Delta t)^4 f^{(4)}(t).
+\end{align*}
+
+Dividing by $(\Delta t)^2$:
+
+\begin{equation}
+    f''(t) - \frac{11}{12} (\Delta t)^2 f^{(4)}(t).
+\end{equation}
+
+Thus, we have derived the new finite difference formula:
+
+\begin{equation}
+    f''(t) = \frac{1}{(\Delta t)^2} \left( 2f(t) - 5f(t+\Delta t) + 4f(t+2\Delta t) - f(t+3\Delta t) \right) + O((\Delta t)^2).
+\end{equation}
+
+This shows that our method is \textbf{second-order accurate} because the error term is proportional to $(\Delta t)^2$.
+
+
+\item 
+\begin{enumerate}
+    \item \textbf{Finding \( q_t \) for the Composite Trapezoidal Rule} \\
+    The Composite Trapezoidal Rule is given by:
+    \[
+    \int_a^b f(x)dx \approx \sum_{k=0}^{N-1} \frac{h}{2} \left[ f(x_k) + f(x_{k+1}) \right]
+    \]
+    where \( h = \frac{b-a}{N} \). This can be expressed as a dot product:
+    \[
+    q_t^T f_t = q_t \cdot f_t
+    \]
+    The corresponding weight vector is:
+    \[
+    q_t =
+    \begin{bmatrix}
+    \frac{h}{2} & h & h & \dots & h & \frac{h}{2}
+    \end{bmatrix}^T
+    \]
+
+    \item \textbf{Finding \( q_s \) for the Composite Simpson’s Rule} \\
+    The Composite Simpson’s Rule is given by:
+    \[
+    \int_a^b f(x)dx \approx \sum_{k=0}^{N-1} \frac{h}{6} \left[ f(x_k) + 4f(x_{k+1/2}) + f(x_{k+1}) \right]
+    \]
+    Expressing this as a dot product:
+    \[
+    q_s^T f_s = q_s \cdot f_s
+    \]
+    The weight vector \( q_s \) is:
+    \[
+    q_s =
+    \begin{bmatrix}
+    \frac{h}{6} & \frac{2h}{3} & \frac{h}{3} & \frac{2h}{3} & \dots & \frac{h}{3} & \frac{2h}{3} & \frac{h}{6}
+    \end{bmatrix}^T
+    \]
+
+    \item \textbf{Applying the Dot Products to Compute the Integral} \\
+    Given data:
+    \[
+    x = [0, 0.5, 1, 1.5, 2, 2.5, 3]
+    \]
+    \[
+    f(x) = [7, 5, 4, 1, -3, -4, -2]
+    \]
+    Step size: \( h = 1 \).
+
+    Composite Trapezoidal Rule:
+    \[
+    \int_0^3 f(x)dx \approx \sum_{k=0}^{N-1} \frac{1}{2} \left[ f(x_k) + f(x_{k+1}) \right] h
+    \]
+    Expanding:
+    \[
+    \frac{1}{2} (7 + 5) + \frac{1}{2} (5 + 4) + \frac{1}{2} (4 + 1) + \frac{1}{2} (1 - 3) + \frac{1}{2} (-3 - 4) + \frac{1}{2} (-4 - 2)
+    \]
+    \[
+    = 6 + 4.5 + 2.5 - 1 - 3.5 - 3 = 5.5
+    \]
+    Thus:
+    \[
+    \int_0^3 f(x)dx \approx 5.5
+    \]
+
+    Composite Simpson’s Rule:
+    \[
+    \int_0^3 f(x)dx \approx \sum_{k=0}^{N-1} \frac{h}{6} \left[ f(x_k) + 4f(x_{k+1/2}) + f(x_{k+1}) \right]
+    \]
+    Midpoints:
+    \[
+    f(0.5) = 5, \quad f(1.5) = 1, \quad f(2.5) = -4
+    \]
+    Expanding:
+    \[
+    \frac{1}{6} (7 + 4(5) + 4) + \frac{1}{6} (4 + 4(1) + 1) + \frac{1}{6} (1 + 4(-3) - 3) + \frac{1}{6} (-3 + 4(-4) - 4) + \frac{1}{6} (-4 + 4(-2) - 2)
+    \]
+    \[
+    = 5.1667 + 1.5 - 2.3333 - 3.8333 - 2.3333 = 4.6667
+    \]
+    Thus:
+    \[
+    \int_0^3 f(x)dx \approx 4.6667
+    \]
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+    \item \textbf{Constructing \( w \) for the Second-Order Central Finite Difference Formula} \\
+    The second-order central finite difference approximation for the second derivative is:
+
+    \[
+    f''(x_j) \approx \frac{f_{j-1} - 2f_j + f_{j+1}}{(\Delta x)^2}
+    \]
+
+    Expressing this as a dot product using a weight vector \( w \):
+
+    \[
+    w^T \hat{f} = \begin{bmatrix} w_1 & w_2 & w_3 \end{bmatrix}
+    \begin{bmatrix} f_{j-1} \\ f_j \\ f_{j+1} \end{bmatrix}
+    \]
+
+    By comparing terms, we identify:
+
+    \[
+    w_1 = \frac{1}{(\Delta x)^2}, \quad w_2 = \frac{-2}{(\Delta x)^2}, \quad w_3 = \frac{1}{(\Delta x)^2}
+    \]
+
+    Hence, the vector \( w \) is:
+
+    \[
+    w = \frac{1}{(\Delta x)^2} \begin{bmatrix} 1 & -2 & 1 \end{bmatrix}
+    \]
+
+    \item \textbf{Constructing the Matrix \( D_{xx} \)} \\
+    For a grid of \( m \) points, the second derivative operator can be written as a matrix-vector product:
+
+    \[
+    D_{xx} f \approx f''
+    \]
+
+    The differentiation matrix \( D_{xx} \) follows a tridiagonal structure:
+
+    \[
+    D_{xx} =
+    \frac{1}{(\Delta x)^2}
+    \begin{bmatrix}
+    -2 & 1  & 0  & 0  & \dots & 0  & 0  \\
+    1  & -2 & 1  & 0  & \dots & 0  & 0  \\
+    0  & 1  & -2 & 1  & \dots & 0  & 0  \\
+    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0  & 0  & 0  & 0  & \dots & -2 & 1  \\
+    0  & 0  & 0  & 0  & \dots & 1  & -2
+    \end{bmatrix}
+    \]
+
+    where:
+    - The main diagonal contains \( -2/(\Delta x)^2 \).
+    - The first upper and lower diagonals contain \( 1/(\Delta x)^2 \).
+
+    \item \textbf{Modifying \( D_{xx} \) to \( \tilde{D}_{xx} \) for Boundary Conditions} \\
+    At the boundaries, we replace the central difference with forward and backward finite differences:
+
+    - Forward difference at \( x_1 \):
+      \[
+      f''(x_1) \approx \frac{f_3 - 2f_2 + f_1}{(\Delta x)^2}
+      \]
+    - Backward difference at \( x_m \):
+      \[
+      f''(x_m) \approx \frac{f_{m-2} - 2f_{m-1} + f_m}{(\Delta x)^2}
+      \]
+
+    The modified matrix \( \tilde{D}_{xx} \) incorporates these changes in the first and last rows.
+
+    \item \textbf{Computational Complexity} \\
+    The matrix \( \tilde{D}_{xx} \) is sparse (only three nonzero elements per row), so applying it to a vector requires:
+
+    - \( O(m) \) operations, since each row involves only three multiplications and two additions.
+
+    The overall complexity is:
+
+    \[
+    O(m)
+    \]
+
+    rather than \( O(m^2) \), which would be required for a dense matrix.
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

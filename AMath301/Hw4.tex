@@ -1,0 +1,559 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Amath Homework \#3}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+\begin{enumerate}
+\item 
+\begin{enumerate}
+
+    \item Compute \( B = A A^T \)
+    
+    First, compute the transpose of \( A \):
+
+    \[
+    A^T =
+    \begin{bmatrix}
+    2 & 36 \\
+    36 & 23
+    \end{bmatrix}
+    \]
+
+    Now, compute \( B = A A^T \):
+
+    \[
+    B =
+    \begin{bmatrix}
+    2 & 36 \\
+    36 & 23
+    \end{bmatrix}
+    \begin{bmatrix}
+    2 & 36 \\
+    36 & 23
+    \end{bmatrix}
+    \]
+
+    Performing the matrix multiplication:
+
+    \[
+    B =
+    \begin{bmatrix}
+    2(2) + 36(36) & 2(36) + 36(23) \\
+    36(2) + 23(36) & 36(36) + 23(23)
+    \end{bmatrix}
+    \]
+
+    \[
+    B =
+    \begin{bmatrix}
+    4 + 1296 & 72 + 828 \\
+    72 + 828 & 1296 + 529
+    \end{bmatrix}
+    \]
+
+    \[
+    B =
+    \begin{bmatrix}
+    1300 & 900 \\
+    900 & 1825
+    \end{bmatrix}
+    \]
+
+    \item Find the eigenvalues of \( B \)
+
+    The characteristic equation is given by:
+
+    \[
+    \det(B - \lambda I) = 0
+    \]
+
+    where \( I \) is the identity matrix.
+
+    \[
+    B - \lambda I =
+    \begin{bmatrix}
+    1300 - \lambda & 900 \\
+    900 & 1825 - \lambda
+    \end{bmatrix}
+    \]
+
+    Computing the determinant:
+
+    \[
+    (1300 - \lambda)(1825 - \lambda) - (900)(900) = 0
+    \]
+
+    Expanding:
+
+    \[
+    2372500 - 3125\lambda + \lambda^2 - 810000 = 0
+    \]
+
+    \[
+    \lambda^2 - 3125\lambda + 1562500 = 0
+    \]
+
+    Solving using the quadratic formula:
+
+    \[
+    \lambda = \frac{3125 \pm \sqrt{(3125)^2 - 4(1562500)}}{2}
+    \]
+
+    \[
+    \lambda = \frac{3125 \pm \sqrt{9765625 - 6250000}}{2}
+    \]
+
+    \[
+    \lambda = \frac{3125 \pm \sqrt{3515625}}{2}
+    \]
+
+    \[
+    \lambda = \frac{3125 \pm 1875}{2}
+    \]
+
+    \[
+    \lambda_1 = \frac{3125 + 1875}{2} = 2500, \quad \lambda_2 = \frac{3125 - 1875}{2} = 625
+    \]
+
+    \item Find the eigenvectors of \( B \)
+
+    Solve \( (B - \lambda I)v = 0 \).
+
+    For \( \lambda_1 = 2500 \):
+
+    \[
+    \begin{bmatrix}
+    -1200 & 900 \\
+    900 & -675
+    \end{bmatrix}
+    \begin{bmatrix}
+    x \\ y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0 \\ 0
+    \end{bmatrix}
+    \]
+
+    \[
+    -1200x + 900y = 0 \Rightarrow x = \frac{900}{1200} y = \frac{3}{4} y
+    \]
+
+    Choosing \( y = 4/5 \), we get \( x = 3/5 \). So:
+
+    \[
+    v_1 =
+    \begin{bmatrix}
+    3/5 \\ 4/5
+    \end{bmatrix}
+    \]
+
+    For \( \lambda_2 = 625 \):
+
+    \[
+    \begin{bmatrix}
+    675 & 900 \\
+    900 & 1200
+    \end{bmatrix}
+    \begin{bmatrix}
+    x \\ y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0 \\ 0
+    \end{bmatrix}
+    \]
+
+    \[
+    x = -\frac{900}{675} y = -\frac{4}{3} y
+    \]
+
+    Choosing \( y = 3/5 \), we get \( x = -4/5 \), so:
+
+    \[
+    v_2 =
+    \begin{bmatrix}
+    -4/5 \\ 3/5
+    \end{bmatrix}
+    \]
+    \item  \( U \) is:
+
+    \[
+    U =
+    \begin{bmatrix}
+    3/5 & -4/5 \\
+    4/5 & 3/5
+    \end{bmatrix}
+    \]
+
+    \item Repeat with \( C = A^T A \)
+
+    Since \( A^T A = A A^T = B \), we get:
+
+    \[
+    C = B =
+    \begin{bmatrix}
+    1300 & 900 \\
+    900 & 1825
+    \end{bmatrix}
+    \]
+
+    The eigenvalues remain \( 2500, 625 \), and the eigenvectors are chosen in the first or fourth quadrants:
+
+    \[
+    V =
+    \begin{bmatrix}
+    3/5 & 4/5 \\
+    4/5 & -3/5
+    \end{bmatrix}
+    \]
+
+    \item Construct \( \Sigma \)
+
+    \[
+    \Sigma =
+    \begin{bmatrix}
+    \sqrt{2500} & 0 \\
+    0 & \sqrt{625}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    50 & 0 \\
+    0 & 25
+    \end{bmatrix}
+    \]
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+
+    \item Write out \( A = R(\pi/4) \)
+    
+    Substituting \( \theta = \frac{\pi}{4} \):
+
+    \[
+    A =
+    \begin{bmatrix}
+    \cos(\pi/4) & -\sin(\pi/4) & 0 \\
+    \sin(\pi/4) & \cos(\pi/4) & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    Since \( \cos(\pi/4) = \frac{\sqrt{2}}{2} \) and \( \sin(\pi/4) = \frac{\sqrt{2}}{2} \), we obtain:
+
+    \[
+    A =
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} & 0 \\
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    \item Find \( A^{-1} \) using logic
+    
+    Since \( A \) represents a rotation by \( \frac{\pi}{4} \) (45 degrees) counterclockwise, its inverse must rotate clockwise by the same angle. This corresponds to \( \theta = -\frac{\pi}{4} \), so:
+
+    \[
+    A^{-1} = R(-\pi/4)
+    \]
+
+    Using trigonometric identities:
+
+    \[
+    \cos(-\pi/4) = \cos(\pi/4) = \frac{\sqrt{2}}{2}, \quad \sin(-\pi/4) = -\sin(\pi/4) = -\frac{\sqrt{2}}{2}
+    \]
+
+    Thus:
+
+    \[
+    A^{-1} =
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    \item Verify \( A^{-1} A = I \)
+
+    We compute:
+
+    \[
+    A^{-1} A =
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    -\frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{2} & 0 \\
+    \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    Computing each entry:
+
+    - First row:
+    
+      \[
+      \left(\frac{\sqrt{2}}{2} \cdot \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{2}}{2} \right) = \left(\frac{2}{4} + \frac{2}{4}\right) = 1
+      \]
+    
+      \[
+      \left(\frac{\sqrt{2}}{2} \cdot -\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{2}}{2} \right) = 0
+      \]
+
+    - Second row:
+
+      \[
+      \left(-\frac{\sqrt{2}}{2} \cdot \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} \cdot -\frac{\sqrt{2}}{2} \right) = 0
+      \]
+
+      \[
+      \left(-\frac{\sqrt{2}}{2} \cdot -\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{2}}{2} \right) = 1
+      \]
+
+    Thus:
+
+    \[
+    A^{-1} A = I =
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    \]
+
+    which confirms that \( A^{-1} \) is correct.
+
+    \item
+    
+    - The matrix \( A \) represents rotation by \( \frac{\pi}{4} \) in the xy-plane.
+    
+    - The z-axis is unchanged, meaning any vector along \( (0,0,1) \) is unaffected.
+    
+    - This means the eigenvalue corresponding to this direction is:
+
+    \[
+    \lambda = 1
+    \]
+
+    To find the eigenvector, solve:
+
+    \[
+    A v = v
+    \]
+
+    Since the z-component is unchanged, the eigenvector is:
+
+    \[
+    v =
+    \begin{bmatrix}
+    0 \\
+    0 \\
+    1
+    \end{bmatrix}
+    \]
+
+    This makes sense because rotation in the xy-plane does not affect the z-axis.
+
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+
+    \item Formulating \( f(I_D, V_D) \)
+    
+    The equations are rearranged into the form:
+
+    \[
+    f(I_D, V_D) =
+    \begin{bmatrix}
+    f_1(I_D, V_D) \\
+    f_2(I_D, V_D)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    I_S \left(e^{V_D / V_T} - 1 \right) - I_D \\
+    \frac{V_{DD} - V_D}{R} - I_D
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0 \\
+    0
+    \end{bmatrix}
+    \]
+
+    \item Compute the Jacobian matrix
+    
+    The Jacobian matrix is given by:
+
+    \[
+    J(I_D, V_D) =
+    \begin{bmatrix}
+    \frac{\partial f_1}{\partial I_D} & \frac{\partial f_1}{\partial V_D} \\
+    \frac{\partial f_2}{\partial I_D} & \frac{\partial f_2}{\partial V_D}
+    \end{bmatrix}
+    \]
+
+    Computing the partial derivatives:
+
+    \[
+    \frac{\partial f_1}{\partial I_D} = -1, \quad
+    \frac{\partial f_1}{\partial V_D} = \frac{I_S}{V_T} e^{V_D / V_T}
+    \]
+
+    \[
+    \frac{\partial f_2}{\partial I_D} = -1, \quad
+    \frac{\partial f_2}{\partial V_D} = -\frac{1}{R}
+    \]
+
+    Thus, the Jacobian matrix is:
+
+    \[
+    J(I_D, V_D) =
+    \begin{bmatrix}
+    -1 & \frac{I_S}{V_T} e^{V_D / V_T} \\
+    -1 & -\frac{1}{R}
+    \end{bmatrix}
+    \]
+
+    \item Perform one Newton-Raphson iteration
+    
+    \begin{enumerate}
+        \item Given values
+        
+        \[
+        I_S = 10^{-15} \text{ A}, \quad V_T = 0.025 \text{ V}, \quad V_{DD} = 1.5 \text{ V}, \quad R = 1000 \text{ Ω}
+        \]
+
+        Initial guess:
+
+        \[
+        v_0 =
+        \begin{bmatrix}
+        I_D \\
+        V_D
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        0 \\
+        0
+        \end{bmatrix}
+        \]
+
+        \item Evaluate \( f(v_0) \)
+
+        \[
+        f_1(0, 0) = I_S \left(e^{0 / 0.025} - 1 \right) - 0 = 10^{-15} (1 - 1) = 0
+        \]
+
+        \[
+        f_2(0, 0) = \frac{1.5 - 0}{1000} - 0 = 0.0015
+        \]
+
+        \[
+        f(v_0) =
+        \begin{bmatrix}
+        0 \\
+        0.0015
+        \end{bmatrix}
+        \]
+
+        \item Compute \( J(v_0) \)
+
+        \[
+        J(0, 0) =
+        \begin{bmatrix}
+        -1 & \frac{10^{-15}}{0.025} e^{0} \\
+        -1 & -\frac{1}{1000}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        -1 & 4 \times 10^{-14} \\
+        -1 & -0.001
+        \end{bmatrix}
+        \]
+
+        \item Solve \( J(v_0) \Delta v = -f(v_0) \)
+
+        \[
+        \begin{bmatrix}
+        -1 & 4 \times 10^{-14} \\
+        -1 & -0.001
+        \end{bmatrix}
+        \begin{bmatrix}
+        \Delta I_D \\
+        \Delta V_D
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        0 \\
+        -0.0015
+        \end{bmatrix}
+        \]
+
+        Using Gaussian elimination:
+
+        \[
+        \Delta I_D = 0.000815, \quad \Delta V_D = 0.682
+            \]
+
+        \item Compute \( v_1 \)
+
+        \[
+        v_1 = v_0 + \Delta v
+        \]
+
+        \[
+        =
+        \begin{bmatrix}
+        0 \\
+        0
+        \end{bmatrix}
+        +
+        \begin{bmatrix}
+        0.000815 \\
+        0.682
+        \end{bmatrix}
+        \]
+
+        \[
+        =
+        \begin{bmatrix}
+        0.000815 \\
+        0.682
+        \end{bmatrix}
+        \]
+
+    \end{enumerate}
+
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

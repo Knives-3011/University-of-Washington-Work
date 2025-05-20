@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 136 Homework \#7}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item Let 
+\[
+g(x, y) = 
+\begin{cases}
+\frac{xy(x^2 - y^2)}{x^2 + y^2} & \text{for } (x, y) \neq (0, 0) \\
+0 & \text{for } (x, y) = (0, 0)
+\end{cases}
+\]
+
+To compute \( g_y(x, 0) \), we use the limit definition:
+
+\[
+g_y(x, 0) = \lim_{h \to 0} \frac{g(x,h) - g(x,0)}{h}
+\]
+
+Note that \( g(x, h) = \frac{x h (x^2 - h^2)}{x^2 + h^2} \), and \( g(x, 0) = 0 \). Then,
+
+\[
+\frac{g(x,h) - g(x,0)}{h} = \frac{x(x^2 - h^2)}{x^2 + h^2}
+\]
+
+Taking the limit as \( h \to 0 \):
+
+\[
+g_y(x, 0) = \lim_{h \to 0} \frac{x(x^2 - h^2)}{x^2 + h^2} = x
+\]
+
+Similarly, to compute \( g_x(0, y) \), use:
+
+\[
+g_x(0, y) = \lim_{h \to 0} \frac{g(h, y) - g(0, y)}{h}
+\]
+
+Note that \( g(h, y) = \frac{h y (h^2 - y^2)}{h^2 + y^2} \), and \( g(0, y) = 0 \). So,
+
+\[
+\frac{g(h,y) - g(0,y)}{h} = \frac{y(h^2 - y^2)}{h^2 + y^2}
+\]
+
+Taking the limit as \( h \to 0 \):
+
+\[
+g_x(0, y) = \lim_{h \to 0} \frac{y(h^2 - y^2)}{h^2 + y^2} = -y
+\]
+
+Now compute the mixed partial derivatives:
+
+\[
+g_{yx}(0, 0) = \frac{\partial}{\partial x} g_y(x, 0) \bigg|_{x = 0} = \frac{d}{dx}(x) \bigg|_{x = 0} = 1
+\]
+
+\[
+g_{xy}(0, 0) = \frac{\partial}{\partial y} g_x(0, y) \bigg|_{y = 0} = \frac{d}{dy}(-y) \bigg|_{y = 0} = -1
+\]
+
+Hence, we have shown that:
+
+\[
+g_y(x, 0) = x, \quad g_x(0, y) = -y, \quad g_{yx}(0, 0) = 1, \quad g_{xy}(0, 0) = -1
+\]
+\item \begin{enumerate}
+    \item
+
+    A function \( f : \mathbb{R} \to \mathbb{R} \) is said to be continuous at \( x = a \) if
+    \[
+    \lim_{x \to a} f(x) = f(a)
+    \]
+    That is, for every \( \varepsilon > 0 \), there exists \( \delta > 0 \) such that
+    \[
+    |x - a| < \delta \implies |f(x) - f(a)| < \varepsilon.
+    \]
+
+    \item 
+    A function \( f : \mathbb{R}^n \to \mathbb{R} \) is continuous at \( \mathbf{a} \in \mathbb{R}^n \) if
+    \[
+    \lim_{\mathbf{x} \to \mathbf{a}} f(\mathbf{x}) = f(\mathbf{a}).
+    \]
+    That is, for every \( \varepsilon > 0 \), there exists \( \delta > 0 \) such that
+    \[
+    \|\mathbf{x} - \mathbf{a}\| < \delta \implies |f(\mathbf{x}) - f(\mathbf{a})| < \varepsilon,
+    \]
+    where \( \|\cdot\| \) denotes a norm (typically the Euclidean norm) on \( \mathbb{R}^n \).
+
+    \item Let \( \mathbf{x}_0 \in f^{-1}(I) \), so \( f(\mathbf{x}_0) \in (a, b) \). Since \( f \) is continuous at \( \mathbf{x}_0 \), for
+    \[
+    \varepsilon = \min\{ f(\mathbf{x}_0) - a,\ b - f(\mathbf{x}_0) \} > 0,
+    \]
+    there exists \( \delta > 0 \) such that
+    \[
+    \|\mathbf{x} - \mathbf{x}_0\| < \delta \implies |f(\mathbf{x}) - f(\mathbf{x}_0)| < \varepsilon.
+    \]
+    Hence, \( f(\mathbf{x}) \in (a, b) \), so \( \mathbf{x} \in f^{-1}(I) \). Therefore, a neighborhood around \( \mathbf{x}_0 \) is entirely contained in \( f^{-1}(I) \), implying that \( f^{-1}(I) \) is open.
+
+
+\end{enumerate}
+
+
+\end{enumerate}
+\end{document}

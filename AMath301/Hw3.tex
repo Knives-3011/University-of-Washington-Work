@@ -1,0 +1,360 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Amath Homework \#3}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+
+\begin{enumerate}
+\item \begin{enumerate}
+    \item \( A_{2,3} \): \( 3 \) (element in the 2nd row and 3rd column of \( A \)).
+    
+    \item Indices of the zero entry in \( C \): \( [(1, 1)] \) (row 2, column 2 in 1-based indexing).
+    
+    \item \( B^T + 3C \):
+    \[
+    \begin{bmatrix}
+    9 & 4 \\
+    -4 & 1 \\
+    1 & 5
+    \end{bmatrix}
+    \]
+    
+    \item \( A \circ A^T \) (Hadamard product):
+    \[
+    \begin{bmatrix}
+    4 & 0 & 2 \\
+    0 & 1 & 12 \\
+    2 & 12 & 16
+    \end{bmatrix}
+    \]
+    
+    \item \( BC \):
+    \[
+    \begin{bmatrix}
+    -17 & -4 \\
+    -1 & -1
+    \end{bmatrix}
+    \]
+    
+    \item \( A^2 - I \):
+    \[
+    \begin{bmatrix}
+    5 & -11 & -15 \\
+    -3 & 12 & 15 \\
+    -6 & 21 & 29
+    \end{bmatrix}
+    \]
+\end{enumerate}
+
+\item 
+Let \( A \) be an \( m \times m \) matrix, \( B \) be an \( m \times n \) matrix, and \( q \) be an \( n \times 1 \) vector, where \( m \gg n > 1 \). The vector \( w = ABq \) can be computed in two ways:
+
+\begin{itemize}
+    \item Method 1: Compute \( AB \) (an \( m \times n \) matrix) first, followed by multiplying the result with \( q \), i.e., \( w = (AB)q \).
+    \item Method 2 Compute \( Bq \) (an \( m \times 1 \) vector) first, followed by multiplying the result with \( A \), i.e., \( w = A(Bq) \).
+\end{itemize}
+
+To determine which method is computationally faster, we count the number of floating-point operations (multiplications and additions) required for each method.
+
+\textbf{Method 1:} 
+\begin{enumerate}
+    \item Compute \( AB \): Multiplications require \( m \cdot n \cdot m \) operations, and additions require \( m \cdot n \cdot (m - 1) \) operations.
+    \item Compute \( (AB)q \): Multiplications require \( m \cdot n \) operations, and additions require \( m \cdot (n - 1) \) operations.
+\end{enumerate}
+Total operations for Method 1:
+\[
+\text{Total} = m \cdot n \cdot m + m \cdot n \cdot (m - 1) + m \cdot n + m \cdot (n - 1)
+\]
+
+\textbf{Method 2:}
+\begin{enumerate}
+    \item Compute \( Bq \): Multiplications require \( n \cdot m \) operations, and additions require \( n \cdot (m - 1) \) operations.
+    \item Compute \( A(Bq) \): Multiplications require \( m \cdot m \) operations, and additions require \( m \cdot (m - 1) \) operations.
+\end{enumerate}
+Total operations for Method 2:
+\[
+\text{Total} = n \cdot m + n \cdot (m - 1) + m \cdot m + m \cdot (m - 1)
+\]
+The difference between the two methods is:
+\[
+\text{Difference} = \text{Total}_1 - \text{Total}_2
+\]
+Substituting the expressions:
+\[
+\text{Difference} = [m \cdot n \cdot m + m \cdot n \cdot (m - 1) + m \cdot n + m \cdot (n - 1)]
+- [n \cdot m + n \cdot (m - 1) + m \cdot m + m \cdot (m - 1)]
+\]
+Simplify:
+\[
+\text{Difference} = m \cdot n \cdot m + m \cdot n \cdot (m - 1) - m \cdot m - m \cdot (m - 1)
+\]
+
+For \( m \gg n \), the difference is dominated by \( m \cdot n \cdot m \), indicating that computing the full matrix product \( AB \) requires significantly more operations than first computing \( Bq \).
+
+Comparison: Assume \( m = 1000 \) and \( n = 10 \):
+\begin{itemize}
+    \item Total operations for Method 1: \( 20,009,000 \)
+    \item Total operations for Method 2: \( 2,018,990 \)
+\end{itemize}
+
+Method 2 (\( A(Bq) \)) is computationally faster as it requires significantly fewer operations. This is because computing \( Bq \) (a vector) is less costly than computing the full matrix product \( AB \).
+
+\item 
+\begin{enumerate}
+    \item \( C = AB \)
+If the \( p \)-th row of \( A \) is all zeros, then any element in the \( p \)-th row of \( C = AB \) is computed as:
+\[
+C_{p,j} = \sum_{k=1}^m A_{p,k} B_{k,j}
+\]
+Since \( A_{p,k} = 0 \) for all \( k \), the summation evaluates to zero:
+\[
+C_{p,j} = 0 \quad \text{for all } j.
+\]
+Thus, the \( p \)-th row of \( C \) will always be a row of zeros. This statement is true.
+
+\item 
+\( D = BA \)
+If the \( p \)-th row of \( A \) is all zeros, it does not necessarily imply that \( D = BA \) will have a row of zeros. The rows of \( D \) are linear combinations of the rows of \( B \), based on the columns of \( A \). If \( A \) has a zero row, this does not affect the structure of \( D \), as \( A \)'s zero row only contributes to \( A \)'s columns, not \( B \)'s rows.
+Counterexample:
+Let:
+\[
+A = \begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}, \quad B = \begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}.
+\]
+Then:
+\[
+D = BA = \begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix} \begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix} = \begin{bmatrix}
+1 & 0 \\
+3 & 0
+\end{bmatrix}.
+\]
+Here, no row of \( D \) is entirely zeros, despite the second row of \( A \) being all zeros. Thus, this is false
+\end{enumerate} 
+
+\item 
+We start with:
+\[
+L =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix},
+\quad
+U =
+\begin{bmatrix}
+-6 & 1 & 4 \\
+6 & 4 & -6 \\
+18 & 7 & -15
+\end{bmatrix}.
+\]
+
+First, to eliminate \( U_{21} \), we calculate the multiplier:
+\[
+m_{21} = \frac{U_{21}}{U_{11}} = \frac{6}{-6} = -1.
+\]
+Using this, we update row 2 of \( U \):
+\[
+\text{Row 2} \leftarrow \text{Row 2} - m_{21} \cdot \text{Row 1}.
+\]
+Performing the calculation:
+\[
+\begin{bmatrix}
+-6 & 1 & 4 \\
+6 & 4 & -6 \\
+18 & 7 & -15
+\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+18 & 7 & -15
+\end{bmatrix}.
+\]
+The corresponding entry in \( L \) is updated to \( m_{21} \), giving:
+\[
+L =
+\begin{bmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}.
+\]
+
+Next, to eliminate \( U_{31} \), we calculate:
+\[
+m_{31} = \frac{U_{31}}{U_{11}} = \frac{18}{-6} = -3.
+\]
+Update row 3 of \( U \):
+\[
+\text{Row 3} \leftarrow \text{Row 3} - m_{31} \cdot \text{Row 1}.
+\]
+This results in:
+\[
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+18 & 7 & -15
+\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+0 & 10 & -3
+\end{bmatrix}.
+\]
+Update \( L \) to include \( m_{31} \):
+\[
+L =
+\begin{bmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+-3 & 0 & 1
+\end{bmatrix}.
+\]
+
+To eliminate \( U_{32} \), we compute:
+\[
+m_{32} = \frac{U_{32}}{U_{22}} = \frac{10}{5} = 2.
+\]
+Update row 3 of \( U \):
+\[
+\text{Row 3} \leftarrow \text{Row 3} - m_{32} \cdot \text{Row 2}.
+\]
+The updated \( U \) is:
+\[
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+0 & 10 & -3
+\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+0 & 0 & 1
+\end{bmatrix}.
+\]
+The corresponding entry in \( L \) is updated to \( m_{32} \), resulting in:
+\[
+L =
+\begin{bmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+-3 & 2 & 1
+\end{bmatrix}.
+\]
+
+Thus, the \( LU \) decomposition of \( A \) is:
+\[
+L =
+\begin{bmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+-3 & 2 & 1
+\end{bmatrix},
+\quad
+U =
+\begin{bmatrix}
+-6 & 1 & 4 \\
+0 & 5 & -2 \\
+0 & 0 & 1
+\end{bmatrix}.
+\]
+\item 
+\begin{enumerate}
+    \item Expand \( f(z) \):
+    \[
+    f(z) = \frac{1}{2} z^T A z - b^T z.
+    \]
+    Compute each term:
+    \begin{itemize}
+        \item \( z^T A z = \begin{bmatrix} x & y \end{bmatrix} \begin{bmatrix} 4 & -1 \\ -1 & 3 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = 4x^2 - xy - xy + 3y^2 = 4x^2 - 2xy + 3y^2 \).
+        \item \( b^T z = \begin{bmatrix} -10 & 8 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = -10x + 8y \).
+    \end{itemize}
+    Combine the terms:
+    \[
+    f(z) = \frac{1}{2}(4x^2 - 2xy + 3y^2) - (-10x + 8y) = 2x^2 - xy + \frac{3}{2}y^2 + 10x - 8y.
+    \]
+
+    \item Compute the gradient \( \nabla f(z) \):
+    \[
+    \nabla f(z) = \begin{bmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \end{bmatrix}.
+    \]
+    \begin{itemize}
+        \item \( \frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left( 2x^2 - xy + \frac{3}{2}y^2 + 10x - 8y \right) = 4x - y + 10 \).
+        \item \( \frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left( 2x^2 - xy + \frac{3}{2}y^2 + 10x - 8y \right) = -x + 3y - 8 \).
+    \end{itemize}
+    Thus:
+    \[
+    \nabla f(z) = \begin{bmatrix} 4x - y + 10 \\ -x + 3y - 8 \end{bmatrix}.
+    \]
+
+    \item Perform two iterations of Gradient Descent starting at \( z_0 = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \) with \( \tau = \frac{1}{4} \):
+    \begin{enumerate}
+        \item Compute \( z_1 \):
+        \[
+        z_1 = z_0 - \tau \nabla f(z_0).
+        \]
+        Substitute \( z_0 = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \):
+        \[
+        \nabla f(z_0) = \begin{bmatrix} 4(0) - 0 + 10 \\ -(0) + 3(0) - 8 \end{bmatrix} = \begin{bmatrix} 10 \\ -8 \end{bmatrix}.
+        \]
+        \[
+        z_1 = \begin{bmatrix} 0 \\ 0 \end{bmatrix} - \frac{1}{4} \begin{bmatrix} 10 \\ -8 \end{bmatrix} = \begin{bmatrix} -\frac{5}{2} \\ 2 \end{bmatrix}.
+        \]
+
+        \item Compute \( z_2 \):
+        \[
+        z_2 = z_1 - \tau \nabla f(z_1).
+        \]
+        Substitute \( z_1 = \begin{bmatrix} -\frac{5}{2} \\ 2 \end{bmatrix} \):
+        \[
+        \nabla f(z_1) = \begin{bmatrix} 4(-\frac{5}{2}) - 2 + 10 \\ -(-\frac{5}{2}) + 3(2) - 8 \end{bmatrix} = \begin{bmatrix} -10 - 2 + 10 \\ \frac{5}{2} + 6 - 8 \end{bmatrix} = \begin{bmatrix} -2 \\ \frac{5}{2} \end{bmatrix}.
+        \]
+        \[
+        z_2 = \begin{bmatrix} -\frac{5}{2} \\ 2 \end{bmatrix} - \frac{1}{4} \begin{bmatrix} -2 \\ \frac{5}{2} \end{bmatrix} = \begin{bmatrix} -\frac{5}{2} + \frac{1}{2} \\ 2 - \frac{5}{8} \end{bmatrix} = \begin{bmatrix} -2 \\ \frac{11}{8} \end{bmatrix}.
+        \]
+    \end{enumerate}
+    Thus:
+    \[
+    z_1 = \begin{bmatrix} -\frac{5}{2} \\ 2 \end{bmatrix}, \quad z_2 = \begin{bmatrix} -2 \\ \frac{11}{8} \end{bmatrix}.
+    \]
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

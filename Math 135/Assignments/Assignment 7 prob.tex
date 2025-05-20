@@ -1,0 +1,377 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#7_1}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item 
+\begin{enumerate}
+
+    \item For \( f_1(t) = t e^{4t} \cos(-2t) \):
+    
+    Since cosine is an even function, we rewrite:
+    \[
+    f_1(t) = t e^{4t} \cos(2t).
+    \]
+    Using the standard Laplace transform formula:
+    \[
+    \mathcal{L} \{t \cos(\omega t)\} = \frac{s^2 - \omega^2}{(s^2 + \omega^2)^2},
+    \]
+    and applying the first shifting theorem:
+    \[
+    \mathcal{L} \{e^{at} f(t) \} = F(s-a),
+    \]
+    with \( a = 4 \) and \( \omega = 2 \), we obtain:
+    \[
+    \mathcal{L} \{t e^{4t} \cos 2t \} = \frac{(s-4)^2 - 4}{\left( (s-4)^2 + 4 \right)^2}.
+    \]
+
+    \item For \( f_2(t) = \cos^2 t \):
+    
+    Using the identity:
+    \[
+    \cos^2 t = \frac{1 + \cos 2t}{2},
+    \]
+    and taking Laplace transforms term by term:
+    \[
+    \mathcal{L} \{ 1 \} = \frac{1}{s}, \quad \mathcal{L} \{\cos 2t\} = \frac{s}{s^2 + 4},
+    \]
+    we obtain:
+    \[
+    \mathcal{L} \{\cos^2 t\} = \frac{1}{2} \left( \frac{1}{s} + \frac{s}{s^2 + 4} \right) = \frac{1}{2s} + \frac{s}{2(s^2+4)}.
+    \]
+
+    \item For \( f_3(t) = \sqrt{t} e^t \):
+    
+    Using the standard formula for the Laplace transform of \( t^p e^{at} \):
+    \[
+    \mathcal{L} \{t^p e^{at} \} = \frac{\Gamma(p+1)}{(s-a)^{p+1}},
+    \]
+    with \( p = \frac{1}{2} \), \( a = 1 \), and \( \Gamma(3/2) = \frac{\sqrt{\pi}}{2} \), we get:
+    \[
+    \mathcal{L} \{\sqrt{t} e^t \} = \frac{\sqrt{\pi}/2}{(s-1)^{3/2}}.
+    \]
+    \item Compute the Laplace transform of the piecewise function:
+
+    \[
+    f(t) =
+    \begin{cases}
+    4, & 0 \leq t < 2, \\
+    t+2, & 2 \leq t \leq 5, \\
+    e^{-t}, & t > 5.
+    \end{cases}
+    \]
+
+    The Laplace transform is computed by integrating over the respective intervals:
+
+    \textbf{Interval \( [0,2] \):}
+    \[
+    \mathcal{L} \{4\} = \int_0^2 4 e^{-st} dt = \frac{4(1 - e^{-2s})}{s}.
+    \]
+
+    \textbf{Interval \( [2,5] \):} We compute
+    \[
+    I = \int_2^5 (t+2) e^{-st} dt.
+    \]
+    Using integration by parts, let:
+    \[
+    u = t+2, \quad dv = e^{-st} dt.
+    \]
+    Then:
+    \[
+    du = dt, \quad v = -\frac{1}{s} e^{-st}.
+    \]
+    Applying integration by parts:
+    \[
+    I = -\frac{(t+2)e^{-st}}{s} \Big|_2^5 + \frac{1}{s} \int_2^5 e^{-st} dt.
+    \]
+    Computing the integral:
+    \[
+    \int_2^5 e^{-st} dt = \left[ -\frac{e^{-st}}{s} \right]_2^5 = -\frac{e^{-5s} - e^{-2s}}{s}.
+    \]
+    Substituting back:
+    \[
+    I = -e^{-5s} \left(\frac{7}{s} + \frac{1}{s^2}\right) + e^{-2s} \left(\frac{4}{s} + \frac{1}{s^2}\right).
+    \]
+
+    \textbf{Interval \( [5,\infty] \):}
+    \[
+    \int_5^\infty e^{-t} e^{-st} dt = \int_5^\infty e^{-(s+1)t} dt = \frac{e^{-5(s+1)}}{s+1}.
+    \]
+
+    \textbf{Final Laplace Transform:}
+    \[
+    \mathcal{L} \{f(t)\} = \frac{4(1 - e^{-2s})}{s} + \left[-e^{-5s} \left(\frac{7}{s} + \frac{1}{s^2}\right) + e^{-2s} \left(\frac{4}{s} + \frac{1}{s^2}\right)\right] + \frac{e^{-5(s+1)}}{s+1}.
+    \]
+    \end{enumerate}
+    \item 
+    \begin{enumerate}
+  \item
+    \begin{enumerate}
+      \item For 
+        \[
+        F_1(s)=\frac{1}{s^2+2s+10},
+        \]
+        complete the square in the denominator:
+        \[
+        s^2+2s+10=(s+1)^2+9=(s+1)^2+3^2.
+        \]
+        Thus,
+        \[
+        F_1(s)=\frac{1}{(s+1)^2+3^2}=\frac{1}{3}\cdot\frac{3}{(s+1)^2+3^2}.
+        \]
+        Recognizing that 
+        \[
+        \mathcal{L}\{e^{-t}\sin3t\}(s)=\frac{3}{(s+1)^2+3^2},
+        \]
+        we obtain
+        \[
+        f_1(t)=\frac{1}{3}e^{-t}\sin3t.
+        \]
+
+      \item For 
+        \[
+        F_2(s)=\frac{3s}{s^2+4s+13},
+        \]
+        complete the square:
+        \[
+        s^2+4s+13=(s+2)^2+9=(s+2)^2+3^2.
+        \]
+        Express the numerator as
+        \[
+        3s=3(s+2)-6.
+        \]
+        Then,
+        \[
+        F_2(s)=\frac{3(s+2)}{(s+2)^2+3^2}-\frac{6}{(s+2)^2+3^2}.
+        \]
+        Since
+        \[
+        \mathcal{L}\{e^{-2t}\cos3t\}(s)=\frac{s+2}{(s+2)^2+3^2} \quad \text{and} \quad
+        \mathcal{L}\{e^{-2t}\sin3t\}(s)=\frac{3}{(s+2)^2+3^2},
+        \]
+        we have
+        \[
+        f_2(t)=3e^{-2t}\cos3t-\;2e^{-2t}\sin3t.
+        \]
+
+      \item For 
+        \[
+        F_3(s)=\frac{2s+7}{s^2+6s+9},
+        \]
+        note that
+        \[
+        s^2+6s+9=(s+3)^2.
+        \]
+        Write the numerator as
+        \[
+        2s+7=2(s+3)+1.
+        \]
+        Hence,
+        \[
+        F_3(s)=\frac{2(s+3)}{(s+3)^2}+\frac{1}{(s+3)^2}
+        =\frac{2}{s+3}+\frac{1}{(s+3)^2}.
+        \]
+        Using the standard transforms
+        \[
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{s+3}\Bigr\}=e^{-3t} \quad \text{and} \quad
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{(s+3)^2}\Bigr\}=te^{-3t},
+        \]
+        we obtain
+        \[
+        f_3(t)=2e^{-3t}+te^{-3t}=e^{-3t}(2+t).
+        \]
+    \end{enumerate}
+
+  \item
+    \begin{enumerate}
+      \item For 
+        \[
+        F_1(s)=\frac{s^2-6}{s^3+4s^2+3s},
+        \]
+        factor the denominator:
+        \[
+        s^3+4s^2+3s=s(s^2+4s+3)=s(s+1)(s+3).
+        \]
+        Write the partial fractions:
+        \[
+        \frac{s^2-6}{s(s+1)(s+3)}
+        =\frac{A}{s}+\frac{B}{s+1}+\frac{C}{s+3}.
+        \]
+        Multiplying through by \(s(s+1)(s+3)\) gives:
+        \[
+        s^2-6=A(s+1)(s+3)+B\,s(s+3)+C\,s(s+1).
+        \]
+        Expanding,
+        \[
+        A(s^2+4s+3)+B(s^2+3s)+C(s^2+s)
+        =(A+B+C)s^2+(4A+3B+C)s+3A.
+        \]
+        Equate coefficients:
+        \[
+        A+B+C=1,\quad 4A+3B+C=0,\quad 3A=-6.
+        \]
+        Thus, \(A=-2\), \(B=\frac{5}{2}\), and \(C=\frac{1}{2}\). Hence,
+        \[
+        F_1(s)=-\frac{2}{s}+\frac{5/2}{s+1}+\frac{1/2}{s+3}.
+        \]
+        Taking inverse transforms:
+        \[
+        f_1(t)=-2+\frac{5}{2}e^{-t}+\frac{1}{2}e^{-3t}.
+        \]
+
+      \item For 
+        \[
+        F_2(s)=\frac{16}{s(s^2+4)},
+        \]
+        assume
+        \[
+        \frac{16}{s(s^2+4)}=\frac{A}{s}+\frac{Bs+C}{s^2+4}.
+        \]
+        Multiplying both sides by \(s(s^2+4)\) gives:
+        \[
+        16=A(s^2+4)+(Bs+C)s.
+        \]
+        This expands to:
+        \[
+        16=(A+B)s^2+Cs+4A.
+        \]
+        Equate coefficients:
+        \[
+        A+B=0,\quad C=0,\quad 4A=16.
+        \]
+        Hence, \(A=4\) and \(B=-4\). Therefore,
+        \[
+        F_2(s)=\frac{4}{s}-\frac{4s}{s^2+4}.
+        \]
+        Noting that
+        \[
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{s}\Bigr\}=1 \quad \text{and} \quad
+        \mathcal{L}^{-1}\Bigl\{\frac{s}{s^2+4}\Bigr\}=\cos2t,
+        \]
+        we obtain
+        \[
+        f_2(t)=4-4\cos2t.
+        \]
+
+      \item For 
+        \[
+        F_3(s)=\frac{6s-3}{s(s+1)^2},
+        \]
+        set up the partial fractions:
+        \[
+        \frac{6s-3}{s(s+1)^2}
+        =\frac{A}{s}+\frac{B}{s+1}+\frac{C}{(s+1)^2}.
+        \]
+        Multiplying by \(s(s+1)^2\) yields:
+        \[
+        6s-3=A(s+1)^2+B\,s(s+1)+C\,s.
+        \]
+        Expanding,
+        \[
+        A(s^2+2s+1)+B(s^2+s)+C\,s
+        =(A+B)s^2+(2A+B+C)s+A.
+        \]
+        Equate coefficients with \(6s-3\) (i.e. \(0\cdot s^2+6s-3\)):
+        \[
+        A+B=0,\quad 2A+B+C=6,\quad A=-3.
+        \]
+        Thus, \(B=3\) and \(C=9\). Hence,
+        \[
+        F_3(s)=-\frac{3}{s}+\frac{3}{s+1}+\frac{9}{(s+1)^2}.
+        \]
+        Taking inverse Laplace transforms:
+        \[
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{s}\Bigr\}=1,\quad
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{s+1}\Bigr\}=e^{-t},\quad
+        \mathcal{L}^{-1}\Bigl\{\frac{1}{(s+1)^2}\Bigr\}=te^{-t},
+        \]
+        so
+        \[
+        f_3(t)=-3+3e^{-t}+9te^{-t}.
+        \]
+    \end{enumerate}
+
+  \item
+    For 
+    \[
+    F(s)=\frac{(1-e^{-2s})(1-3e^{-2s})}{s^2},
+    \]
+    first expand the numerator:
+    \[
+    (1-e^{-2s})(1-3e^{-2s})=1-4e^{-2s}+3e^{-4s}.
+    \]
+    Thus,
+    \[
+    F(s)=\frac{1}{s^2}-\frac{4e^{-2s}}{s^2}+\frac{3e^{-4s}}{s^2}.
+    \]
+    Using the second shifting theorem with
+    \[
+    \mathcal{L}^{-1}\Bigl\{\frac{1}{s^2}\Bigr\}=t \quad \text{and} \quad \mathcal{L}^{-1}\Bigl\{\frac{e^{-as}}{s^2}\Bigr\}=u(t-a)(t-a),
+    \]
+    we obtain
+    \[
+    f(t)=t-4\,u(t-2)(t-2)+3\,u(t-4)(t-4).
+    \]
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+
+    \item Solve \( y' - y = 0, \quad y(0) = 1 \)
+    
+    \begin{align*}
+        \mathcal{L} \{ y' \} - \mathcal{L} \{ y \} &= 0 \\
+        (sY(s) - y(0)) - Y(s) &= 0 \\
+        (s - 1) Y(s) &= 1 \quad \text{(using \( y(0) = 1 \))} \\
+        Y(s) &= \frac{1}{s - 1} \\
+        y(t) &= e^t
+    \end{align*}
+
+    \item Solve \( y' - y = e^x, \quad y(0) = 1 \)
+
+    \begin{align*}
+        \mathcal{L} \{ y' \} - \mathcal{L} \{ y \} &= \mathcal{L} \{ e^x \} \\
+        (sY(s) - y(0)) - Y(s) &= \frac{1}{s - 1} \\
+        (s - 1) Y(s) &= \frac{1}{s - 1} + 1 \quad \text{(using \( y(0) = 1 \))} \\
+        (s - 1) Y(s) &= \frac{1 + (s - 1)}{(s - 1)} \\
+        Y(s) &= \frac{s}{(s - 1)^2} \\
+        y(t) &= (t+1)e^t
+    \end{align*}
+
+    \item Solve \( y' + y = e^{-x}, \quad y(0) = 1 \)
+
+    \begin{align*}
+        \mathcal{L} \{ y' \} + \mathcal{L} \{ y \} &= \mathcal{L} \{ e^{-x} \} \\
+        (sY(s) - y(0)) + Y(s) &= \frac{1}{s + 1} \\
+        (s + 1) Y(s) &= \frac{1}{s + 1} + 1 \quad \text{(using \( y(0) = 1 \))} \\
+        (s + 1) Y(s) &= \frac{1 + (s + 1)}{s + 1} \\
+        Y(s) &= \frac{s + 2}{(s + 1)^2} \\
+        y(t) &= (t+1)e^{-t}
+    \end{align*}
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

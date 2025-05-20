@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 136 Homework \#1}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item
+\begin{enumerate}
+    \item[\textbf{(a)}] Basis for the space of \( 3 \times 3 \) symmetric matrices:
+
+    A \( 3 \times 3 \) symmetric matrix has the form:
+    \[
+    \begin{bmatrix}
+    a & b & c \\
+    b & d & e \\
+    c & e & f
+    \end{bmatrix}
+    \]
+    The basis consists of the following 6 matrices:
+    \[
+    \left\{
+    \begin{bmatrix}
+    1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+    0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+    0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+    0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+    0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+    0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1
+    \end{bmatrix}
+    \right\}
+    \]
+
+    \item[\textbf{(b)}] General basis for \( n \times n \) symmetric matrices:
+
+    Let \( E_{ij} \) denote the matrix with a 1 in the \((i,j)\) position and 0 elsewhere.  
+    Then a basis is given by:
+    \[
+    \left\{ E_{ii} \mid 1 \le i \le n \right\} \cup \left\{ E_{ij} + E_{ji} \mid 1 \le i < j \le n \right\}
+    \]
+    The total number of basis matrices is \( \frac{n(n+1)}{2} \).
+
+    \item[\textbf{(c)}] General basis for \( n \times n \) antisymmetric matrices:
+
+    For antisymmetric matrices, the diagonal entries are zero and \( A_{ij} = -A_{ji} \).  
+    Define \( E_{ij} \) as before. Then the basis is:
+    \[
+    \left\{ E_{ij} - E_{ji} \mid 1 \le i < j \le n \right\}
+    \]
+    This yields \( \frac{n(n-1)}{2} \) antisymmetric basis matrices satisfying \( A^T = -A \).
+\end{enumerate}
+
+\item Let \( A \) be an \( m \times n \) matrix and \( B \) be an \( n \times m \) matrix.
+
+We want to prove that \( \text{trace}(AB) = \text{trace}(BA) \).
+
+Recall that the trace of a square matrix is the sum of its diagonal elements:
+\[
+\text{trace}(AB) = \sum_{i=1}^{m} (AB)_{ii}
+\]
+
+Using the definition of matrix multiplication:
+\[
+(AB)_{ii} = \sum_{k=1}^{n} A_{ik} B_{ki}
+\]
+
+Therefore,
+\[
+\text{trace}(AB) = \sum_{i=1}^{m} \sum_{k=1}^{n} A_{ik} B_{ki}
+\]
+
+Switching the order of summation:
+\[
+\text{trace}(AB) = \sum_{k=1}^{n} \sum_{i=1}^{m} B_{ki} A_{ik}
+\]
+
+This can be written as:
+\[
+\text{trace}(AB) = \sum_{k=1}^{n} (BA)_{kk} = \text{trace}(BA)
+\]
+
+Hence,
+\text{trace}(AB) = \text{trace}(BA)
+
+\item 
+Let \( \mathbf{n} = \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix} \) be the normal vector to the plane \( \alpha x + \beta y + \gamma z = 0 \).
+
+The orthogonal projection of a vector \( \mathbf{v} \in \mathbb{R}^3 \) onto the plane is given by:
+\[
+T(\mathbf{v}) = \mathbf{v} - \frac{\mathbf{v} \cdot \mathbf{n}}{\|\mathbf{n}\|^2} \mathbf{n}
+\]
+
+We express this as a matrix transformation:
+\[
+T(\mathbf{v}) = \left( I - \frac{\mathbf{n} \mathbf{n}^\top}{\|\mathbf{n}\|^2} \right) \mathbf{v}
+\]
+
+Therefore, the matrix of the transformation \( T \) with respect to the standard basis is:
+\[
+P = I - \frac{1}{\alpha^2 + \beta^2 + \gamma^2}
+\begin{bmatrix}
+\alpha^2 & \alpha \beta & \alpha \gamma \\
+\alpha \beta & \beta^2 & \beta \gamma \\
+\alpha \gamma & \beta \gamma & \gamma^2
+\end{bmatrix}
+\]
+
+
+\item 
+Let \( T: \mathbb{R}^3 \to \mathbb{R}^3 \) be the reflection of points through the plane \( \alpha x + \beta y + \gamma z = 0 \). This is a reflection through a plane passing through the origin with normal vector
+\[
+\vec{n} = \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}.
+\]
+We define the unit normal vector as
+\[
+\hat{n} = \frac{1}{\sqrt{\alpha^2 + \beta^2 + \gamma^2}} \begin{bmatrix} \alpha \\ \beta \\ \gamma \end{bmatrix}.
+\]
+The matrix of the reflection transformation is given by
+\[
+R = I - 2 \hat{n} \hat{n}^T.
+\]
+Substituting \( \hat{n} \hat{n}^T \), we get
+\[
+\hat{n} \hat{n}^T = \frac{1}{\alpha^2 + \beta^2 + \gamma^2}
+\begin{bmatrix}
+\alpha \\ \beta \\ \gamma
+\end{bmatrix}
+\begin{bmatrix}
+\alpha & \beta & \gamma
+\end{bmatrix}
+= \frac{1}{\alpha^2 + \beta^2 + \gamma^2}
+\begin{bmatrix}
+\alpha^2 & \alpha\beta & \alpha\gamma \\
+\alpha\beta & \beta^2 & \beta\gamma \\
+\alpha\gamma & \beta\gamma & \gamma^2
+\end{bmatrix}.
+\]
+Thus, the reflection matrix is
+\[
+R = I - \frac{2}{\alpha^2 + \beta^2 + \gamma^2}
+\begin{bmatrix}
+\alpha^2 & \alpha\beta & \alpha\gamma \\
+\alpha\beta & \beta^2 & \beta\gamma \\
+\alpha\gamma & \beta\gamma & \gamma^2
+\end{bmatrix}.
+\]
+
+\end{enumerate}
+\end{document}

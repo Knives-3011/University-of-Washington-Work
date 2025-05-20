@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#9}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item We begin with the standard triangle inequality:
+
+\[
+\|\mathbf{a}\| = \|\mathbf{a} - \mathbf{b} + \mathbf{b}\| \leq \|\mathbf{a} - \mathbf{b}\| + \|\mathbf{b}\|
+\]
+
+Rearranging this gives:
+
+\[
+\|\mathbf{a}\| - \|\mathbf{b}\| \leq \|\mathbf{a} - \mathbf{b}\|
+\]
+
+Similarly, applying the same property to \(\mathbf{b} - \mathbf{a}\), we obtain:
+
+\[
+\|\mathbf{b}\| = \|\mathbf{b} - \mathbf{a} + \mathbf{a}\| \leq \|\mathbf{b} - \mathbf{a}\| + \|\mathbf{a}\| = \|\mathbf{a} - \mathbf{b}\| + \|\mathbf{a}\|
+\]
+
+Rearranging this yields:
+
+\[
+\|\mathbf{b}\| - \|\mathbf{a}\| \leq \|\mathbf{a} - \mathbf{b}\|
+\]
+
+Since both inequalities hold, we conclude:
+
+\[
+|\|\mathbf{a}\| - \|\mathbf{b}\|| \leq \|\mathbf{a} - \mathbf{b}\|
+\]
+
+Thus, we see that:
+
+\[
+\|\mathbf{a} - \mathbf{b}\| \geq |\|\mathbf{a}\| - \|\mathbf{b}\||
+\]
+
+as required.
+
+
+\item 
+To prove the parallelogram law, we start with the given equation:
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 + \|\mathbf{a} - \mathbf{b}\|^2 = 2\|\mathbf{a}\|^2 + 2\|\mathbf{b}\|^2.
+\]
+
+Expanding the norms using the dot product,
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 = (\mathbf{a} + \mathbf{b}) \cdot (\mathbf{a} + \mathbf{b}).
+\]
+
+Expanding the right-hand side,
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 = \mathbf{a} \cdot \mathbf{a} + 2 \mathbf{a} \cdot \mathbf{b} + \mathbf{b} \cdot \mathbf{b}.
+\]
+
+Similarly, for \(\|\mathbf{a} - \mathbf{b}\|^2\),
+
+\[
+\|\mathbf{a} - \mathbf{b}\|^2 = (\mathbf{a} - \mathbf{b}) \cdot (\mathbf{a} - \mathbf{b}).
+\]
+
+Expanding this expression,
+
+\[
+\|\mathbf{a} - \mathbf{b}\|^2 = \mathbf{a} \cdot \mathbf{a} - 2 \mathbf{a} \cdot \mathbf{b} + \mathbf{b} \cdot \mathbf{b}.
+\]
+
+Adding the two equations,
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 + \|\mathbf{a} - \mathbf{b}\|^2 =
+(\mathbf{a} \cdot \mathbf{a} + 2 \mathbf{a} \cdot \mathbf{b} + \mathbf{b} \cdot \mathbf{b}) +
+(\mathbf{a} \cdot \mathbf{a} - 2 \mathbf{a} \cdot \mathbf{b} + \mathbf{b} \cdot \mathbf{b}).
+\]
+
+The terms \(+2 \mathbf{a} \cdot \mathbf{b}\) and \(-2 \mathbf{a} \cdot \mathbf{b}\) cancel out, leaving
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 + \|\mathbf{a} - \mathbf{b}\|^2 = 2 \mathbf{a} \cdot \mathbf{a} + 2 \mathbf{b} \cdot \mathbf{b}.
+\]
+
+Since \(\mathbf{a} \cdot \mathbf{a} = \|\mathbf{a}\|^2\) and \(\mathbf{b} \cdot \mathbf{b} = \|\mathbf{b}\|^2\), we get
+
+\[
+\|\mathbf{a} + \mathbf{b}\|^2 + \|\mathbf{a} - \mathbf{b}\|^2 = 2 \|\mathbf{a}\|^2 + 2 \|\mathbf{b}\|^2.
+\]
+
+Thus, the parallelogram law is proved.
+\item 
+Let the sphere be centered at the origin in a 3D Cartesian coordinate system. If \( P_1 \) and \( P_2 \) are antipodal points, we can represent them as:
+\[
+P_1 = (x, y, z), \quad P_2 = (-x, -y, -z)
+\]
+where both lie on the sphere. Let \( Q \) be any other point on the sphere:
+\[
+Q = (a, b, c).
+\]
+The vectors from \( P_1 \) and \( P_2 \) to \( Q \) are:
+\[
+\overrightarrow{P_1Q} = (a-x, b-y, c-z)
+\]
+\[
+\overrightarrow{P_2Q} = (a+x, b+y, c+z).
+\]
+To check if these vectors are perpendicular, we compute their dot product:
+\[
+\overrightarrow{P_1Q} \cdot \overrightarrow{P_2Q} = (a-x, b-y, c-z) \cdot (a+x, b+y, c+z).
+\]
+Expanding each term:
+\[
+(a-x)(a+x) + (b-y)(b+y) + (c-z)(c+z).
+\]
+Using the identity \( (m-n)(m+n) = m^2 - n^2 \), we get:
+\[
+a^2 - x^2 + b^2 - y^2 + c^2 - z^2.
+\]
+Since \( P_1 \) and \( P_2 \) are on the sphere of radius \( R \), we know:
+\[
+x^2 + y^2 + z^2 = R^2, \quad a^2 + b^2 + c^2 = R^2.
+\]
+Substituting these values:
+\[
+a^2 + b^2 + c^2 - (x^2 + y^2 + z^2) = R^2 - R^2 = 0.
+\]
+Since the dot product is zero, it follows that:
+\[
+\overrightarrow{P_1Q} \perp \overrightarrow{P_2Q}.
+\]
+Thus, the vectors are perpendicular, proving the required result.
+
+\item If \(\mathbf{a}, \mathbf{b}, \mathbf{c}\) are linearly independent, then any vector \(\mathbf{d}\) can be written as a unique linear combination:
+
+\[
+\mathbf{d} = \alpha \mathbf{a} + \beta \mathbf{b} + \gamma \mathbf{c}
+\]
+
+Taking the dot product of both sides with \(\mathbf{b} \times \mathbf{c}\):
+
+\[
+\mathbf{d} \cdot (\mathbf{b} \times \mathbf{c}) = (\alpha \mathbf{a} + \beta \mathbf{b} + \gamma \mathbf{c}) \cdot (\mathbf{b} \times \mathbf{c})
+\]
+
+Using the scalar triple product properties, we get:
+
+\[
+\alpha (\mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})) + \beta (\mathbf{b} \cdot (\mathbf{b} \times \mathbf{c})) + \gamma (\mathbf{c} \cdot (\mathbf{b} \times \mathbf{c})) = \mathbf{d} \cdot (\mathbf{b} \times \mathbf{c})
+\]
+
+Since \(\mathbf{b} \cdot (\mathbf{b} \times \mathbf{c}) = 0\) and \(\mathbf{c} \cdot (\mathbf{b} \times \mathbf{c}) = 0\), it simplifies to:
+
+\[
+\alpha (\mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})) = \mathbf{d} \cdot (\mathbf{b} \times \mathbf{c})
+\]
+
+Solving for \(\alpha\):
+
+\[
+\alpha = \frac{\mathbf{d} \cdot (\mathbf{b} \times \mathbf{c})}{\mathbf{a} \cdot (\mathbf{b} \times \mathbf{c})}
+\]
+
+Similarly, applying the same method for \(\beta\) and \(\gamma\):
+
+\[
+\beta = \frac{\mathbf{d} \cdot (\mathbf{c} \times \mathbf{a})}{\mathbf{b} \cdot (\mathbf{c} \times \mathbf{a})}, \quad
+\gamma = \frac{\mathbf{d} \cdot (\mathbf{a} \times \mathbf{b})}{\mathbf{c} \cdot (\mathbf{a} \times \mathbf{b})}
+\]
+
+Thus, the coefficients \(\alpha, \beta, \gamma\) are uniquely determined using the scalar triple products.
+
+\item 
+Let the semicircle be centered at the origin \( \mathbf{O} = (0,0) \) with radius \( a \). The endpoints of the diameter are
+\( \mathbf{A} = (-a,0) \) and \( \mathbf{B} = (a,0) \).
+
+Let \( \mathbf{C} = (x,y) \) be any point on the semicircle. Since it lies on the semicircle, it satisfies the equation:
+
+\[
+x^2 + y^2 = a^2
+\]
+
+Now, define the vectors \( \mathbf{AB}, \mathbf{AC}, \) and \( \mathbf{BC} \):
+
+\[
+\mathbf{AB} = \mathbf{B} - \mathbf{A} = (a,0) - (-a,0) = (2a,0)
+\]
+
+\[
+\mathbf{AC} = \mathbf{C} - \mathbf{A} = (x - (-a), y - 0) = (x + a, y)
+\]
+
+\[
+\mathbf{BC} = \mathbf{C} - \mathbf{B} = (x - a, y - 0) = (x - a, y)
+\]
+
+To prove that \( \angle ACB = 90^\circ \), we compute the dot product \( \mathbf{AC} \cdot \mathbf{BC} \):
+
+\[
+\mathbf{AC} \cdot \mathbf{BC} = (x + a, y) \cdot (x - a, y)
+\]
+
+Expanding using the dot product formula:
+
+\[
+(x + a)(x - a) + y \cdot y = x^2 - a^2 + y^2
+\]
+
+Since \( C(x,y) \) lies on the semicircle, substituting \( x^2 + y^2 = a^2 \) gives:
+
+\[
+(x^2 - a^2) + y^2 = a^2 - a^2 = 0
+\]
+
+Since the dot product is zero, \( \mathbf{AC} \) and \( \mathbf{BC} \) are perpendicular, proving that \( \angle ACB \) is a right angle.
+
+\end{enumerate}
+\end{document}

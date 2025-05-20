@@ -1,0 +1,219 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 136 Homework \#3}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item
+\begin{enumerate}
+    \item False. A system of linear equations may be inconsistent. For example, the system
+    \[
+    \begin{cases}
+    x + y = 1 \\
+    x + y = 2
+    \end{cases}
+    \]
+    has no solution because the equations are contradictory.
+    
+    \item False. A system of linear equations may have infinitely many solutions. For example,
+    \[
+    \begin{cases}
+    x + y = 2 \\
+    2x + 2y = 4
+    \end{cases}
+    \]
+    has infinitely many solutions since the second equation is a scalar multiple of the first.
+
+    \item True. A homogeneous system always has at least one solution, namely the zero vector. This follows from the fact that if \( Ax = 0 \), then \( x = 0 \) is a solution.
+
+    \item False. Even a square system can be inconsistent. For example,
+    \[
+    \begin{cases}
+    x + y = 1 \\
+    x + y = 2
+    \end{cases}
+    \]
+    is a system of 2 equations in 2 unknowns, but it has no solution.
+
+    \item False. A system with \( n \) equations and \( n \) unknowns can have infinitely many solutions. For example,
+    \[
+    \begin{cases}
+    x + y = 2 \\
+    2x + 2y = 4
+    \end{cases}
+    \]
+    has infinitely many solutions.
+
+    \item False. The homogeneous system always has a solution (at least the zero vector), but the corresponding non-homogeneous system may be inconsistent. For example, the homogeneous system \( x + y = 0 \) has a solution, but the system \( x + y = 1 \) does not.
+
+    \item True. If the coefficient matrix of a homogeneous system is invertible, then the only solution is the trivial solution. This follows from the fact that if \( A \) is invertible, then \( Ax = 0 \Rightarrow x = 0 \).
+
+    \item False. The solution set of a general (non-homogeneous) system is not a subspace, because it may not contain the zero vector and may not be closed under scalar multiplication. For example, the line \( x + y = 1 \) is not a subspace of \( \mathbb{R}^2 \).
+
+    \item True. The solution set of a homogeneous system is a subspace of \( \mathbb{R}^n \), since it is closed under addition and scalar multiplication and contains the zero vector.
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+    \item False. The rank of a matrix is the dimension of its column space, i.e., the maximum number of linearly independent columns. This is not the same as the number of non-zero columns. For instance, in the matrix
+    \[
+    \begin{bmatrix}
+    1 & 2 \\
+    2 & 4
+    \end{bmatrix},
+    \]
+    both columns are non-zero, but they are linearly dependent (the second is a multiple of the first). Therefore, the matrix has only one linearly independent column, so its rank is 1, not 2.
+
+    \item True. A matrix has rank 0 if and only if all of its rows and columns are zero vectors. The only matrix for which this holds is the zero matrix (i.e., a matrix where every entry is zero). Any other matrix must contain at least one non-zero entry, which would contribute to a non-zero row or column and hence increase the rank.
+
+    \item True. Elementary row operations (such as swapping two rows, multiplying a row by a non-zero scalar, or adding a scalar multiple of one row to another) do not change the linear dependence relations among the rows. These operations re-express the same row space using different basis vectors. Since the span of the row vectors remains the same, the number of linearly independent rows—and thus the rank—remains unchanged.
+
+    \item True. Elementary column operations, unlike row operations, can change the relationships between the rows of a matrix. For example, if we replace one column with a linear combination of other columns, we may alter the linear dependencies among rows. This can result in a different row space and therefore a different rank. Thus, column operations do not always preserve rank.
+
+    \item True. The rank of a matrix is defined as the dimension of its column space, which corresponds to the maximum number of linearly independent columns. If a column can be written as a linear combination of other columns, it does not increase the dimension of the column space. Therefore, the rank is exactly equal to the number of columns that form a basis for the column space, i.e., the maximum number of linearly independent columns.
+
+    \item True. Similarly, the rank of a matrix is also the dimension of its row space, which corresponds to the maximum number of linearly independent rows. When performing Gaussian elimination, we reduce the matrix to row echelon form, where the number of non-zero rows corresponds to the number of linearly independent rows. Hence, the rank equals the number of linearly independent rows. By a fundamental theorem of linear algebra, the row rank and the column rank are always equal.
+
+    \item True. An \( n \times n \) matrix can have at most \( n \) linearly independent rows or columns, because it has only \( n \) rows and \( n \) columns. Therefore, the maximum possible rank of such a matrix is \( n \). More generally, for an \( m \times n \) matrix, the rank is at most \( \min(m, n) \).
+
+    \item True. If an \( n \times n \) matrix has rank \( n \), then all of its rows and columns are linearly independent. This means its determinant is non-zero, and it has full rank. By the invertible matrix theorem, such a matrix must be invertible. In other words, it has an inverse that, when multiplied with the original matrix, gives the identity matrix.
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item 
+The set \( S = \{ \vec{v} \in \mathbb{R}^3 : T(\vec{v}) = \vec{v} \} \) consists of all vectors fixed by the transformation \( T \). This means \( (T - I)\vec{v} = \vec{0} \), so \( S \) is the null space of the matrix \( T - I \). Since the null space of a linear transformation is always a subspace, \( S \) is a subspace of \( \mathbb{R}^3 \).
+
+\item 
+Compute \( T - I \):
+
+\[
+T - I =
+\begin{bmatrix}
+0 & 3 & -2 \\
+1 & -2 & 2 \\
+2 & -6 & 5
+\end{bmatrix}
+-
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+-1 & 3 & -2 \\
+1 & -3 & 2 \\
+2 & -6 & 4
+\end{bmatrix}
+\]
+
+We row reduce this matrix:
+
+\[
+\begin{bmatrix}
+-1 & 3 & -2 \\
+1 & -3 & 2 \\
+2 & -6 & 4
+\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}
+1 & -3 & 2 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\]
+
+This gives the equation \( x - 3y + 2z = 0 \). So, \( S \) is the set of all \( (x, y, z) \in \mathbb{R}^3 \) satisfying this equation.
+
+\item 
+The set \( S \) is the set of solutions to a single linear equation in three variables. Geometrically, this is a plane passing through the origin in \( \mathbb{R}^3 \).
+
+\item 
+From the equation \( x - 3y + 2z = 0 \), solve for \( x \) in terms of \( y \) and \( z \):
+
+\[
+x = 3y - 2z
+\Rightarrow 
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}
+=
+y \begin{bmatrix}
+3 \\
+1 \\
+0
+\end{bmatrix}
++
+z \begin{bmatrix}
+-2 \\
+0 \\
+1
+\end{bmatrix}
+\]
+
+Hence, a basis for \( S \) is 
+\[
+\left\{
+\begin{bmatrix}
+3 \\
+1 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+-2 \\
+0 \\
+1
+\end{bmatrix}
+\right\}
+\]
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item A complex number $z$ can be written as $z = x + iy$, where $x, y \in \mathbb{R}$. Define a map $\phi: \mathbb{C} \rightarrow \mathbb{R}^2$ by $\phi(x + iy) = \begin{pmatrix} x \\ y \end{pmatrix}$. This map preserves addition and real scalar multiplication: $\phi(z_1 + z_2) = \phi(z_1) + \phi(z_2)$ and $\phi(rz) = r\phi(z)$ for $r \in \mathbb{R}$. Therefore, $\mathbb{C}$ is a 2-dimensional real vector space.
+
+\item Let $L: \mathbb{C} \rightarrow M_{2 \times 2}$ be defined by $L(x + iy) = \begin{pmatrix} x & y \\ -y & x \end{pmatrix}$. To verify linearity, consider $z_1 = x_1 + iy_1$ and $z_2 = x_2 + iy_2$ with real scalars $a, b$:
+\[
+L(az_1 + bz_2) = L((ax_1 + bx_2) + i(ay_1 + by_2)) = \begin{pmatrix} ax_1 + bx_2 & ay_1 + by_2 \\ -(ay_1 + by_2) & ax_1 + bx_2 \end{pmatrix} = aL(z_1) + bL(z_2)
+\]
+Thus, $L$ is a linear map. The image of $L$ consists of matrices of the form $\begin{pmatrix} x & y \\ -y & x \end{pmatrix}$, which is a 2-dimensional subspace of $M_{2 \times 2}$, so the rank of $L$ is 2.
+
+\item Let $z_1 = x_1 + iy_1$ and $z_2 = x_2 + iy_2$. Then $z_1 z_2 = (x_1 x_2 - y_1 y_2) + i(x_1 y_2 + x_2 y_1)$, so
+\[
+L(z_1 z_2) = \begin{pmatrix} x_1 x_2 - y_1 y_2 & x_1 y_2 + x_2 y_1 \\ -(x_1 y_2 + x_2 y_1) & x_1 x_2 - y_1 y_2 \end{pmatrix}
+\]
+Also,
+\[
+L(z_1) = \begin{pmatrix} x_1 & y_1 \\ -y_1 & x_1 \end{pmatrix}, \quad L(z_2) = \begin{pmatrix} x_2 & y_2 \\ -y_2 & x_2 \end{pmatrix}
+\]
+Then,
+\[
+L(z_1)L(z_2) = \begin{pmatrix} x_1 & y_1 \\ -y_1 & x_1 \end{pmatrix} \begin{pmatrix} x_2 & y_2 \\ -y_2 & x_2 \end{pmatrix} = \begin{pmatrix} x_1 x_2 - y_1 y_2 & x_1 y_2 + y_1 x_2 \\ -(x_1 y_2 + y_1 x_2) & x_1 x_2 - y_1 y_2 \end{pmatrix}
+\]
+which equals $L(z_1 z_2)$. Therefore, $L(z_1 z_2) = L(z_1)L(z_2)$ for all $z_1, z_2 \in \mathbb{C}$.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

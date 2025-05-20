@@ -1,0 +1,415 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#7}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+\item 
+A function \( f(t) \) is said to be of exponential order if there exist constants \( M > 0 \), \( c > 0 \), and \( T > 0 \) such that:
+
+\[
+|f(t)| \leq M e^{ct}, \quad \forall t > T.
+\]
+
+Now, suppose \( f(t) = e^{t^2} \) were of exponential order. Then, there would exist constants \( M, c, T \) such that:
+
+\[
+e^{t^2} \leq M e^{ct}, \quad \forall t > T.
+\]
+
+Taking the natural logarithm on both sides:
+
+\[
+t^2 \leq \ln M + ct.
+\]
+
+Rearranging:
+
+\[
+t^2 - ct \leq \ln M.
+\]
+
+For sufficiently large \( t \), specifically when \( t > c \), the left-hand side grows without bound because the quadratic term \( t^2 \) dominates the linear term \( ct \). This results in a contradiction, as no finite \( M \) can satisfy this inequality. 
+
+Thus, no such constants \( M \) and \( c \) exist, proving that \( f(t) = e^{t^2} \) is not of exponential order.
+
+\item 
+\begin{enumerate}[label=(\alph*)]
+\item We use the fact that
+\[
+\int e^{at}\cos(bt)\,dt=\Re\left\{\int e^{(a+ib)t}\,dt\right\}=\Re\left\{\frac{e^{(a+ib)t}}{a+ib}\right\},
+\]
+and by multiplying numerator and denominator by \(a-ib\) we obtain
+\[
+\Re\left\{\frac{e^{(a+ib)t}(a-ib)}{a^2+b^2}\right\}=\frac{e^{at}}{a^2+b^2}\Bigl[a\cos(bt)+b\sin(bt)\Bigr]+C.
+\]
+Thus,
+\[
+\int e^{at}\cos(bt)\,dt=\frac{e^{at}}{a^2+b^2}\Bigl[a\cos(bt)+b\sin(bt)\Bigr]+C.
+\]
+
+\item Starting from the definition
+\[
+L\{\cos(bt)\}=\int_0^\infty e^{-st}\cos(bt)\,dt,
+\]
+write
+\[
+\cos(bt)=\frac{e^{ibt}+e^{-ibt}}{2},
+\]
+so that
+\[
+L\{\cos(bt)\}=\frac{1}{2}\left(\int_0^\infty e^{-(s-ib)t}\,dt+\int_0^\infty e^{-(s+ib)t}\,dt\right)
+=\frac{1}{2}\left(\frac{1}{s-ib}+\frac{1}{s+ib}\right).
+\]
+Combining the fractions yields
+\[
+\frac{1}{s-ib}+\frac{1}{s+ib}=\frac{2s}{s^2+b^2},
+\]
+and hence,
+\[
+L\{\cos(bt)\}=\frac{s}{s^2+b^2}.
+\]
+
+\item Using the definition
+\[
+L\{\sin(bt)\}=\int_0^\infty e^{-st}\sin(bt)\,dt,
+\]
+express
+\[
+\sin(bt)=\frac{e^{ibt}-e^{-ibt}}{2i},
+\]
+so that
+\[
+L\{\sin(bt)\}=\frac{1}{2i}\left(\int_0^\infty e^{-(s-ib)t}\,dt-\int_0^\infty e^{-(s+ib)t}\,dt\right)
+=\frac{1}{2i}\left(\frac{1}{s-ib}-\frac{1}{s+ib}\right).
+\]
+Since
+\[
+\frac{1}{s-ib}-\frac{1}{s+ib}=\frac{2ib}{s^2+b^2},
+\]
+it follows that
+\[
+L\{\sin(bt)\}=\frac{b}{s^2+b^2}.
+\]
+
+\item To find \(L\{t\sin(bt)\}\) we use the differentiation property of the Laplace transform:
+\[
+L\{t\sin(bt)\}=-\frac{d}{ds}\Bigl(L\{\sin(bt)\}\Bigr)
+=-\frac{d}{ds}\left(\frac{b}{s^2+b^2}\right).
+\]
+Differentiating yields
+\[
+\frac{d}{ds}\left(\frac{b}{s^2+b^2}\right)=-\frac{2bs}{(s^2+b^2)^2},
+\]
+so that
+\[
+L\{t\sin(bt)\}=\frac{2bs}{(s^2+b^2)^2}.
+\]
+
+\item By the first shifting theorem, for any function \(f(t)\) with Laplace transform \(F(s)\) we have
+\[
+L\{e^{at}f(t)\}=F(s-a).
+\]
+Since
+\[
+L\{\sin(bt)\}=\frac{b}{s^2+b^2},
+\]
+it follows that
+\[
+L\{e^{at}\sin(bt)\}=\frac{b}{(s-a)^2+b^2}.
+\]
+
+\item Using the differentiation property on the transform from part (e),
+\[
+L\{t\,e^{at}\sin(bt)\}=-\frac{d}{ds}\left(\frac{b}{(s-a)^2+b^2}\right).
+\]
+Differentiation gives
+\[
+-\frac{d}{ds}\left(\frac{b}{(s-a)^2+b^2}\right)
+=\frac{2b(s-a)}{\bigl[(s-a)^2+b^2\bigr]^2},
+\]
+so that
+\[
+L\{t\,e^{at}\sin(bt)\}=\frac{2b(s-a)}{\bigl[(s-a)^2+b^2\bigr]^2}.
+\]
+
+\item Write
+\[
+\frac{s^2}{(s^2+a^2)^2}=\frac{s^2+a^2-a^2}{(s^2+a^2)^2}
+=\frac{1}{s^2+a^2}-\frac{a^2}{(s^2+a^2)^2}.
+\]
+Recall that
+\[
+L^{-1}\Bigl\{\frac{1}{s^2+a^2}\Bigr\}=\frac{1}{a}\sin(at)
+\]
+and that a standard result is
+\[
+L^{-1}\Bigl\{\frac{1}{(s^2+a^2)^2}\Bigr\}=\frac{1}{2a^3}\Bigl[\sin(at)-at\cos(at)\Bigr].
+\]
+Thus,
+\[
+L^{-1}\Bigl\{\frac{s^2}{(s^2+a^2)^2}\Bigr\}
+=\frac{1}{a}\sin(at)-\frac{a^2}{2a^3}\Bigl[\sin(at)-at\cos(at)\Bigr]
+=\frac{1}{2a}\Bigl[\sin(at)+at\cos(at)\Bigr],
+\]
+and similarly,
+\[
+L^{-1}\Bigl\{\frac{a^2}{(s^2+a^2)^2}\Bigr\}
+=\frac{1}{2a}\Bigl[\sin(at)-at\cos(at)\Bigr].
+\]
+\end{enumerate}
+
+\item 
+\[
+y'' + y = f(t), \quad y(0) = 0, \quad y'(0) = 0,
+\]
+
+where
+
+\[
+f(t) =
+\begin{cases} 
+4, & 0 \leq t \leq 2, \\
+t + 2, & t > 2.
+\end{cases}
+\]
+
+Taking the Laplace transform of both sides:
+
+\[
+L\{y''\} + L\{y\} = L\{f(t)\}.
+\]
+
+Using the properties:
+
+\[
+L\{y''\} = s^2 Y(s) - sy(0) - y'(0) = s^2 Y(s),
+\]
+
+\[
+L\{y\} = Y(s),
+\]
+
+we obtain:
+
+\[
+(s^2 + 1) Y(s) = L\{f(t)\}.
+\]
+
+Thus,
+
+\[
+Y(s) = \frac{L\{f(t)\}}{s^2 + 1}.
+\]
+
+
+We compute the Laplace transform as:
+
+\[
+L\{f(t)\} = \int_0^\infty e^{-st} f(t) dt.
+\]
+
+Splitting the integral at \( t = 2 \):
+
+\[
+L\{f(t)\} = \int_0^2 4 e^{-st} dt + \int_2^\infty (t+2) e^{-st} dt.
+\]
+
+
+\[
+\int_0^2 4 e^{-st} dt = 4 \left[ \frac{e^{-st}}{-s} \right]_0^2 = 4 \left( \frac{1 - e^{-2s}}{s} \right).
+\]
+
+Using integration by parts:
+
+Let
+
+- \( u = t+2 \) so that \( du = dt \),
+- \( dv = e^{-st} dt \) so that \( v = \frac{e^{-st}}{-s} \).
+
+Applying integration by parts:
+
+\[
+\int_2^\infty (t+2) e^{-st} dt = \left[ (t+2) \frac{e^{-st}}{-s} \right]_2^\infty - \int_2^\infty \frac{e^{-st}}{-s} dt.
+\]
+
+Evaluating the boundary terms,
+
+\[
+\lim_{t \to \infty} (t+2) \frac{e^{-st}}{-s} = 0.
+\]
+
+At \( t = 2 \):
+
+\[
+(2+2) \frac{e^{-2s}}{-s} = -\frac{4e^{-2s}}{s}.
+\]
+
+For the remaining integral:
+
+\[
+\int_2^\infty \frac{e^{-st}}{-s} dt = \frac{e^{-2s}}{s^2}.
+\]
+
+Thus,
+
+\[
+\int_2^\infty (t+2) e^{-st} dt = -\frac{4e^{-2s}}{s} + \frac{e^{-2s}}{s^2} = e^{-2s} \left( \frac{1}{s^2} - \frac{4}{s} \right).
+\]
+
+Solving for \( Y(s) \)
+
+\[
+L\{f(t)\} = 4 \frac{1 - e^{-2s}}{s} + e^{-2s} \left( \frac{1}{s^2} - \frac{4}{s} \right).
+\]
+
+\[
+Y(s) = \frac{4(1 - e^{-2s})}{s(s^2+1)} + e^{-2s} \frac{\frac{1}{s^2} - \frac{4}{s}}{s^2+1}.
+\]
+
+Using inverse Laplace transform techniques, we find:
+
+\[
+L^{-1} \left[ \frac{4}{s(s^2+1)} \right] = 4 - 4\cos t.
+\]
+
+Using the time shift property:
+
+\[
+L^{-1} \left[ \frac{-4e^{-2s}}{s(s^2+1)} \right] = \alpha(t-2)(4 - 4\cos(t-2)).
+\]
+
+For the second term:
+
+\[
+L^{-1} \left[ e^{-2s} \frac{1/s^2 - 4/s}{s^2+1} \right] = \alpha(t-2) ((t-2) - 4).
+\]
+
+Thus:
+
+\[
+y(t) =
+\begin{cases} 
+4 - 4\cos t, & 0 \leq t \leq 2, \\
+\alpha(t-2) \left[ (t-2) - 4 + 4 - 4\cos(t-2) \right], & t > 2.
+\end{cases}
+\]
+
+Simplifying,
+
+\[
+y(t) =
+\begin{cases} 
+4 - 4\cos t, & 0 \leq t \leq 2, \\
+t - 2 - 4\cos(t-2), & t > 2.
+\end{cases}
+\]
+
+\item 
+\[
+h(t) =
+\begin{cases} 
+t, & 0 \leq t < 1, \\
+h(t - 1), & t \geq 1.
+\end{cases}
+\]
+
+Since \( h(t) \) is periodic with period \( T = 1 \), its Laplace transform is given by:
+
+\[
+L\{ h(t) \} = \frac{\int_0^T e^{-st} h(t) dt}{1 - e^{-sT}}.
+\]
+
+Computing the integral:
+
+\[
+I = \int_0^1 t e^{-st} dt.
+\]
+
+Using integration by parts, let:
+
+\[
+u = t, \quad dv = e^{-st} dt.
+\]
+
+Then:
+
+\[
+du = dt, \quad v = \frac{-e^{-st}}{s}.
+\]
+
+Applying integration by parts:
+
+\[
+I = \left[ t \cdot \frac{-e^{-st}}{s} \right]_0^1 - \int_0^1 \frac{-e^{-st}}{s} dt.
+\]
+
+Evaluating the first term:
+
+\[
+I = -\frac{e^{-s}}{s} + \frac{1}{s} \int_0^1 e^{-st} dt.
+\]
+
+Since:
+
+\[
+\int_0^1 e^{-st} dt = \frac{1 - e^{-s}}{s},
+\]
+
+substituting,
+
+\[
+I = -\frac{e^{-s}}{s} + \frac{1 - e^{-s}}{s^2}.
+\]
+
+Simplifying:
+
+\[
+I = \frac{1 - e^{-s}(1 + s)}{s^2}.
+\]
+
+Now, using the periodic Laplace transform formula:
+
+\[
+L\{ h(t) \} = \frac{I}{1 - e^{-s}},
+\]
+
+substituting \( I \):
+
+\[
+L\{ h(t) \} = \frac{\frac{1 - e^{-s} (1 + s)}{s^2}}{1 - e^{-s}}.
+\]
+
+Factoring \( (1 - e^{-s}) \) in the numerator:
+
+\[
+L\{ h(t) \} = \frac{(1 - e^{-s}) - s e^{-s}}{s^2 (1 - e^{-s})}.
+\]
+
+Canceling \( (1 - e^{-s}) \):
+
+\[
+L\{ h(t) \} = \frac{1 - s e^{-s}}{s^2 (1 - e^{-s})}.
+\]
+
+\end{enumerate}
+\end{document}

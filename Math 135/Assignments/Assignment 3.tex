@@ -1,0 +1,566 @@
+\documentclass[12pt]{article}
+\usepackage{bigints}
+\usepackage{graphicx}			% Use this package to include images
+\usepackage{amsmath}	
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{polynom}
+\usepackage{listings}
+% A library of many standard math expressions
+\graphicspath{ {./Images/} }
+\usepackage[margin=1in]{geometry}% Sets 1in margins. 
+\newcommand{\qed}[0]{$\blacksquare$}
+\usepackage{fancyhdr}			% Creates headers and footers
+\usepackage{enumerate}          %These two package give custom labels to a list
+\usepackage[shortlabels]{enumitem}
+
+
+% Creates the header and footer. You can adjust the look and feel of these here.
+\pagestyle{fancy}
+\fancyhead[l]{Aditya Gupta}
+\fancyhead[c]{Math 135 Homework \#3}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} %Creates a horizontal line underneath the header
+\setlength{\headheight}{15pt} %Sets enough space for the header
+\begin{document}
+\begin{enumerate}
+    \item 
+    \begin{enumerate}
+    \item 
+    The $n$th Taylor polynomial for $f(x)$ at $x = a$ is given by
+
+\[
+T_{n,a}(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n.
+\]
+
+We need to prove that
+
+\[
+f^{(i)}(a) = T^{(i)}_{n,a}(a), \quad \text{for } 0 \leq i \leq n.
+\]
+
+The Taylor polynomial is defined as
+
+\[
+T_{n,a}(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n.
+\]
+
+To compute derivatives, consider the $i$th derivative of $T_{n,a}(x)$ term by term. For $i=0$, the 0th derivative is simply the polynomial itself, so
+
+\[
+T^{(0)}_{n,a}(a) = T_{n,a}(a) = f(a).
+\]
+
+For $i=1$, the derivative is given by
+
+\[
+T'_{n,a}(x) = f'(a) + \frac{2f''(a)}{2!}(x-a) + \dots + \frac{n f^{(n)}(a)}{n!}(x-a)^{n-1}.
+\]
+
+Evaluating at $x = a$, all terms involving $(x-a)$ vanish, leaving
+
+\[
+T'_{n,a}(a) = f'(a).
+\]
+
+For a general $i$th derivative, the derivative of the $k$th term contributes only if $k \geq i$. At $x = a$, only the $i$th derivative term survives, which is
+
+\[
+\frac{f^{(i)}(a)}{i!}(i!) = f^{(i)}(a).
+\]
+
+Thus, for all $0 \leq i \leq n$, we have
+
+\[
+T^{(i)}_{n,a}(a) = f^{(i)}(a).
+\]
+
+
+\item 
+Now we show:
+\[
+\lim_{x \to a} \frac{f(x) - T_{n,a}(x)}{(x-a)^n} = 0.
+\]
+
+The error term in the Taylor expansion is given by
+
+\[
+f(x) = T_{n,a}(x) + R_n(x),
+\]
+
+where the remainder $R_n(x)$ is
+
+\[
+R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1},
+\]
+
+for some $c$ between $a$ and $x$. Substituting this into the limit, we have
+
+\[
+\lim_{x \to a} \frac{f(x) - T_{n,a}(x)}{(x-a)^n} = \lim_{x \to a} \frac{R_n(x)}{(x-a)^n}.
+\]
+
+Substitute the expression for $R_n(x)$:
+
+\[
+\frac{R_n(x)}{(x-a)^n} = \frac{\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}}{(x-a)^n}.
+\]
+
+Simplify by canceling $(x-a)^n$:
+
+\[
+\frac{R_n(x)}{(x-a)^n} = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a).
+\]
+
+Taking the limit as $x \to a$, we observe that $(x-a) \to 0$, so
+
+\[
+\lim_{x \to a} \frac{R_n(x)}{(x-a)^n} = 0.
+\]
+
+Thus, we have shown that
+
+\[
+\lim_{x \to a} \frac{f(x) - T_{n,a}(x)}{(x-a)^n} = 0.
+\]
+
+\item 
+To prove the generalized second derivative test, we rewrite the function \(f(x)\) by subtracting \(f(a)\) so that \(g(x) = f(x) - f(a)\). This does not affect the local extrema since shifting the function vertically does not change the critical points. Thus, we focus on the analysis of \(g(x)\) such that:
+\[
+g(a) = 0, \quad g'(a) = g''(a) = \cdots = g^{(n-1)}(a) = 0, \quad g^{(n)}(a) \neq 0.
+\]
+
+The Taylor expansion of \(g(x)\) near \(x = a\) is given by:
+\[
+g(x) = \frac{g^{(n)}(a)}{n!}(x-a)^n + R_n(x),
+\]
+where \(R_n(x)\) is the remainder term, which becomes negligible for \(x\) sufficiently close to \(a\). Therefore, we approximate \(g(x)\) as:
+\[
+g(x) \approx \frac{g^{(n)}(a)}{n!}(x-a)^n.
+\]
+
+\textbf{Case 1:} \(n\) is even and \(g^{(n)}(a) > 0\).
+
+If \(n\) is even, the term \((x-a)^n > 0\) for all \(x \neq a\). Since \(g^{(n)}(a) > 0\), it follows that:
+\[
+g(x) > 0 \quad \text{for all } x \neq a.
+\]
+This implies that \(f(x) > f(a)\) in a neighborhood around \(x = a\), so \(f(x)\) has a local minimum at \(x = a\).
+
+\textbf{Case 2:} \(n\) is even and \(g^{(n)}(a) < 0\).
+
+Similarly, when \(n\) is even, \((x-a)^n > 0\) for all \(x \neq a\). Since \(g^{(n)}(a) < 0\), it follows that:
+\[
+g(x) < 0 \quad \text{for all } x \neq a.
+\]
+This implies that \(f(x) < f(a)\) in a neighborhood around \(x = a\), so \(f(x)\) has a local maximum at \(x = a\).
+
+\textbf{Case 3:} \(n\) is odd.
+
+If \(n\) is odd, the term \((x-a)^n\) changes sign as \(x\) crosses \(a\):
+\[
+(x-a)^n > 0 \quad \text{for } x > a, \quad \text{and } \quad (x-a)^n < 0 \quad \text{for } x < a.
+\]
+Thus, the sign of \(g(x)\) also changes depending on the sign of \((x-a)^n\):
+\[
+g(x) > 0 \quad \text{for } x > a, \quad \text{and } \quad g(x) < 0 \quad \text{for } x < a.
+\]
+This implies that \(g(x)\) (or equivalently \(f(x) - f(a)\)) does not stay entirely positive or negative in any neighborhood around \(x = a\). Therefore, \(f(x)\) has neither a local maximum nor a local minimum at \(x = a\).
+
+Thus:
+\begin{itemize}
+    \item If \(n\) is even and \(f^{(n)}(a) > 0\), \(f(x)\) has a local minimum at \(x = a\).
+    \item If \(n\) is even and \(f^{(n)}(a) < 0\), \(f(x)\) has a local maximum at \(x = a\).
+    \item If \(n\) is odd, \(f(x)\) has neither a local maximum nor a local minimum at \(x = a\).
+\end{itemize}
+
+\end{enumerate}
+
+\item 
+By definition if \(\sum a_k\) is absolutely convergent, then \(\sum |a_k|\) converges. This implies that the sequence \(|a_k|\) is bounded and \(|a_k| \to 0\) as \(k \to \infty\). Since \(|a_k| \to 0\), for large \(k\), we have \(|a_k| < 1\), and 
+
+\[
+|a_k^2| = |a_k|^2 < |a_k|.
+\]
+
+The series \(\sum |a_k^2|\) is thus dominated by \(\sum |a_k|\), which converges. By the comparison test, 
+
+\[
+\sum a_k^2
+\]
+
+converges as well.
+
+To show that the converse is false, consider the sequence \(a_k = \frac{(-1)^k}{k}\). We compute 
+
+\[
+a_k^2 = \left(\frac{(-1)^k}{k}\right)^2 = \frac{1}{k^2},
+\]
+
+and the series 
+
+\[
+\sum a_k^2 = \sum \frac{1}{k^2}
+\]
+
+converges as a \(p\)-series with \(p = 2 > 1\). However, \(|a_k| = \frac{1}{k}\), and 
+
+\[
+\sum |a_k| = \sum \frac{1}{k}
+\]
+
+diverges, as the harmonic series diverges. Thus, \(\sum a_k\) is not absolutely convergent. Finally, 
+
+\[
+\sum a_k = \sum \frac{(-1)^k}{k}
+\]
+
+converges conditionally by the Alternating Series Test, as \(|a_k| = \frac{1}{k}\) decreases monotonically to 0. This provides a counterexample where \(\sum a_k^2\) converges but \(\sum |a_k|\) diverges, demonstrating that the converse of the result in part (a) is false.
+
+\item 
+\begin{enumerate}
+    \item 
+    Consider the function $h(x)$:
+    \[
+h(x) = \frac{f(x) - f(a)}{g(x) - g(a)}.
+\]
+
+This function is well-defined on \((a, b)\) because \(g'(x) \neq 0\), ensuring \(g(x) - g(a) \neq 0\).
+
+At \(x = a\),
+\[
+h(a) = \frac{f(a) - f(a)}{g(a) - g(a)} = 0.
+\]
+At \(x = b\),
+\[
+h(b) = \frac{f(b) - f(a)}{g(b) - g(a)}.
+\]
+
+Let us define another function:
+\[
+k(x) = h(x) - h(b).
+\]
+Then,
+\[
+k(a) = h(a) - h(b) = 0 - h(b) = -h(b),
+\]
+\[
+k(b) = h(b) - h(b) = 0.
+\]
+
+By Rolle's Theorem, since \(k(a) = k(b)\), there exists some \(c \in (a, b)\) such that \(k'(c) = 0\).
+
+Using the quotient rule for \(h(x)\):
+\[
+h'(x) = \frac{(f'(x))(g(x) - g(a)) - (g'(x))(f(x) - f(a))}{(g(x) - g(a))^2}.
+\]
+
+Substituting into \(k'(x)\):
+\[
+k'(x) = h'(x).
+\]
+
+At \(x = c\), \(h'(c) = 0\). Therefore,
+\[
+(f'(c))(g(c) - g(a)) = (g'(c))(f(c) - f(a)).
+\]
+
+Dividing through by \(g'(c)(g(c) - g(a)) \neq 0\), we obtain:
+\[
+\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}.
+\]
+
+Thus, there exists a \(c \in (a, b)\) such that:
+\[
+\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}.
+\]
+
+\item 
+We aim to prove the given integral relationship using Cauchy's Mean Value Theorem (CMVT):
+
+\[
+g(c) \int_a^b f(t) \, dt = f(c) \int_a^b g(t) \, dt
+\]
+
+for some \( c \in (a, b) \), assuming \( f \) and \( g \) are continuous on \([a, b]\). Let
+
+\[
+F(x) = \int_a^x f(t) \, dt, \quad G(x) = \int_a^x g(t) \, dt.
+\]
+
+Both \( F(x) \) and \( G(x) \) are continuous and differentiable on \([a, b]\) because \( f(t) \) and \( g(t) \) are continuous. By the Fundamental Theorem of Calculus,
+
+\[
+F'(x) = f(x), \quad G'(x) = g(x).
+\]
+
+According to CMVT, since \( F(x) \) and \( G(x) \) satisfy the hypotheses of the theorem, there exists some \( c \in (a, b) \) such that
+
+\[
+\frac{F'(c)}{G'(c)} = \frac{F(b) - F(a)}{G(b) - G(a)}.
+\]
+
+From the definitions of \( F(x) \) and \( G(x) \),
+
+\[
+F(b) - F(a) = \int_a^b f(t) \, dt, \quad G(b) - G(a) = \int_a^b g(t) \, dt.
+\]
+
+Substituting \( F'(c) = f(c) \) and \( G'(c) = g(c) \), the CMVT equation becomes
+
+\[
+\frac{f(c)}{g(c)} = \frac{\int_a^b f(t) \, dt}{\int_a^b g(t) \, dt}.
+\]
+
+Multiplying through by \( g(c) \int_a^b g(t) \, dt \), we obtain
+
+\[
+g(c) \int_a^b f(t) \, dt = f(c) \int_a^b g(t) \, dt.
+\]
+
+Thus, we have proved the desired result:
+
+\[
+g(c) \int_a^b f(t) \, dt = f(c) \int_a^b g(t) \, dt
+\]
+
+for some \( c \in (a, b) \).
+
+
+\item 
+To prove that if $\phi$ and $h$ are continuous on $[a, b]$ and $h(t) \neq 0$ for any $t \in (a, b)$, then
+\[
+\int_a^b \phi(t)h(t)dt = \phi(c)\int_a^b h(t)dt
+\]
+for some $c \in (a, b)$, we proceed as follows.
+
+Let $I = \int_a^b \phi(t)h(t)dt$ and $H = \int_a^b h(t)dt$.
+
+Since $\phi(t)$ and $h(t)$ are continuous on $[a, b]$, their product $\phi(t)h(t)$ is also continuous on $[a, b]$. Additionally, $h(t) \neq 0$ for all $t \in (a, b)$.
+
+On the interval $[a, b]$, the function $\phi(t)$ attains a minimum value $m$ and a maximum value $M$. Thus,
+\[
+m \leq \phi(t) \leq M, \quad \forall t \in [a, b].
+\]
+
+Multiplying this inequality by $h(t)$, which is nonzero and continuous, and integrating over $[a, b]$, we obtain
+\[
+m \int_a^b h(t)dt \leq \int_a^b \phi(t)h(t)dt \leq M \int_a^b h(t)dt.
+\]
+
+Using the definitions $I = \int_a^b \phi(t)h(t)dt$ and $H = \int_a^b h(t)dt$, this can be written as
+\[
+mH \leq I \leq MH.
+\]
+
+Dividing through by $H$ (which is nonzero), we get
+\[
+m \leq \frac{I}{H} \leq M.
+\]
+
+By the Intermediate Value Theorem, there exists a $c \in (a, b)$ such that
+\[
+\phi(c) = \frac{I}{H}.
+\]
+
+Substituting back $I$ and $H$, we have
+\[
+\phi(c) = \frac{\int_a^b \phi(t)h(t)dt}{\int_a^b h(t)dt}.
+\]
+
+Multiplying through by $H$, this simplifies to
+\[
+\int_a^b \phi(t)h(t)dt = \phi(c)\int_a^b h(t)dt,
+\]
+for some $c \in (a, b)$, as required.
+
+If $h(t)$ is negative on $[a, b]$, the proof remains valid. The continuity of $h(t)$ ensures that the integrals are well-defined, and $h(t) \neq 0$ guarantees that $\int_a^b h(t)dt$ is nonzero. If $h(t) < 0$ for all $t \in [a, b]$, the sign of $\int_a^b h(t)dt$ will also be negative. This may reverse the inequalities when dividing by $\int_a^b h(t)dt$ (since dividing by a negative number reverses the direction of inequalities), but the Intermediate Value Theorem still guarantees the existence of $c \in (a, b)$ such that
+\[
+\phi(c) = \frac{\int_a^b \phi(t)h(t)dt}{\int_a^b h(t)dt}.
+\]
+
+\item 
+We want to show that the remainder in Taylor's theorem,
+\[
+R_n(x) = \frac{1}{n!} \int_a^x f^{(n+1)}(t)(x - t)^n dt,
+\]
+equals
+\[
+R_n(x) = \frac{f^{(n+1)}(c)(x - a)^{n+1}}{(n+1)!},
+\]
+for some $c$ between $a$ and $x$.
+
+Let us define:
+\[
+g(t) = (x - t)^n.
+\]
+
+Then the remainder term can be written as:
+\[
+R_n(x) = \frac{1}{n!} \int_a^x f^{(n+1)}(t) g(t) \, dt.
+\]
+
+Since $f^{(n+1)}(t)$ and $g(t)$ are continuous on $[a, x]$, their product is also continuous. By the Mean-Value Theorem for Integrals, there exists some $c \in (a, x)$ such that:
+\[
+\int_a^x f^{(n+1)}(t) g(t) \, dt = f^{(n+1)}(c) \int_a^x g(t) \, dt.
+\]
+
+Therefore,
+\[
+R_n(x) = \frac{1}{n!} f^{(n+1)}(c) \int_a^x g(t) \, dt.
+\]
+
+Now, compute $\int_a^x g(t) \, dt$:
+\[
+\int_a^x g(t) \, dt = \int_a^x (x - t)^n \, dt.
+\]
+
+Using the substitution $u = x - t$, $du = -dt$, and the limits of integration change as $t = a \to u = x - a$ and $t = x \to u = 0$, we have:
+\[
+\int_a^x (x - t)^n \, dt = \int_{x-a}^0 u^n (-du) = \int_0^{x-a} u^n \, du.
+\]
+
+Evaluate the integral:
+\[
+\int_0^{x-a} u^n \, du = \left[ \frac{u^{n+1}}{n+1} \right]_0^{x-a} = \frac{(x-a)^{n+1}}{n+1}.
+\]
+
+Substitute this back into the expression for $R_n(x)$:
+\[
+R_n(x) = \frac{1}{n!} f^{(n+1)}(c) \frac{(x-a)^{n+1}}{n+1}.
+\]
+
+Simplify:
+\[
+R_n(x) = \frac{f^{(n+1)}(c)(x-a)^{n+1}}{(n+1)!}.
+\]
+
+This completes the proof, showing that the remainder can be expressed as:
+\[
+R_n(x) = \frac{f^{(n+1)}(c)(x-a)^{n+1}}{(n+1)!},
+\]
+for some $c \in (a, x)$.
+
+\item 
+We want to prove the inequality:
+\[
+\frac{1}{10\sqrt{2}} < \int_0^1 \frac{x^9}{\sqrt{1+x}} \, dx < \frac{1}{10}.
+\]
+
+For $x \in [0, 1]$, the term $\sqrt{1+x}$ satisfies
+\[
+\sqrt{1} \leq \sqrt{1+x} \leq \sqrt{2}.
+\]
+Taking reciprocals (since $\sqrt{1+x} > 0$), we have
+\[
+\frac{1}{\sqrt{2}} \leq \frac{1}{\sqrt{1+x}} \leq 1.
+\]
+
+Using these bounds, the integral can be bounded as follows:
+\[
+\int_0^1 x^9 \cdot \frac{1}{\sqrt{2}} \, dx \leq \int_0^1 \frac{x^9}{\sqrt{1+x}} \, dx \leq \int_0^1 x^9 \, dx.
+\]
+
+Now, evaluate the integrals. For the upper bound:
+\[
+\int_0^1 x^9 \, dx = \left[\frac{x^{10}}{10}\right]_0^1 = \frac{1}{10}.
+\]
+
+For the lower bound:
+\[
+\int_0^1 x^9 \cdot \frac{1}{\sqrt{2}} \, dx = \frac{1}{\sqrt{2}} \int_0^1 x^9 \, dx = \frac{1}{\sqrt{2}} \cdot \frac{1}{10} = \frac{1}{10\sqrt{2}}.
+\]
+
+Combining these results, we get:
+\[
+\frac{1}{10\sqrt{2}} \leq \int_0^1 \frac{x^9}{\sqrt{1+x}} \, dx \leq \frac{1}{10}.
+\]
+
+Finally, since $\frac{x^9}{\sqrt{1+x}}$ is strictly less than $x^9$ (as $\sqrt{1+x} > 1$) and strictly greater than $\frac{x^9}{\sqrt{2}}$ (as $\sqrt{1+x} < \sqrt{2}$), the inequality holds strictly:
+\[
+\frac{1}{10\sqrt{2}} < \int_0^1 \frac{x^9}{\sqrt{1+x}} \, dx < \frac{1}{10}.
+\]
+
+\end{enumerate}
+\item 
+The series in question is given by
+
+\[
+\sum_{k=1}^\infty (-1)^k a_k,
+\]
+
+where \(a_k\) is defined as
+
+\[
+a_k =
+\begin{cases}
+\frac{1}{k}, & \text{if } k \text{ is odd}, \\
+\frac{2}{k}, & \text{if } k \text{ is even}.
+\end{cases}
+\]
+
+To rigorously analyze the convergence of the series, we examine its partial sums:
+
+\[
+S_N = \sum_{k=1}^N (-1)^k a_k.
+\]
+
+Expanding this sum based on the parity of \(k\), we write
+
+\[
+S_N = \sum_{\text{odd } k} (-1)^k \frac{1}{k} + \sum_{\text{even } k} (-1)^k \frac{2}{k}.
+\]
+
+For odd \(k\), we have \((-1)^k = -1\), and for even \(k\), we have \((-1)^k = 1\). Substituting these values, we find
+
+\[
+S_N = -\sum_{\text{odd } k \leq N} \frac{1}{k} + \sum_{\text{even } k \leq N} \frac{2}{k}.
+\]
+
+Let us denote the sums over odd and even terms as \(S_{\text{odd}}\) and \(S_{\text{even}}\), respectively. Thus,
+
+\[
+S_N = -S_{\text{odd}} + S_{\text{even}},
+\]
+
+where
+
+\[
+S_{\text{odd}} = \sum_{\text{odd } k \leq N} \frac{1}{k}, \quad S_{\text{even}} = \sum_{\text{even } k \leq N} \frac{2}{k}.
+\]
+
+The sum \(S_{\text{odd}}\) represents approximately half of the harmonic series \(H_N = \sum_{k=1}^N \frac{1}{k}\) for large \(N\), so we approximate
+
+\[
+S_{\text{odd}} \sim \frac{1}{2} H_N.
+\]
+
+Similarly, \(S_{\text{even}}\) can be expressed as
+
+\[
+S_{\text{even}} = 2 \sum_{\text{even } k \leq N} \frac{1}{k} \sim H_N,
+\]
+
+since the even terms of the harmonic series contribute approximately the same magnitude as the odd terms. Substituting these approximations into the expression for \(S_N\), we get
+
+\[
+S_N \sim -\frac{1}{2} H_N + H_N = \frac{1}{2} H_N.
+\]
+
+The harmonic series \(H_N\) diverges as \(N \to \infty\), so the partial sums \(S_N\) grow approximately as \(\frac{1}{2} H_N\). Since \(S_N\) does not converge to a finite value, the series
+
+\[
+\sum_{k=1}^\infty (-1)^k a_k
+\]
+
+diverges.
+
+The divergence arises because the sequence \(\{a_k\}\) is not monotonically decreasing, which is a necessary condition for the Alternating Series Test (Leibniz's test) to apply. While \(\lim_{k \to \infty} a_k = 0\), the non-monotonic nature of \(a_k\) prevents the series from converging.
+
+\end{enumerate}
+
+
+
+
+\end{document}

@@ -93,6 +93,62 @@ R_n = S - s_n \to S - S = 0 \quad \text{as } n \to \infty.
 Hence, \(R_n \to 0\) as \(n \to \infty\), as required.
 
 \item [28. ]
+We know that the sequence $(a_n)$ converges to $L$. 
+
+\[
+\lim_{n \to \infty} a_n = L.
+\]
+
+For a given $\epsilon > 0$ and an $n \geq N$ sufficiently large, we can write that
+\[
+|a_n - L| < \frac{\epsilon}{2}
+\]
+
+So, for the sequence $M_n = \frac{a_1 + a_2 + \dots + a_n}{n}$, given $\epsilon > 0$, we must find an $N$ such that for $n \geq N$,
+\[
+|M_n - L| = \left| \frac{a_1 + a_2 + \dots + a_n}{n} - L \right| = \left| \frac{(a_1 - L) + (a_2 - L) + \dots + (a_n - L)}{n} \right|.
+\]
+
+\[
+|M_n - L| = \frac{\sum_{i=1}^n |a_i - L|}{n} < \frac{\epsilon}{2}.
+\]
+
+Let $\frac{|a_i - L|}{n} < \frac{\epsilon}{2N_1}$ for $n \geq N_1$.
+
+\[
+\sum_{i=1}^{N_1} \frac{|a_i - L|}{n} < \frac{\epsilon}{2N_1}\cdot N_1 = \frac{\epsilon}{2}.
+\]
+
+Since $|a_n - L| < \frac{\epsilon}{2}$ when $n \geq N$.
+
+\[
+\sum_{i=N+1}^n \frac{|a_i - L|}{n} < \frac{\epsilon}{2n} \cdot (n - N) < \frac{\epsilon}{2n} \cdot n = \frac{\epsilon}{2}.
+\]
+
+Joining both series:
+\[
+\sum_{i=1}^n \frac{|a_i - L|}{n} = \sum_{i=1}^{N_1} \frac{|a_i - L|}{n} + \sum_{i=N+1}^n \frac{|a_i - L|}{n}.
+\]
+\[
+\sum_{i=1}^n \frac{|a_i - L|}{n} < \left| \sum_{i=1}^n \frac{a_i - L}{n} \right| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\]
+
+We also know from earlier that
+\[
+\left| \sum_{i=1}^n \frac{a_i - L}{n} \right| = |M_n - L|.
+\]
+
+It follows that
+\[
+|M_n - L| < \epsilon,
+\]
+and even further that
+\[
+\lim_{n \to \infty} M_n = \lim_{n \to \infty} \frac{a_1 + a_2 + \dots + a_n}{n} = L.
+\]
+
+Thus, we know that the sequence $M_n = \frac{a_1 + a_2 + \dots + a_n}{n}$ converges to $L$.
+
 \item [42. ]
 The terms of the series are \((a_{k+1} - a_k)\), which represent differences between consecutive terms of the sequence \(a_n\). The partial sum \(S_n\) is given by:
 \[
@@ -218,7 +274,7 @@ Using the substitution \( u = \ln(x) \), we have \( du = \frac{1}{x} dx \). When
 \int_2^\infty \frac{1}{x (\ln(x))^2} \, dx = \int_{\ln(2)}^\infty \frac{1}{u^2} \, du.
 \]
 
-The antiderivative of \(u^{-2}\) is:
+The anti-derivative of \(u^{-2}\) is:
 \[
 \int u^{-2} \, du = -\frac{1}{u}.
 \]
@@ -304,6 +360,9 @@ By the integral test, the series
 \]
 
 diverges.
+
+
+The above result is also an easy corollary of a result proven in a hand-written note handed out during a lecture of the Yugoslavian Mathematical Society in 1894.
 
 \end{enumerate}
 
